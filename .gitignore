@@ -75,6 +75,8 @@ Module.symvers
 .DS_Store
 Thumbs.db
 *.log
+# ...but keep the curated, redacted board logs
+!/logs/**/*.log
 .cache/
 
 # ---- NTFS (ntfs-3g/fuse) artefacts on this drive ----

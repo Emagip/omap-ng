@@ -1,0 +1,137 @@
+
+
+Texas Instruments X-Loader 1.42
+Detected Samsung MuxOneNAND1G Flash 
+Starting OS Bootloader...
+No OOB scheme defined for oobsize 0
+Scanning device for bad blocks
+OneNAND: 128 MB
+No NAND device found!!!
+0 MiB
+
+
+U-Boot 2008.10 (May 22 2009 - 20:37:53)
+
+OMAP35X-Family-GP rev 2, CPU-OPP2 L3-165MHz
+OMAP3 EVM board + LPDDR/ONENAND
+In:    serial
+Out:   serial
+Err:   serial
+Hit any key to stop autoboot: 20 19 0 
+OMAP3_EVM # version
+
+U-Boot 2008.10 (May 22 2009 - 20:37:53)
+OMAP3_EVM # bdinfo
+arch_number = 0x000005FF
+env_t       = 0x00000000
+boot_params = 0x80000100
+DRAM bank   = 0x00000000
+-> start    = 0x00000000
+-> size     = 0x00000000
+DRAM bank   = 0x00000001
+-> start    = 0x00000000
+-> size     = 0x00000000
+ethaddr     = 00:50:C2:xx:xx:xx
+ip_addr     = 192.168.1.10
+baudrate    = 115200 bps
+OMAP3_EVM # printenv
+baudrate=115200
+bootfile="uImage"
+ethaddr=00:50:c2:xx:xx:xx
+get_kernel=run nand_kernel
+get_initrd=run nand_initrd
+nand_kernel=onenand read 0x80000000 0x280000 0x0200000
+nand_initrd=onenand read 0x81600000 0x780000 0x1000000
+tftp_kernel=tftpboot 0x80000000 uImage
+tftp_initrd=tftpboot 0x81600000 ramdisk.gz
+bootargs_rd=mem=128M console=ttyS0,115200n8 root=/dev/ram0 initrd=0x81600000,40M ramdisk_size=40960
+bootargs_fs=mem=128M console=ttyS0,115200n8 noinitrd root=/dev/mtdblock4 rw rootfstype=jffs2
+bootargs_nfs=mem=128M console=ttyS0,115200n8 noinitrd rw root=/dev/nfs nfsroot=/mnt/nfs,nolock
+addip=setenv bootargs $(bootargs) ip=$(ipaddr):$(serverip):$(gatewayip):$(netmask):$(hostname):eth0:on
+boot_rd=run get_kernel; run get_initrd; setenv bootargs $(bootargs_rd); run addip; bootm 0x80000000
+boot_fs=run get_kernel; setenv bootargs $(bootargs_fs); run addip; bootm 0x80000000
+boot_nfs=run get_kernel; setenv bootargs $(bootargs_nfs); run addip; bootm 0x80000000
+bootdelay=20
+filesize=203CF8
+fileaddr=80000000
+gatewayip=192.168.1.254
+netmask=255.255.255.0
+ipaddr=192.168.1.10
+serverip=192.168.1.57
+bootcmd=onenand read 0x80000000 0x280000 0x0220000; bootm 0x80000000
+bootargs=mem=128M console=ttyS0,115200n8 noinitrd root=/dev/mtdblock4 rw rootfstype=jffs2 ip=\$(ipaddr):\$(serverip):\$(gatewayip):\$(netmask):\$(hostname):eth0:on
+stdin=serial
+stdout=serial
+stderr=serial
+
+Environment size: 1376/131068 bytes
+OMAP3_EVM # onenand info
+Muxed OneNAND 128MB 1.8V 16-bit (0x30)
+OMAP3_EVM # md.l 0x4830a204 1
+4830a204: 2b7ae02f    /.z+
+OMAP3_EVM # md.l 0x480022f0 1
+480022f0: 00000330    0...
+OMAP3_EVM # mmc info
+Usage:
+mmcinit - init mmc card
+
+OMAP3_EVM # stshutdown
+Unknown command 'shutdown' - try 'help'
+OMAP3_EVM # help
+?       - alias for 'help'
+autoscr - run script from memory
+base	- print or set address offset
+bdinfo  - print Board Info structure
+boot    - boot default, i.e., run 'bootcmd'
+bootd   - boot default, i.e., run 'bootcmd'
+bootm   - boot application image from memory
+bootp	- boot image via network using BOOTP/TFTP protocol
+cmp	- memory compare
+coninfo - print console devices and information
+cp	- memory copy
+crc32	- checksum calculation
+dhcp	- boot image via network using DHCP/TFTP protocol
+echo    - echo args to console
+ext2load- load binary file from a Ext2 filesystem
+ext2ls  - list files in a directory (default /)
+fatinfo - print information about filesystem
+fatload - load binary file from a dos filesystem
+fatls   - list files in a directory (default /)
+fsinfo	- print information about filesystems
+fsload	- load binary file from a filesystem image
+go      - start application at address 'addr'
+help    - print online help
+icrc32  - checksum calculation
+iloop   - infinite loop on address range
+imd     - i2c memory display
+imm     - i2c memory modify (auto-incrementing)
+imw     - memory write (fill)
+inm     - memory modify (constant address)
+iprobe  - probe to discover valid I2C chip addresses
+itest	- return true/false on integer compare
+loadb   - load binary file over serial line (kermit mode)
+loady   - load binary file over serial line (ymodem mode)
+loop	- infinite loop on address range
+ls	- list files in a directory (default /)
+md	- memory display
+mm	- memory modify (auto-incrementing)
+mmcinit - init mmc card
+mtest	- simple RAM test
+mw	- memory write (fill)
+nand    - NAND sub-system
+nandecc - switch OMAP3 NAND ECC calculation algorithm
+nboot   - boot from NAND device
+nfs	- boot image via network using NFS protocol
+nm	- memory modify (constant address)
+onenand - OneNAND sub-system
+ping	- send ICMP ECHO_REQUEST to network host
+printenv- print environment variables
+rarpboot- boot image via network using RARP/TFTP protocol
+reset   - Perform RESET of the CPU
+run     - run commands in an environment variable
+saveenv - save environment variables to persistent storage
+setenv  - set environment variables
+sleep   - delay execution for some time
+tftpboot- boot image via network using TFTP protocol
+version - print monitor version
+OMAP3_EVM # 

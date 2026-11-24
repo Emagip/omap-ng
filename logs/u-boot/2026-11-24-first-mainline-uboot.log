@@ -1,0 +1,73 @@
+
+U-Boot SPL 2026.10-00001-g75810499ef88 (Nov 24 2026 - 21:24:03 +0100)
+Trying to boot from MMC1
+
+
+U-Boot 2026.10-00001-g75810499ef88 (Nov 24 2026 - 21:24:03 +0100)
+
+OMAP3530-GP ES2.1, CPU-OPP2, L3-165MHz, Max CPU Clock 600 MHz
+Model: TI OMAP35XX EVM (TMDSEVM3530)
+OMAP3 EVM board + LPDDR/NAND
+DRAM:  128 MiB
+Core:  49 devices, 16 uclasses, devicetree: separate
+NAND:  0 MiB
+MMC:   OMAP SD/MMC: 0, OMAP SD/MMC: 1
+Loading Environment from FAT...Unable to read "uboot.env" from mmc0:1... 
+Read back SMSC id 0x1150000
+OMAP die ID: <redacted>
+Net:   eth0: ethernet@2c000000
+Hit any key to stop autoboot: 2Hit any key to stop autoboot: 1Hit any key to stop autoboot: 0
+OMAP3_EVM # version
+U-Boot 2026.10-00001-g75810499ef88 (Nov 24 2026 - 21:24:03 +0100)
+
+arm-linux-gnueabihf-gcc (Ubuntu 15.2.0-16ubuntu1) 15.2.0
+GNU ld (GNU Binutils for Ubuntu) 2.46
+OMAP3_EVM # bdinfo
+boot_params = 0x80000100
+DRAM bank   = 0x00000000
+-> start    = 0x80000000
+-> size     = 0x08000000
+flashstart  = 0x00000000
+flashsize   = 0x00000000
+flashoffset = 0x00000000
+baudrate    = 115200 bps
+relocaddr   = 0x87f4d000
+reloc off   = 0x0774d000
+Build       = 32-bit
+current eth = ethernet@2c000000
+ethaddr     = 00:50:c2:xx:xx:xx
+IP addr     = <NULL>
+fdt_blob    = 0x85f32d60
+lmb_dump_all:
+ memory.count = 0x1
+ memory[0]	[0x80000000-0x87ffffff], 0x8000000 bytes, flags: none
+ reserved.count = 0x2
+ reserved[0]	[0x84f29000-0x84f31fff], 0x9000 bytes, flags: no-notify, no-overwrite
+ reserved[1]	[0x84f32d40-0x87ffffff], 0x30cd2c0 bytes, flags: no-overwrite
+devicetree  = separate
+serial addr = 0x4806a000
+ width      = 0x00000000
+ shift      = 0x00000002
+ offset     = 0x00000000
+ clock      = 0x02dc6c00
+arch_number = 0x000005ff
+TLB addr    = 0x87ff0000
+irq_sp      = 0x85f32d50
+sp start    = 0x85f32d40
+Early malloc usage: 45c / 4000
+OMAP3_EVM # mmc info
+Device: OMAP SD/MMC
+Manufacturer ID: 3
+OEM: 5344
+Name: SL64G
+Bus Speed: 48000000
+Mode: SD High Speed (50MHz)
+Rd Block Len: 512
+SD version 3.0
+High Capacity: Yes
+Capacity: 59.5 GiB
+Bus Width: 4-bit
+Erase Group Size: 512 Bytes
+OMAP3_EVM # mtest 0x80000000 0x81000000 0 2
+Unknown command 'mtest' - try 'help'
+(help output omitted)

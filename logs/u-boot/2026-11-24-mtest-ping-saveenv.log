@@ -1,0 +1,149 @@
+
+U-Boot SPL 2026.10-00001-g9e2d9f44f5cc (Nov 24 2026 - 21:29:56 +0100)
+Trying to boot from MMC1
+
+
+U-Boot 2026.10-00001-g9e2d9f44f5cc (Nov 24 2026 - 21:29:56 +0100)
+
+OMAP3530-GP ES2.1, CPU-OPP2, L3-165MHz, Max CPU Clock 600 MHz
+Model: TI OMAP35XX EVM (TMDSEVM3530)
+OMAP3 EVM board + LPDDR/NAND
+DRAM:  128 MiB
+Core:  49 devices, 16 uclasses, devicetree: separate
+NAND:  0 MiB
+MMC:   OMAP SD/MMC: 0, OMAP SD/MMC: 1
+Loading Environment from FAT...Unable to read "uboot.env" from mmc0:1... 
+Read back SMSC id 0x1150000
+OMAP die ID: <redacted>
+Net:   eth0: ethernet@2c000000
+OMAP3_EVM # 
+OMAP3_EVM # 
+OMAP3_EVM # my tes    help
+?         - alias for 'help'
+[         - alias for 'test'
+askenv    - get environment variables from stdin
+base      - print or set address offset
+bdinfo    - print Board Info structure
+bind      - Bind a device to a driver
+blkcache  - block cache diagnostics and control
+boot      - boot default, i.e., run 'bootcmd'
+bootd     - boot default, i.e., run 'bootcmd'
+bootefi   - Boots an EFI payload from memory
+bootelf   - Boot from an ELF image in memory
+bootflow  - Boot flows
+bootm     - boot application image from memory
+bootp     - boot image via network using BOOTP/TFTP protocol
+bootvx    - Boot vxWorks from an ELF image
+bootz     - boot Linux zImage image from memory
+chpart    - change active partition of a MTD device
+cmp       - memory compare
+coninfo   - print console devices and information
+cp        - memory copy
+crc32     - checksum calculation
+dcache    - enable or disable data cache
+dhcp      - boot image via network using DHCP/TFTP protocol
+dm        - Driver model low level access
+echo      - echo args to console
+editenv   - edit environment variable
+eficonfig - provide menu-driven UEFI variable maintenance interface
+env       - environment handling commands
+exit      - exit script
+ext2load  - load binary file from a Ext2 filesystem
+ext2ls    - list files in a directory (default /)
+ext4load  - load binary file from a Ext4 filesystem
+ext4ls    - list files in a directory (default /)
+ext4size  - determine a file's size
+ext4write - create a file in the root directory
+false     - do nothing, unsuccessfully
+fastboot  - run as a fastboot usb or udp device
+fatinfo   - print information about filesystem
+fatload   - load binary file from a dos filesystem
+fatls     - list files in a directory (default /)
+fatmkdir  - create a directory
+fatrm     - delete a file
+fatsize   - determine a file's size
+fatwrite  - write file into a dos filesystem
+fdt       - flattened device tree utility commands
+fstype    - Look up a filesystem type
+fstypes   - List supported filesystem types
+fsuuid    - Look up a filesystem UUID
+go        - start application at address 'addr'
+gpio      - query and control gpio pins
+help      - print command description/usage
+i2c       - I2C sub-system
+icache    - enable or disable instruction cache
+iminfo    - print header information for application image
+imxtract  - extract a part of a multi-image
+itest     - return true/false on integer compare
+ln        - Create a symbolic link
+load      - load binary file from a filesystem
+loadb     - load binary file over serial line (kermit mode)
+loads     - load S-Record file over serial line
+loadx     - load binary file over serial line (xmodem mode)
+loady     - load binary file over serial line (ymodem mode)
+loop      - infinite loop on address range
+ls        - list files in a directory (default /)
+md        - memory display
+mii       - MII utility commands
+mkdir     - create a directory
+mm        - memory modify (auto-incrementing address)
+mmc       - MMC sub system
+mmcinfo   - display MMC info
+mtdparts  - define flash/nand partitions
+mtest     - simple RAM read/write test
+mv        - rename/move a file/directory
+mw        - memory write (fill)
+nand      - NAND sub-system
+nandecc   - switch OMAP3 NAND ECC calculation algorithm
+nboot     - boot from NAND device
+net       - NET sub-system
+nm        - memory modify (constant address)
+panic     - Panic with optional message
+part      - disk partition related commands
+ping      - send ICMP ECHO_REQUEST to network host
+poweroff  - Perform POWEROFF of the device
+printenv  - print environment variables
+pxe       - get and boot from pxe files
+random    - fill memory with random pattern
+reset     - Perform RESET of the CPU
+rm        - delete a file
+run       - run commands in an environment variable
+save      - save file to a filesystem
+saveenv   - save environment variables to persistent storage
+setenv    - set environment variables
+setexpr   - set environment variable as the result of eval expression
+showvar   - print local hushshell variables
+size      - determine a file's size
+sleep     - delay execution for some time
+source    - run script from memory
+spl       - SPL configuration
+sspi      - SPI utility command
+sysboot   - command to get and boot from syslinux files
+test      - minimal test like /bin/sh
+tftpboot  - load file via network using TFTP protocol
+true      - do nothing, successfully
+ubi       - ubi commands
+ubifsload - load file from an UBIFS filesystem
+ubifsls   - list files in a directory
+ubifsmount- mount UBIFS volume
+ubifsumount- unmount UBIFS volume
+unbind    - Unbind a device from a driver
+usb       - USB sub-system
+usbboot   - boot from USB device
+version   - print monitor, compiler and linker version
+OMAP3_EVM # mtest 0x80000000 0x81000000 0 2
+Testing 80000000 ... 81000000:
+Iteration:      1Pattern 00000000  Writing...            Reading...Iteration:      2Pattern FFFFFFFF  Writing...            Reading...
+Tested 2 iteration(s) with 0 errors.
+OMAP3_EVM # setenv ipaddr 192.168.1.10
+OMAP3_EVM # setenv serverip 192.168.1.110
+OMAP3_EVM # ping ${serverip}
+smc911x: detected LAN9115 controller
+smc911x: phy initialized
+smc911x: MAC 00:50:c2:xx:xx:xx
+Using ethernet@2c000000 device
+smc911x: MAC 00:50:c2:xx:xx:xx
+host 192.168.1.110 is alive
+OMAP3_EVM # saveenv
+Saving Environment to FAT... OK
+OMAP3_EVM # poweroff
