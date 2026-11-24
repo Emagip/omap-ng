@@ -47,6 +47,10 @@ find "$EXT" -name '*.sh' -exec chmod 755 {} +
 
 # 3. Configure + build
 make -C "$SRC" O="$OBJ" BR2_EXTERNAL="$EXT" "$DEFCONFIG"
+# report defconfig lines that did not survive (missing dependencies / typos)
+while IFS= read -r line; do
+	case "$line" in *'$('*) ;; BR2_*=*) grep -qxF "$line" "$OBJ/.config" || echo "WARNING: not applied: $line" ;; esac
+done < "$EXT/configs/$DEFCONFIG"
 make -C "$SRC" O="$OBJ"
 if [ "${1:-}" = sdk ]; then
 	make -C "$SRC" O="$OBJ" sdk
