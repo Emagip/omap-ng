@@ -8,7 +8,7 @@ Each step ends with a **checkpoint**. Don't move on until it passes.
 |---|---|---|
 | 0 | Host and serial setup | **done**: USB-serial chain works |
 | 1 | Baseline: capture what the board boots today | **done** (2026-11-24); see `logs/baseline/FINDINGS.md`. Multimeter checks still to do. |
-| 2 | Mainline U-Boot on SD | todo |
+| 2 | Mainline U-Boot on SD | **built** v2026.10 (`scripts/build-uboot.sh`). Next: the SD card test (`scripts/mksd.sh`). |
 | 3 | Mainline kernel + Rev D device tree | todo |
 | 4 | Buildroot root filesystem + cross SDK | todo |
 | 5 | GPIO (LED), then I2C and SPI | todo |
@@ -108,6 +108,7 @@ If the SPL hangs or RAM is unstable: apply the **Infineon DDR timing patch** (`F
   - disable USB host (EHCI) and drop its pinmux and GPIO hogs (gpio_61, TWL GPIO2, gpio_21/22)
   - disable `mmc2`, `wlcore` and the WL12xx regulator
   - drop the `tvp5146` node
+  - disable the TSC2046 touchscreen on `&mcspi1` (removed on this unit; the LCD stays)
   - `mmc1` 4-bit
   - memory 128 MB
   - LED pinmux on gpio_158

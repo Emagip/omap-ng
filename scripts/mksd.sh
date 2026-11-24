@@ -1,0 +1,84 @@
+#!/usr/bin/env bash
+# SPDX-License-Identifier: GPL-2.0-only
+#
+# Prepare an SD card for the OMAP35x EVM (boots via SW4 = ON ON ON ON OFF OFF OFF OFF).
+#
+#   sudo scripts/mksd.sh format /dev/sdX   # WIPES the card: p1 FAT32 "BOOT" + p2 ext4 "rootfs"
+#   sudo scripts/mksd.sh update /dev/sdX   # only (re)copies boot files to the existing p1
+#
+# Boot files are taken from $BOOT_FILES (default: ~<user>/omap-build/out/sd-boot):
+#   MLO, u-boot.img        (required)
+#   anything else in there (zImage, *.dtb, boot.scr, uEnv.txt...) is copied too.
+#
+# Layout (chosen for the old OMAP3 ES2.1 boot ROM, which is picky about FAT):
+#   p1: start sector 63, 64 MiB, type 0x0C (FAT32 LBA), bootable, FAT32 with 255/63 geometry
+#   p2: rest of the card, ext4 (root filesystem, filled later)
+set -euo pipefail
+
+die() { echo "ERROR: $*" >&2; exit 1; }
+
+MODE="${1:-}"; DEV="${2:-}"
+[ "$MODE" = format ] || [ "$MODE" = update ] || die "usage: $0 {format|update} /dev/sdX"
+[ -b "$DEV" ] || die "$DEV is not a block device"
+[ "$(id -u)" -eq 0 ] || die "run with sudo"
+
+REAL_USER="${SUDO_USER:-$USER}"
+REAL_HOME="$(getent passwd "$REAL_USER" | cut -d: -f6)"
+BOOT_FILES="${BOOT_FILES:-$REAL_HOME/omap-build/out/sd-boot}"
+
+# ---- safety checks: whole disk, removable/USB/MMC, not holding the system ----
+NAME="$(basename "$DEV")"
+[ "$(lsblk -dno TYPE "$DEV")" = disk ] || die "$DEV is not a whole disk (give /dev/sdX, not a partition)"
+TRAN="$(lsblk -dno TRAN "$DEV" 2>/dev/null || true)"
+RM="$(cat "/sys/block/$NAME/removable" 2>/dev/null || echo 0)"
+case "$NAME" in mmcblk*) TRAN=mmc ;; esac
+if [ "$RM" != 1 ] && [ "$TRAN" != usb ] && [ "$TRAN" != mmc ]; then
+	die "$DEV is neither removable nor USB/MMC (TRAN='$TRAN') - refusing"
+fi
+for mp in / /boot /boot/efi /home /run/media/"$REAL_USER"/DaFunnyDrive; do
+	src="$(findmnt -no SOURCE "$mp" 2>/dev/null || true)"
+	[ -n "$src" ] && [ "$(lsblk -no PKNAME "$src" 2>/dev/null)" = "$NAME" ] && die "$DEV holds $mp - refusing"
+done
+SIZE_GB=$(( $(blockdev --getsize64 "$DEV") / 1000000000 ))
+[ "$SIZE_GB" -le 128 ] || die "$DEV is ${SIZE_GB} GB - larger than any SD card we expect, refusing"
+
+echo "Target: $DEV  ($(lsblk -dno MODEL,SIZE,TRAN "$DEV" | xargs))"
+lsblk "$DEV"
+
+part() { case "$NAME" in mmcblk*|loop*|nvme*) echo "${DEV}p$1" ;; *) echo "${DEV}$1" ;; esac; }
+P1="$(part 1)"; P2="$(part 2)"
+
+[ -f "$BOOT_FILES/MLO" ] && [ -f "$BOOT_FILES/u-boot.img" ] || die "MLO/u-boot.img missing in $BOOT_FILES (run scripts/build-uboot.sh)"
+
+# unmount anything on the card
+for p in $(lsblk -lnpo NAME "$DEV" | tail -n +2); do umount "$p" 2>/dev/null || true; done
+
+if [ "$MODE" = format ]; then
+	read -r -p "ALL DATA on $DEV will be destroyed. Type the device name ($NAME) to continue: " ans
+	[ "$ans" = "$NAME" ] || die "aborted"
+	wipefs -a "$DEV"
+	# 64 MiB = 131072 sectors; p1 starts at 63 (legacy CHS alignment), p2 aligned to 64 MiB
+	sfdisk --no-reread --wipe always "$DEV" <<EOF
+label: dos
+unit: sectors
+start=63,     size=131009, type=c, bootable
+start=131072,             type=83
+EOF
+	partprobe "$DEV" || true; udevadm settle
+	mkfs.vfat -F 32 -n BOOT -g 255/63 -h 63 "$P1"
+	mkfs.ext4 -F -q -L rootfs "$P2"
+fi
+
+MNT="$(mktemp -d)"
+trap 'umount "$MNT" 2>/dev/null || true; rmdir "$MNT"' EXIT
+mount "$P1" "$MNT"
+# MLO first: some OMAP3 ROMs only look at the first directory entries
+cp "$BOOT_FILES/MLO" "$MNT/MLO"; sync
+cp "$BOOT_FILES/u-boot.img" "$MNT/u-boot.img"
+for f in "$BOOT_FILES"/*; do
+	b="$(basename "$f")"; [ "$b" = MLO ] || [ "$b" = u-boot.img ] && continue
+	cp -r "$f" "$MNT/"
+done
+sync
+ls -l "$MNT"
+echo "Done. Insert the card in the EVM (SW4 = ON ON ON ON OFF OFF OFF OFF) and power-cycle."

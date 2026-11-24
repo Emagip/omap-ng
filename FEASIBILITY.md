@@ -146,6 +146,7 @@ With that, the last step is a desk exercise: for each connector pin, find its OM
 | PoP memory | **Samsung K5W1G1GACM-DL60** | Samsung MCP: OneNAND + mobile DDR. Per Samsung's part numbering, likely 1 Gb (128 MB) OneNAND + 1 Gb (**128 MB**) mDDR; no datasheet found online. The PSP's `initenv-samsung.txt` uses `mem=128M`, which confirms **128 MB RAM**. |
 | Power module | `T4030-PW-1518` | TWL4030 power module (the standard one, not the TPS6235x PR785 variant) |
 | Daughter card | none | |
+| Touchscreen | **removed** (broken) | LCD panel still works. Disable the TSC2046 node on `&mcspi1` (pen IRQ gpio_175) in the Rev D DTS. |
 | WL1271 Wi-Fi | none | |
 
 ### What this means
