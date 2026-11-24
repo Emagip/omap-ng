@@ -153,6 +153,16 @@
 	bus-width = <4>;
 };
 
+/*
+ * ---- I2C1 (TWL4030 power module): 400 kHz instead of 2.6 MHz HS mode ----
+ * In HS mode the link to the separate power module failed intermittently on this
+ * unit ("timeout waiting on XUDF bit", twl read/write -ETIMEDOUT), which then
+ * made the VMMC1 regulator and the SD card probe fail. Fast mode is reliable.
+ */
+&i2c1 {
+	clock-frequency = <400000>;
+};
+
 /* ---- No multimedia daughter card: no TVP5146 on I2C3 ---- */
 &i2c3 {
 	/delete-node/ tvp5146@5c;

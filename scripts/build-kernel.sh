@@ -32,7 +32,7 @@ OBJ="$BUILD_DIR/build/linux"
 OUT="$BUILD_DIR/out/sd-boot"
 MODS="$BUILD_DIR/out/modules"
 LOG="$BUILD_DIR/logs/kernel-build-$(date +%F-%H%M).log"
-K=(make -C "$SRC" O="$OBJ" ARCH=arm CROSS_COMPILE="$CROSS_COMPILE")
+K=(make -C "$SRC" O="$OBJ" ARCH=arm CROSS_COMPILE="$CROSS_COMPILE" LOCALVERSION=)
 
 mkdir -p "$BUILD_DIR/logs" "$OUT" "$OBJ"
 exec > >(tee "$LOG") 2>&1
