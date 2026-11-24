@@ -141,7 +141,7 @@ If the SPL hangs or RAM is unstable: apply the **Infineon DDR timing patch** (`F
 
 1. **On-board LED** `omap3evm::ledb` via sysfs (no wiring).
 2. **External LED** on P7 A18 / gpio_158 through an NPN transistor: `gpioset`, then `examples/gpio-blink/` (libgpiod C). See `GPIO-LED-TEST.md`.
-3. **I2C2** (P7 A30/A31) or **I2C3** (P18 B25/B26) with a 1.8 V device, or a level shifter: `i2cdetect -y 2`.
+3. **I2C2** (P7 A30/A31) or **I2C3** (P18 B25/B26) with a 1.8 V device, or a level shifter: `i2cdetect -y 1` (I2C2) or `-y 2` (I2C3). Linux numbers the buses from 0: I2C1 = `/dev/i2c-0`.
 4. **SPI2** (P7 A10–A13, A15) with spidev: `spidev_test`, then a C program.
 
 **Checkpoint 5:** the LED blinks from a C program you built with the SDK.

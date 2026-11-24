@@ -112,7 +112,7 @@ Mostly the GPMC memory bus, camera port, ETK/trace and SYS_BOOT. **Don't use the
 
 | Need | Best choice | Pins |
 |---|---|---|
-| **I2C** | I2C2 (`/dev/i2c-2`) or I2C3 (`/dev/i2c-3`) | P7 A30/A31, or P18 B25/B26, plus VIO_1V8 and GND on P7 |
+| **I2C** | I2C2 (`/dev/i2c-1`) or I2C3 (`/dev/i2c-2`). Linux numbers from 0; I2C1 = `/dev/i2c-0` is the PMIC. | P7 A30/A31, or P18 B25/B26, plus VIO_1V8 and GND on P7 |
 | **SPI** | McSPI2 with spidev, 2 chip selects | P7 A10 CLK, A11 MOSI, A12 MISO, A13 CS0, A15 CS1 |
 | **Plain GPIO** | camera pads (12 data + 7 control), MMC2 pads (10), McBSP1 (6), McBSP3 (4), UART2 (4) | P18 A25–A45, P7 A16–A21, A26–A29, A36–A49 |
 | **Analog in** | TWL4030 MADC ADCIN0, 2–7 via the IIO driver | P7 B8–B13, A33 |

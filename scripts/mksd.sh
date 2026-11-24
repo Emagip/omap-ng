@@ -4,11 +4,14 @@
 # Prepare an SD card for the OMAP35x EVM (boots via SW4 = ON ON ON ON OFF OFF OFF OFF).
 #
 #   sudo scripts/mksd.sh format /dev/sdX   # WIPES the card: p1 FAT32 "BOOT" + p2 ext4 "rootfs"
+#                                          # (+ writes rootfs.ext4 to p2 if it has been built)
 #   sudo scripts/mksd.sh update /dev/sdX   # only (re)copies boot files to the existing p1
+#   sudo scripts/mksd.sh rootfs /dev/sdX   # (re)writes rootfs.ext4 to p2 (ERASES p2), grows it to fill p2
 #
 # Boot files are taken from $BOOT_FILES (default: ~<user>/omap-build/out/sd-boot):
 #   MLO, u-boot.img        (required)
 #   anything else in there (zImage, *.dtb, boot.scr, uEnv.txt...) is copied too.
+# Root filesystem image: $ROOTFS_IMG (default: ~<user>/omap-build/out/rootfs/rootfs.ext4)
 #
 # Layout (for the OMAP3 boot ROM, which wants a 255-head/63-sector partition table):
 #   p1: cylinders 0-8 = LBA 63..144584 (~70 MB), type 0x0C (FAT32 LBA), bootable,
@@ -19,13 +22,14 @@ set -euo pipefail
 die() { echo "ERROR: $*" >&2; exit 1; }
 
 MODE="${1:-}"; DEV="${2:-}"
-[ "$MODE" = format ] || [ "$MODE" = update ] || die "usage: $0 {format|update} /dev/sdX"
+case "$MODE" in format|update|rootfs) ;; *) die "usage: $0 {format|update|rootfs} /dev/sdX" ;; esac
 [ -b "$DEV" ] || die "$DEV is not a block device"
 [ "$(id -u)" -eq 0 ] || die "run with sudo"
 
 REAL_USER="${SUDO_USER:-$USER}"
 REAL_HOME="$(getent passwd "$REAL_USER" | cut -d: -f6)"
 BOOT_FILES="${BOOT_FILES:-$REAL_HOME/omap-build/out/sd-boot}"
+ROOTFS_IMG="${ROOTFS_IMG:-$REAL_HOME/omap-build/out/rootfs/rootfs.ext4}"
 
 # ---- safety checks: whole disk, removable/USB/MMC, not holding the system ----
 NAME="$(basename "$DEV")"
@@ -49,7 +53,19 @@ lsblk "$DEV"
 part() { case "$NAME" in mmcblk*|loop*|nvme*) echo "${DEV}p$1" ;; *) echo "${DEV}$1" ;; esac; }
 P1="$(part 1)"; P2="$(part 2)"
 
-[ -f "$BOOT_FILES/MLO" ] && [ -f "$BOOT_FILES/u-boot.img" ] || die "MLO/u-boot.img missing in $BOOT_FILES (run scripts/build-uboot.sh)"
+if [ "$MODE" != rootfs ]; then
+	[ -f "$BOOT_FILES/MLO" ] && [ -f "$BOOT_FILES/u-boot.img" ] || die "MLO/u-boot.img missing in $BOOT_FILES (run scripts/build-uboot.sh)"
+else
+	[ -f "$ROOTFS_IMG" ] || die "$ROOTFS_IMG missing (run scripts/build-rootfs.sh)"
+fi
+
+# write rootfs.ext4 into p2 and grow it to the whole partition
+write_rootfs() {
+	echo "Writing $ROOTFS_IMG -> $P2"
+	dd if="$ROOTFS_IMG" of="$P2" bs=4M conv=fsync status=progress
+	e2fsck -fy "$P2" || [ $? -le 1 ]
+	resize2fs "$P2"
+}
 
 # unmount anything on the card
 for p in $(lsblk -lnpo NAME "$DEV" | tail -n +2); do umount "$p" 2>/dev/null || true; done
@@ -93,7 +109,15 @@ PY
 	# -s 1: 1 sector/cluster -> ~142k clusters. With the default (64) the volume has
 	# only ~2k clusters, which by the FAT spec is NOT FAT32 and the ROM rejects it.
 	mkfs.vfat -F 32 -s 1 -n BOOT -g 255/63 -h 63 "$P1"
-	mkfs.ext4 -F -q -L rootfs "$P2"
+	if [ -f "$ROOTFS_IMG" ]; then write_rootfs; else mkfs.ext4 -F -q -L rootfs "$P2"; fi
+fi
+
+if [ "$MODE" = rootfs ]; then
+	read -r -p "Partition $P2 (root filesystem) will be overwritten. Type the device name ($NAME) to continue: " ans
+	[ "$ans" = "$NAME" ] || die "aborted"
+	write_rootfs
+	echo "Done."
+	exit 0
 fi
 
 MNT="$(mktemp -d)"
