@@ -9,7 +9,7 @@ Each step ends with a **checkpoint**. Don't move on until it passes.
 | 0 | Host and serial setup | **done**: USB-serial chain works |
 | 1 | Baseline: capture what the board boots today | **done** (2026-11-24); see `logs/baseline/FINDINGS.md`. Multimeter checks still to do. |
 | 2 | Mainline U-Boot on SD | **done** 2026-11-24: v2026.10 + ES2.1 MMC patch; 128 MiB, `mtest` 0 errors, LAN9115 `ping` OK, env saved to SD. Logs: `logs/u-boot/`. |
-| 3 | Mainline kernel + Rev D device tree | todo |
+| 3 | Mainline kernel + Rev D device tree | **built** 6.18.65 LTS (`scripts/build-kernel.sh`, `board/dts/omap3-evm-revd.dts`, `board/kernel.config`, `board/boot.cmd`). Next: first boot test (it will stop at the root filesystem until step 4). |
 | 4 | Buildroot root filesystem + cross SDK | todo |
 | 5 | GPIO (LED), then I2C and SPI | todo |
 | 6 | Later / optional | – |

@@ -1,0 +1,172 @@
+// SPDX-License-Identifier: GPL-2.0-only
+/*
+ * TI OMAP35x EVM (TMDSEVM3530), as found on this unit:
+ *   - main board OMAP-EVM-MB-1518 Rev D ("Gen 1": LAN9115 Ethernet,
+ *     no on-board EHCI host port: that port lived on the multimedia
+ *     daughter card until Rev E)
+ *   - processor module O3530-PB-1518 Rev B, OMAP3530 ES2.1,
+ *     Samsung K5W1G1GACM PoP: 128 MB OneNAND (GPMC CS0) + 128 MB mDDR
+ *   - no multimedia daughter card, no WL1271 module, touchscreen removed
+ *
+ * Built on top of the mainline omap3-evm.dts, which describes the later
+ * Rev E/G boards with NAND processor modules.
+ */
+
+#include "omap3-evm.dts"
+
+/ {
+	model = "TI OMAP35XX EVM (TMDSEVM3530) Rev D, OneNAND";
+
+	chosen {
+		stdout-path = "serial0:115200n8";
+	};
+
+	memory@80000000 {
+		device_type = "memory";
+		reg = <0x80000000 0x08000000>;	/* 128 MB (U-Boot fixes this up too) */
+	};
+
+	leds {
+		ledb {
+			/* on the underside of the board: blinks while the kernel runs */
+			linux,default-trigger = "heartbeat";
+		};
+	};
+};
+
+/* ---- GPMC CS0: Samsung OneNAND instead of the NAND of later modules ---- */
+&gpmc {
+	ranges = <0 0 0x30000000 0x1000000>,	/* CS0: 16MB for OneNAND */
+		 <5 0 0x2c000000 0x01000000>;	/* CS5: 16MB for LAN9115 */
+
+	/delete-node/ nand@0,0;
+
+	onenand@0,0 {
+		#address-cells = <1>;
+		#size-cells = <1>;
+		compatible = "ti,omap2-onenand";
+		reg = <0 0 0x20000>;		/* CS0, offset 0, IO size 128K */
+
+		/* asynchronous timings from omap3430-sdp.dts (Samsung OneNAND, same SoC) */
+		gpmc,device-width = <2>;
+		gpmc,mux-add-data = <2>;
+		gpmc,cs-on-ns = <0>;
+		gpmc,cs-rd-off-ns = <84>;
+		gpmc,cs-wr-off-ns = <72>;
+		gpmc,adv-on-ns = <0>;
+		gpmc,adv-rd-off-ns = <18>;
+		gpmc,adv-wr-off-ns = <18>;
+		gpmc,oe-on-ns = <30>;
+		gpmc,oe-off-ns = <84>;
+		gpmc,we-on-ns = <0>;
+		gpmc,we-off-ns = <42>;
+		gpmc,rd-cycle-ns = <108>;
+		gpmc,wr-cycle-ns = <96>;
+		gpmc,access-ns = <78>;
+		gpmc,wr-data-mux-bus-ns = <30>;
+
+		/*
+		 * Layout used by the TI PSP 02.01.01.08 X-Loader/U-Boot still on
+		 * the flash (board-omap3evm-flash.c). All read-only: the old
+		 * firmware is the fallback boot when no SD card is inserted.
+		 */
+		partition@0 {
+			label = "xloader-onenand";
+			reg = <0x0 0x80000>;
+			read-only;
+		};
+		partition@80000 {
+			label = "uboot-onenand";
+			reg = <0x80000 0x1e0000>;
+			read-only;
+		};
+		partition@260000 {
+			label = "params-onenand";
+			reg = <0x260000 0x20000>;
+			read-only;
+		};
+		partition@280000 {
+			label = "linux-onenand";
+			reg = <0x280000 0x500000>;
+			read-only;
+		};
+		partition@780000 {
+			label = "jffs2-onenand";
+			reg = <0x780000 0x7880000>;
+			read-only;
+		};
+	};
+};
+
+/* ---- USB host (EHCI) port 2: not present on Rev D without the daughter card ---- */
+&usbhshost {
+	status = "disabled";
+};
+
+/* no on-board EHCI PHY: its supply/reset GPIOs (gpio_22/gpio_21) are free */
+&hsusb2_power {
+	status = "disabled";
+};
+
+&hsusb2_phy {
+	status = "disabled";
+};
+
+/* No WL1271 module: the WLAN supply regulator (gpio_150) is unused */
+&wl12xx_vmmc {
+	status = "disabled";
+};
+
+/* drop the Rev E+ USB host pinmux (frees mcspi1_cs3, McSPI2 and etk_d10..d15 pads) */
+&omap3_pmx_core {
+	/delete-property/ pinctrl-names;
+	/delete-property/ pinctrl-0;
+
+	led_test_pins: led-test-pins {
+		pinctrl-single,pins = <
+			OMAP3_CORE1_IOPAD(0x2190, PIN_OUTPUT | MUX_MODE4)	/* mcbsp1_dx.gpio_158, P7 A18 */
+		>;
+	};
+};
+
+&omap3_pmx_core2 {
+	/delete-property/ pinctrl-names;
+	/delete-property/ pinctrl-0;
+};
+
+/* drop the Rev E+ hogs that route gpio_61 to the on-board USB host bus switch */
+&gpio2 {
+	/delete-node/ en-usb2-port-hog;
+};
+
+&twl_gpio {
+	/delete-node/ en-on-board-gpio-61-hog;
+};
+
+/* ---- No WL1271: MMC2 unused (frees the MMC2 pads on P7 A41-A49) ---- */
+&mmc2 {
+	status = "disabled";
+};
+
+/* ---- SD slot is 4-bit on this board ---- */
+&mmc1 {
+	bus-width = <4>;
+};
+
+/* ---- No multimedia daughter card: no TVP5146 on I2C3 ---- */
+&i2c3 {
+	/delete-node/ tvp5146@5c;
+};
+
+/* ---- Touchscreen removed from the LCD panel on this unit ---- */
+&mcspi1 {
+	tsc2046@0 {
+		status = "disabled";
+	};
+};
+
+/* ---- First GPIO test: gpio_158 (P7 A18) muxed as GPIO, see GPIO-LED-TEST.md ---- */
+&gpio5 {
+	pinctrl-names = "default";
+	pinctrl-0 = <&led_test_pins>;
+};
