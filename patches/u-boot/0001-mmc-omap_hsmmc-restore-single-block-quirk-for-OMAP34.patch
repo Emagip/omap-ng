@@ -1,0 +1,46 @@
+From 153b5ce1db45cce9763ab2daf28b57edb2404193 Mon Sep 17 00:00:00 2001
+From: Emagip_ <72194496+Emagip@users.noreply.github.com>
+Date: Tue, 24 Nov 2026 21:23:51 +0100
+Subject: [PATCH] mmc: omap_hsmmc: restore single-block quirk for OMAP34xx
+ ES2.1 with DM_MMC
+
+OMAP34xx/35xx silicon revisions 2.1 and older cannot do multiple block
+reads on MMC1/MMC2 in polling or interrupt mode (SPRZ278F, advisory
+2.1.1.128): data is corrupted once the controller's two 512-byte read
+buffers are full. The legacy omap_hsmmc_init() path limits b_max to 1 on
+these revisions, but the driver-model path (omap_hsmmc_of_to_plat) lost
+that check, so SPL fails on such boards with:
+
+  Error reading cluster
+  spl_load_image_fat: error reading image u-boot.img, err - -5
+
+Apply the same limit in the DM path. Found on a TMDSEVM3530
+(OMAP3530 ES2.1, main board Rev D).
+
+Signed-off-by: Emagip_ <72194496+Emagip@users.noreply.github.com>
+---
+ drivers/mmc/omap_hsmmc.c | 8 ++++++++
+ 1 file changed, 8 insertions(+)
+
+diff --git a/drivers/mmc/omap_hsmmc.c b/drivers/mmc/omap_hsmmc.c
+index 2cf3e4e5..3751c475 100644
+--- a/drivers/mmc/omap_hsmmc.c
++++ b/drivers/mmc/omap_hsmmc.c
+@@ -1928,6 +1928,14 @@ static int omap_hsmmc_of_to_plat(struct udevice *dev)
+ 	cfg->f_min = 400000;
+ 	cfg->voltages = MMC_VDD_32_33 | MMC_VDD_33_34 | MMC_VDD_165_195;
+ 	cfg->b_max = CONFIG_SYS_MMC_MAX_BLK_COUNT;
++#if defined(CONFIG_OMAP34XX)
++	/*
++	 * Silicon revs 2.1 and older do not support multiblock transfers
++	 * (OMAP35x errata SPRZ278F, advisory 2.1.1.128).
++	 */
++	if ((get_cpu_family() == CPU_OMAP34XX) && (get_cpu_rev() <= CPU_3XX_ES21))
++		cfg->b_max = 1;
++#endif
+ 	if (fdtdec_get_bool(fdt, node, "ti,dual-volt"))
+ 		plat->controller_flags |= OMAP_HSMMC_SUPPORTS_DUAL_VOLT;
+ 	if (fdtdec_get_bool(fdt, node, "no-1-8-v"))
+-- 
+2.53.0
+

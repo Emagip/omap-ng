@@ -97,6 +97,8 @@ Nothing is written to the board in this step.
 - `mtest` over a few MB passes
 - the SMSC LAN9115 is detected: `ping` to the host works
 
+**ES2.1 MMC erratum (2.1.1.128):** multi-block reads on MMC1/2 corrupt data. Mainline U-Boot lost the single-block workaround in its driver-model MMC path, so the first SD boot failed with `Error reading cluster ... u-boot.img, err -5`. Fixed by `patches/u-boot/0001-mmc-omap_hsmmc-restore-single-block-quirk-for-OMAP34.patch`, which is worth sending upstream once tested. **Check the Linux `omap_hsmmc` driver for the same erratum in step 3.**
+
 If the SPL hangs or RAM is unstable: apply the **Infineon DDR timing patch** (`FEASIBILITY.md` §7) as `patches/u-boot/0001-omap3evm-onenand-ddr-timings.patch`.
 
 ## 3. Mainline kernel + Rev D device tree
