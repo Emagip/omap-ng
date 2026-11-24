@@ -135,9 +135,20 @@ With that, the last step is a desk exercise: for each connector pin, find its OM
   - `src/linux-dts` (torvalds/linux `8d7fe98`, 7.4-rc4: `arch/arm/boot/dts/ti/omap`, `arch/arm/configs`)
   - `src/u-boot-probe` (u-boot `ee1b347`, v2027.01-rc3: `configs`, `board/ti`)
 
-## 7. Open questions for you
+## 7. Board specifics
 
-1. Processor module: NAND (Micron) or OneNAND (Samsung)? 128 or 256 MB?
-2. Main-board revision, from the silkscreen: Rev C/D (Gen 1) or Rev E/G (Gen 2)?
-3. Do you have the multimedia daughter card fitted? It occupies I2C3, McBSP and the camera port.
-4. What do you want to attach (which buses, voltages)? That decides which pins to mux.
+As stated by the user on 2026-11-24. Exact markings to follow.
+
+- **Main board:** an older revision, probably Gen 1 (LAN9115, ISP1504 USB PHY). Expect the USB host DT tweak from §1.
+- **Processor module:** **Samsung OneNAND.** So the §2 OneNAND caveat applies: boot from SD, check DDR timings in U-Boot SPL, and replace the DT `nand@0,0` node with a `ti,omap2-onenand` node modeled on `omap3430-sdp.dts`, or just disable it.
+- **No multimedia daughter card:** I2C3 is free, and the TVP5146 node can be dropped.
+- **No WL1271 Wi-Fi:** disable `&mmc2`, `wlcore` and `wl12xx_vmmc` in the board DTS. That also frees gpio_149 and gpio_150 (the UART1 RTS/CTS pads).
+- **GPIO use:** from user C programs later, through libgpiod or the GPIO chardev. See `doc/04-linux-mainline/kernel-docs/`.
+
+Still open:
+
+1. Exact silkscreen revisions of the main board and processor module, the PoP marking, and the DDR size.
+2. The expansion-connector pinout. See `doc/README.md`, "Not obtained": the main-board schematic must be downloaded by hand.
+3. What will be attached (voltage, buses)?
+
+Reference documentation is collected in `doc/`; see `doc/README.md`.
