@@ -1,0 +1,39 @@
+omap-ng: mainline Linux on the TI TMDSEVM3530 (OMAP35x EVM)
+Copyright (C) 2026 Emagip_
+
+This repository uses two licenses for its own content. The full texts are in
+LICENSES/.
+
+1. Code: GPL-2.0-only (LICENSES/GPL-2.0-only.txt)
+   Covers source code, scripts, Makefiles, device-tree sources (.dts/.dtsi),
+   kernel and U-Boot configuration fragments, and patches written for this
+   project.
+
+   This program is free software; you can redistribute it and/or modify it
+   under the terms of the GNU General Public License version 2 as published by
+   the Free Software Foundation.
+
+   This program is distributed in the hope that it will be useful, but WITHOUT
+   ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+   FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for
+   more details.
+
+2. Documentation: CC-BY-SA-4.0 (LICENSES/CC-BY-SA-4.0.txt)
+   Covers the Markdown documentation written for this project (*.md).
+   Code snippets that appear inside the documentation may also be used under
+   GPL-2.0-only.
+
+3. Third-party material keeps its own license and copyright
+   - doc/04-linux-mainline/ and doc/05-legacy-psp-2009/: excerpts from the
+     Linux kernel and U-Boot. They are under the licenses stated in each
+     file's header / SPDX tag (mostly GPL-2.0).
+   - doc/**/*.pdf: datasheets, manuals and errata, copyright Texas
+     Instruments, Mistral Solutions and Microchip Technology. They are
+     included unmodified as publicly available reference material and are
+     NOT covered by the licenses above. See doc/README.md for the source of
+     each file.
+   - Non-redistributable documents are deliberately not included. See
+     doc/README.md, "Not redistributed".
+
+SPDX-License-Identifier for project code:   GPL-2.0-only
+SPDX-License-Identifier for project docs:   CC-BY-SA-4.0
