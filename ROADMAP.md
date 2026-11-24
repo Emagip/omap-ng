@@ -8,7 +8,7 @@ Each step ends with a **checkpoint**. Don't move on until it passes.
 |---|---|---|
 | 0 | Host and serial setup | **done**: USB-serial chain works |
 | 1 | Baseline: capture what the board boots today | **done** (2026-11-24); see `logs/baseline/FINDINGS.md`. Multimeter checks still to do. |
-| 2 | Mainline U-Boot on SD | **built** v2026.10 (`scripts/build-uboot.sh`). Next: the SD card test (`scripts/mksd.sh`). |
+| 2 | Mainline U-Boot on SD | **prompt reached** 2026-11-24 (v2026.10 + ES2.1 MMC patch): 128 MiB, LAN9115, 64 GB SD OK. Remaining: `mtest`, `ping`, `saveenv`. Log: `logs/u-boot/`. |
 | 3 | Mainline kernel + Rev D device tree | todo |
 | 4 | Buildroot root filesystem + cross SDK | todo |
 | 5 | GPIO (LED), then I2C and SPI | todo |

@@ -14,8 +14,10 @@ that check, so SPL fails on such boards with:
   Error reading cluster
   spl_load_image_fat: error reading image u-boot.img, err - -5
 
-Apply the same limit in the DM path. Found on a TMDSEVM3530
-(OMAP3530 ES2.1, main board Rev D).
+Apply the same limit in the DM path.
+
+Tested on a TMDSEVM3530 (OMAP3530 ES2.1, main board Rev D): SPL now
+loads u-boot.img from a 64 GB SD card and U-Boot reaches its prompt.
 
 Signed-off-by: Emagip_ <72194496+Emagip@users.noreply.github.com>
 ---
