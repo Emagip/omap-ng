@@ -9,6 +9,8 @@ The target board:
 - Power module `T4030-PW-1518`
 - **No multimedia daughter card**, **no WL1271 Wi-Fi**
 
+**Start with `EXPANSION-CONNECTORS.md`**: the P7/P18 pinout, mapped to OMAP pads and Linux GPIO numbers, plus SW4 boot-switch settings.
+
 ## Layout
 
 | Folder | Contents |
@@ -23,6 +25,8 @@ The target board:
 
 | File | What it is | Source |
 |---|---|---|
+| `ti-omap35x-evm-mainboard-schematic-revG.pdf` | **Main-board schematic, Rev G** (20 sheets, Sept 2009; revision history from Rev D). Sheet 9 = expansion connectors P7/P18 and SW4; sheet 16 = the Rev E+ bus switches. **Decoded in `../EXPANSION-CONNECTORS.md`.** | e2e.ti.com forum attachment (downloaded by the user) |
+| `expansion-connectors/*.png` | High-resolution crops of sheet 9: P7, P18, their power pins, SW4 | rendered from the schematic |
 | `mistral-omap35x-evm-datasheet-old-build.pdf` | Mistral EVM datasheet, **old build**. Interfaces, memory options, expansion-connector interface list. | archive.org copy of mistralsolutions.com `datasheets/35x_EVM_old_build.pdf` (2010) |
 | `mistral-omap35x-evm-datasheet.pdf` | Same datasheet, newer build | farnell.com/datasheets/1500928.pdf |
 | `mistral-hw-user-guide-errata-SW4-SW1.pdf` | **Correct SW4 (boot) and SW1 settings.** Corrects the Hardware User Guide. Read it before changing switches. | archive.org copy of Mistral `Errata.pdf` (2009) |
@@ -84,7 +88,8 @@ The target board:
 
 | Document | Why it's missing | Where |
 |---|---|---|
-| **Main-board schematic** (`omap35x_evm_mb_sch_revg.pdf`, Rev G "based on Rev D") | The e2e server returned HTTP 500 to the automated download. Download it from a browser. It's the main hope for the **expansion-connector pinout**. | https://e2e.ti.com/cfs-file/__key/communityserver-discussions-components-files/791/omap35x_5F00_evm_5F00_mb_5F00_sch_5F00_revg.pdf |
+| Main-board schematic **Rev D** exactly | Only Rev G is public. Rev D differences come from its revision history; see `EXPANSION-CONNECTORS.md`. | – |
+| Processor-module and power-module schematics | Mistral login | – |
 | Mistral **Hardware User Guide**, processor/power/main-board schematics, Gerbers | Gated behind a Mistral login, and the old site is gone. Shipped on the EVM's DVD/SD card: check your kit's original media. | Mistral support pages, archived at web.archive.org: `mistralsolutions.com/assets/downloads/3530.php` |
 | Samsung OneNAND+mDDR PoP datasheet (**K5W1G1GACM-DL60**) | No public datasheet found. The closest are the standalone 1 Gb OneNAND KFG1G16U2B/C datasheets. | – |
 

@@ -174,9 +174,22 @@ With that, the last step is a desk exercise: for each connector pin, find its OM
 
 **GPIO use:** from user C programs, through libgpiod or the GPIO chardev. See `doc/04-linux-mainline/kernel-docs/` (`gpio-chardev.rst`, `gpio-tools-examples/`).
 
+### Expansion connectors (resolved from the main-board schematic)
+
+The full pinout is in `doc/EXPANSION-CONNECTORS.md`. In short, for this Rev D board:
+
+- **I2C:** I2C2 on P7 A30/A31 and I2C3 on P18 B25/B26. Both are free. Add 1.8 V pull-ups if needed.
+- **SPI:** McSPI2 on P7 A10–A13 and A15 (CLK, MOSI, MISO, CS0, CS1), used through spidev. This needs the mainline Rev E+ USB-host pinmux removed.
+- **GPIO:** about 35 free pads. The 12 camera data pads, the camera control pads, MMC2 (no Wi-Fi), McBSP1/3 and UART2 are the best candidates.
+- **Analog:** TWL4030 MADC inputs on P7.
+- **Supply:** VIO_1V8 is available on P7. All logic is 1.8 V.
+- **SW4:** for SD boot with OneNAND fallback, `ON ON ON ON OFF OFF OFF OFF`. This assumes ON = 0; check against the current positions first.
+- **Caveat:** the public schematic is Rev G. On Rev D the `EXP_*` nets are expected to be wired directly, without the Rev E+ bus switches. Verify by inspection or a continuity check.
+
 Still open:
 
-1. The expansion-connector pinout. It needs the main-board schematic: see `doc/README.md`, "Not obtained".
-2. What will be attached (voltage, buses)?
+1. Confirm the Rev D routing of the `EXP_*` nets and the power pins (multimeter).
+2. Confirm the SW4 polarity from the current switch positions.
+3. What will be attached (voltage, buses)?
 
 Reference documentation is collected in `doc/`; see `doc/README.md`.
