@@ -135,20 +135,48 @@ With that, the last step is a desk exercise: for each connector pin, find its OM
   - `src/linux-dts` (torvalds/linux `8d7fe98`, 7.4-rc4: `arch/arm/boot/dts/ti/omap`, `arch/arm/configs`)
   - `src/u-boot-probe` (u-boot `ee1b347`, v2027.01-rc3: `configs`, `board/ti`)
 
-## 7. Board specifics
+## 7. Board specifics (confirmed from the board's markings, 2026-11-24)
 
-As stated by the user on 2026-11-24. Exact markings to follow.
+| Part | Marking | Meaning |
+|---|---|---|
+| Main board | `OMAP-EVM-MB-1518`, **Rev D** | **Gen 1** main board: LAN9115 Ethernet, U-Boot `OMAP3EVM_BOARD_GEN_1` |
+| Processor module | `O3530-PB-1518`, silkscreen "OMAP 35XX REV B" | OMAP3530 processor board, Rev B. This is the minimum PSP 2.x supports. |
+| PoP memory | **Samsung K5W1G1GACM-DL60** | Samsung MCP: OneNAND + mobile DDR. Per Samsung's part numbering, likely 1 Gb (128 MB) OneNAND + 1 Gb (**128 MB**) mDDR; no datasheet found online. The PSP's `initenv-samsung.txt` uses `mem=128M`, which confirms **128 MB RAM**. |
+| Power module | `T4030-PW-1518` | TWL4030 power module (the standard one, not the TPS6235x PR785 variant) |
+| Daughter card | none | |
+| WL1271 Wi-Fi | none | |
 
-- **Main board:** an older revision, probably Gen 1 (LAN9115, ISP1504 USB PHY). Expect the USB host DT tweak from §1.
-- **Processor module:** **Samsung OneNAND.** So the §2 OneNAND caveat applies: boot from SD, check DDR timings in U-Boot SPL, and replace the DT `nand@0,0` node with a `ti,omap2-onenand` node modeled on `omap3430-sdp.dts`, or just disable it.
-- **No multimedia daughter card:** I2C3 is free, and the TVP5146 node can be dropped.
-- **No WL1271 Wi-Fi:** disable `&mmc2`, `wlcore` and `wl12xx_vmmc` in the board DTS. That also frees gpio_149 and gpio_150 (the UART1 RTS/CTS pads).
-- **GPIO use:** from user C programs later, through libgpiod or the GPIO chardev. See `doc/04-linux-mainline/kernel-docs/`.
+### What this means
+
+**DDR in U-Boot SPL: probably works as is.**
+- The SPL guesses the PoP type by reading a *NAND* ID on GPMC CS0. On a OneNAND module that doesn't match Hynix, so it falls back to "Micron 128 MB at 165 MHz" (`board/ti/omap3evm/evm.c`).
+- The 2009 x-loader (`OMAP35x-PSP-SDK-02.01.01.08/src/boot-strap`) detects OneNAND and programs **Infineon timings at 166 MHz**:
+  - ACTIM A: tRFC 12, tRC 10, tRAS 7, tRP 3, tRCD 3, tRRD 2, tDPL 3, tDAL 6
+  - ACTIM B: tWTR 1, tCKE 2, tXP 2, XSR 20
+  - MCFG `0x02584019`: 128 MB, 13-bit rows, 10-bit columns
+- Mainline's Micron fallback has the **same geometry** (128 MB, RASWIDTH 13, CASWIDTH 10). Its timings are equal or looser everywhere (tRFC 21, XSR 23, tXP 5) except tCKE (1 vs 2).
+- **Fallback plan** if RAM is unstable: patch `get_board_mem_timings()` to use the x-loader's Infineon values, keeping the Micron MCFG. Do **not** use mainline's `SAMSUNG_V_MCFG_165`: that is RASWIDTH 14, a different part.
+- `identify_nand_chip()` sends NAND commands to a OneNAND device. This is expected to be harmless, but if the SPL hangs early, this is the first suspect. In that case skip detection and hard-code the values.
+
+**OneNAND in U-Boot.** Mainline `omap3_evm_defconfig` has no OneNAND support. That doesn't matter for SD boot. If you want U-Boot to read or write OneNAND later, `board/isee/igep00x0` shows how an OMAP3 board handles OneNAND on GPMC CS0 (`CMD_ONENAND`, DT fixup).
+
+**Kernel device tree.** Make a small `omap3-evm-revd.dts` that includes `omap3-evm.dts`, then:
+- Replace `&gpmc nand@0,0` with a `ti,omap2-onenand` node (template: `omap3430-sdp.dts`, binding `ti,gpmc-onenand.yaml`), or disable it. The 2009 partition map is in `doc/05-legacy-psp-2009/mach-omap2/board-omap3evm-flash.c`.
+- **USB host (EHCI) port 2 is not on the Rev D main board.**
+  - In the 2009 kernel, EHCI port 2 used the SMSC USB3320 PHY on the *multimedia daughter card* (`ehci-omap.c`, `CONFIG_OMAP3EVM_MISTRAL_DC`). The on-board EHCI with the gpio_61 bus switch arrived with Rev E.
+  - So: disable `&usbhshost`/`&usbhsehci`, drop `hsusb2_pins`, `hsusb2_2_pins` and `ehci_phy_pins`, and drop the gpio_61 and TWL GPIO2 hogs.
+  - **That frees the McSPI2 pads** (`mcspi2_clk/simo/somi/cs0/cs1`) and `mcspi1_cs3`. Whether they reach an expansion connector on Rev D has to be checked in the schematic.
+- MUSB OTG: Gen 1 boards use an external ISP1504 ULPI PHY, so check this at first boot. Networking via LAN9115 Ethernet doesn't depend on it.
+- Disable `&mmc2`, `wlcore`, `wl12xx_vmmc`: no Wi-Fi. That frees gpio_149 and gpio_150.
+- Drop the `tvp5146@5c` node: no daughter card. **I2C2 and I2C3 are both free.**
+- `&mmc1`: the 2009 board file uses **4 bits**, WP = gpio_63, CD = TWL GPIO0. Set `bus-width = <4>` to match.
+- Memory node: 128 MB. U-Boot fixes this up anyway.
+
+**GPIO use:** from user C programs, through libgpiod or the GPIO chardev. See `doc/04-linux-mainline/kernel-docs/` (`gpio-chardev.rst`, `gpio-tools-examples/`).
 
 Still open:
 
-1. Exact silkscreen revisions of the main board and processor module, the PoP marking, and the DDR size.
-2. The expansion-connector pinout. See `doc/README.md`, "Not obtained": the main-board schematic must be downloaded by hand.
-3. What will be attached (voltage, buses)?
+1. The expansion-connector pinout. It needs the main-board schematic: see `doc/README.md`, "Not obtained".
+2. What will be attached (voltage, buses)?
 
 Reference documentation is collected in `doc/`; see `doc/README.md`.

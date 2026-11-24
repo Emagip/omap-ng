@@ -2,7 +2,12 @@
 
 Collected 2026-11-24. Every file below was downloaded from the source listed, or copied from mainline sources or the local 2009 SDK, so later sessions don't need to go online again. The newest public revision is used where one exists.
 
-The target board is an **older main-board revision** with a **Samsung OneNAND processor module**, **no multimedia daughter card** and **no WL1271 Wi-Fi**.
+The target board:
+
+- Main board `OMAP-EVM-MB-1518` **Rev D** (Gen 1)
+- Processor module `O3530-PB-1518` Rev B, with **Samsung K5W1G1GACM-DL60** OneNAND + 128 MB mDDR PoP
+- Power module `T4030-PW-1518`
+- **No multimedia daughter card**, **no WL1271 Wi-Fi**
 
 ## Layout
 
@@ -42,7 +47,8 @@ The target board is an **older main-board revision** with a **Samsung OneNAND pr
 | File | What it is | Source |
 |---|---|---|
 | `swcs032f-tps65950-twl4030-data-manual.pdf` | TPS65950 data manual, Rev F. The TPS65950 is the catalog version of the TWL4030: same GPIOs, regulators, MADC, keypad. | ti.com/lit/pdf/swcs032 |
-| `microchip-lan9115-ethernet-datasheet.pdf` | SMSC/Microchip LAN9115. **Likely the Ethernet chip on old (Gen 1) main boards.** | ww1.microchip.com DS00002269A |
+| `swcu050g-tps65950-twl4030-technical-reference-manual.pdf` | TPS65950 TRM, Rev G (947 pp). Full register map: GPIO, regulators, USB PHY, MADC. | ti.com SWCU050 (login required, downloaded by the user) |
+| `microchip-lan9115-ethernet-datasheet.pdf` | SMSC/Microchip LAN9115. **The Ethernet chip on this Rev D (Gen 1) main board.** | ww1.microchip.com DS00002269A |
 | `microchip-lan9220-ethernet-datasheet.pdf` | LAN9220, used on Gen 2 (Rev ≥ E) main boards | ww1.microchip.com DS00002417A |
 
 ## 04-linux-mainline
@@ -80,8 +86,7 @@ The target board is an **older main-board revision** with a **Samsung OneNAND pr
 |---|---|---|
 | **Main-board schematic** (`omap35x_evm_mb_sch_revg.pdf`, Rev G "based on Rev D") | The e2e server returned HTTP 500 to the automated download. Download it from a browser. It's the main hope for the **expansion-connector pinout**. | https://e2e.ti.com/cfs-file/__key/communityserver-discussions-components-files/791/omap35x_5F00_evm_5F00_mb_5F00_sch_5F00_revg.pdf |
 | Mistral **Hardware User Guide**, processor/power/main-board schematics, Gerbers | Gated behind a Mistral login, and the old site is gone. Shipped on the EVM's DVD/SD card: check your kit's original media. | Mistral support pages, archived at web.archive.org: `mistralsolutions.com/assets/downloads/3530.php` |
-| TPS65950 TRM (SWCU050) | ti.com requires a myTI login | https://www.ti.com/lit/pdf/swcu050 |
-| Samsung OneNAND PoP datasheet | Part number unknown until the board markings are read | – |
+| Samsung OneNAND+mDDR PoP datasheet (**K5W1G1GACM-DL60**) | No public datasheet found. The closest are the standalone 1 Gb OneNAND KFG1G16U2B/C datasheets. | – |
 
 ## Online references (latest, not downloaded)
 
