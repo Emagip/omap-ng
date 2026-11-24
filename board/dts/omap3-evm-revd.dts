@@ -21,6 +21,11 @@
 		stdout-path = "serial0:115200n8";
 	};
 
+	aliases {
+		/* lets U-Boot pass its ethaddr (from the LAN9115 EEPROM) as local-mac-address */
+		ethernet0 = "/ocp@68000000/gpmc@6e000000/ethernet@gpmc";
+	};
+
 	memory@80000000 {
 		device_type = "memory";
 		reg = <0x80000000 0x08000000>;	/* 128 MB (U-Boot fixes this up too) */
@@ -96,6 +101,45 @@
 			read-only;
 		};
 	};
+};
+
+/*
+ * ---- LAN9115 (Gen 1 main board) bus timings ----
+ * omap-gpmc-smsc911x.dtsi is tuned for the LAN9220 of Rev E+ boards (155 ns cycles).
+ * The LAN9115 needs a read/write cycle time of at least 165 ns (datasheet table 6-3);
+ * out-of-spec access gave a silent smsc911x probe failure or a garbage MAC.
+ * These are U-Boot's proven NET_GPMC_CONFIG1..5 values for this board, in ns
+ * (165 MHz GPMC clock, ~6.06 ns per tick).
+ */
+&gpmc {
+	ethernet@gpmc {
+		gpmc,cs-on-ns = <6>;
+		gpmc,cs-rd-off-ns = <182>;
+		gpmc,cs-wr-off-ns = <182>;
+		gpmc,adv-on-ns = <0>;
+		gpmc,adv-rd-off-ns = <18>;
+		gpmc,adv-wr-off-ns = <48>;
+		gpmc,oe-on-ns = <55>;
+		gpmc,oe-off-ns = <170>;
+		gpmc,we-on-ns = <55>;
+		gpmc,we-off-ns = <170>;
+		gpmc,rd-cycle-ns = <188>;
+		gpmc,wr-cycle-ns = <188>;
+		gpmc,access-ns = <145>;
+	};
+};
+
+/*
+ * ---- On-die temperature sensor: disabled ----
+ * ES2.1 parts have a non-trimmed bandgap sensor ("Temp not accurate"); a bogus
+ * reading tripped the critical point 3.6 s after boot and powered the board off.
+ */
+&bandgap {
+	status = "disabled";
+};
+
+&cpu_thermal {
+	status = "disabled";
 };
 
 /* ---- USB host (EHCI) port 2: not present on Rev D without the daughter card ---- */

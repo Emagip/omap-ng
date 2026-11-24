@@ -1,0 +1,1401 @@
+
+U-Boot SPL 2026.10-00001-g9e2d9f44f5cc (Nov 24 2026 - 21:29:56 +0100)
+Trying to boot from MMC1
+
+
+U-Boot 2026.10-00001-g9e2d9f44f5cc (Nov 24 2026 - 21:29:56 +0100)
+
+OMAP3530-GP ES2.1, CPU-OPP2, L3-165MHz, Max CPU Clock 600 MHz
+Model: TI OMAP35XX EVM (TMDSEVM3530)
+OMAP3 EVM board + LPDDR/NAND
+DRAM:  128 MiB
+Core:  49 devices, 16 uclasses, devicetree: separate
+NAND:  0 MiB
+MMC:   OMAP SD/MMC: 0, OMAP SD/MMC: 1
+Loading Environment from FAT...Loading Environment from FAT... OK
+Read back SMSC id 0x1150000
+OMAP die ID: <redacted>
+Net:   eth0: ethernet@2c000000
+switch to partitions #0, OK
+mmc0 is current device
+SD/MMC found on device 0
+730 bytes read in 5 ms (142.6 KiB/s)
+Running bootscript from mmc0 ...
+## Executing script at 82000000
+== boot.scr: TMDSEVM3530 Rev D
+5745744 bytes read in 3483 ms (1.6 MiB/s)
+71451 bytes read in 47 ms (1.4 MiB/s)
+Kernel image @ 0x82000000 [ 0x000000 - 0x57ac50 ]
+## Flattened Device Tree blob at 83000000
+   Booting using the fdt blob at 0x83000000
+Working FDT set to 83000000
+   Loading Device Tree to 84f14000, end 84f2871a ... OK
+Working FDT set to 84f14000
+
+Starting kernel ...
+
+[    0.000000] Booting Linux on physical CPU 0x0
+[    0.000000] Linux version 6.18.65-omapng (emagip@ElLinux) (arm-linux-gnueabihf-gcc (Ubuntu 15.2.0-16ubuntu1) 15.2.0, GNU ld (GNU Binutils for Ubuntu) 2.46) #4 SMP Tue Nov 24 23:01:04 CET 2026
+[    0.000000] CPU: ARMv7 Processor [411fc082] revision 2 (ARMv7), cr=10c5387d
+[    0.000000] CPU: PIPT / VIPT nonaliasing data cache, VIPT nonaliasing instruction cache
+[    0.000000] OF: fdt: Machine model: TI OMAP35XX EVM (TMDSEVM3530) Rev D, OneNAND
+[    0.000000] Memory policy: Data cache writeback
+[    0.000000] cma: Reserved 16 MiB at 0x86800000
+[    0.000000] Zone ranges:
+[    0.000000]   Normal   [mem 0x0000000080000000-0x0000000087dfffff]
+[    0.000000]   HighMem  empty
+[    0.000000] Movable zone start for each node
+[    0.000000] Early memory node ranges
+[    0.000000]   node   0: [mem 0x0000000080000000-0x0000000087dfffff]
+[    0.000000] Initmem setup node 0 [mem 0x0000000080000000-0x0000000087dfffff]
+[    0.000000] On node 0, zone Normal: 512 pages in unavailable ranges
+[    0.000000] OF: reserved mem: Reserved memory: No reserved-memory node in the DT
+[    0.000000] CPU: All CPU(s) started in SVC mode.
+[    0.000000] OMAP3430/3530 ES2.1 (l2cache iva sgx neon isp)
+[    0.000000] percpu: Embedded 17 pages/cpu s40716 r8192 d20724 u69632
+[    0.000000] Kernel command line: console=ttyS0,115200n8 root=/dev/mmcblk0p2 rootfstype=ext4 rw rootwait
+[    0.000000] printk: log buffer data + meta data: 65536 + 204800 = 270336 bytes
+[    0.000000] Dentry cache hash table entries: 16384 (order: 4, 65536 bytes, linear)
+[    0.000000] Inode-cache hash table entries: 8192 (order: 3, 32768 bytes, linear)
+[    0.000000] Built 1 zonelists, mobility grouping on.  Total pages: 32256
+[    0.000000] mem auto-init: stack:all(zero), heap alloc:off, heap free:off
+[    0.000000] SLUB: HWalign=64, Order=0-3, MinObjects=0, CPUs=1, Nodes=1
+[    0.000000] rcu: Hierarchical RCU implementation.
+[    0.000000] rcu: 	RCU event tracing is enabled.
+[    0.000000] rcu: 	RCU restricting CPUs from NR_CPUS=2 to nr_cpu_ids=1.
+[    0.000000] 	Tracing variant of Tasks RCU enabled.
+[    0.000000] rcu: RCU calculated value of scheduler-enlistment delay is 10 jiffies.
+[    0.000000] rcu: Adjusting geometry for rcu_fanout_leaf=16, nr_cpu_ids=1
+[    0.000000] RCU Tasks Trace: Setting shift to 0 and lim to 1 rcu_task_cb_adjust=1 rcu_task_cpu_ids=1.
+[    0.000000] NR_IRQS: 16, nr_irqs: 16, preallocated irqs: 16
+[    0.000000] IRQ: Found an INTC at 0x(ptrval) (revision 4.0) with 96 interrupts
+[    0.000000] rcu: srcu_init: Setting srcu_struct sizes based on contention.
+[    0.000000] clocksource: jiffies: mask: 0xffffffff max_cycles: 0xffffffff, max_idle_ns: 19112604462750000 ns
+[    0.000000] Clocking rate (Crystal/Core/MPU): 26.0/332/600 MHz
+[    0.000000] OMAP clocksource: 32k_counter at 32768 Hz
+[    0.000000] clocksource: 32k_counter: mask: 0xffffffff max_cycles: 0xffffffff, max_idle_ns: 58327039986419 ns
+[    0.000030] sched_clock: 32 bits at 33kHz, resolution 30517ns, wraps every 65535999984741ns
+[    0.004516] TI gptimer clockevent: always-on 32768 Hz at /ocp@68000000/target-module@48318000
+[    0.006225] Console: colour dummy device 80x30
+[    0.006347] Calibrating delay loop... 600.47 BogoMIPS (lpj=3002368)
+[    0.125244] CPU: Testing write buffer coherency: ok
+[    0.125335] CPU0: Spectre v2: using BPIALL workaround
+[    0.125366] pid_max: default: 32768 minimum: 301
+[    0.125579] LSM: initializing lsm=capability
+[    0.125793] VFS: Disk quotas dquot_6.6.0
+[    0.125823] VFS: Dquot-cache hash table entries: 1024 (order 0, 4096 bytes)
+[    0.125915] Mount-cache hash table entries: 1024 (order: 0, 4096 bytes, linear)
+[    0.125946] Mountpoint-cache hash table entries: 1024 (order: 0, 4096 bytes, linear)
+[    0.128265] CPU0: thread -1, cpu 0, socket -1, mpidr 0
+[    0.132202] Setting up static identity map for 0x80100000 - 0x80100078
+[    0.132751] rcu: Hierarchical SRCU implementation.
+[    0.132751] rcu: 	Max phase no-delay instances is 1000.
+[    0.134674] smp: Bringing up secondary CPUs ...
+[    0.134735] smp: Brought up 1 node, 1 CPU
+[    0.134735] SMP: Total of 1 processors activated (600.47 BogoMIPS).
+[    0.134765] CPU: All CPU(s) started in SVC mode.
+[    0.135101] Memory: 90688K/129024K available (12288K kernel code, 1179K rwdata, 2880K rodata, 1024K init, 255K bss, 20540K reserved, 16384K cma-reserved, 0K highmem)
+[    0.136474] devtmpfs: initialized
+[    0.169921] VFP support v0.3: implementor 41 architecture 3 part 30 variant c rev 1
+[    0.170959] posixtimers hash table entries: 512 (order: 0, 4096 bytes, linear)
+[    0.171051] futex hash table entries: 256 (16384 bytes on 1 NUMA nodes, total 16 KiB, linear).
+[    0.172363] pinctrl core: initialized pinctrl subsystem
+[    0.175811] NET: Registered PF_NETLINK/PF_ROUTE protocol family
+[    0.180694] DMA: preallocated 256 KiB pool for atomic coherent allocations
+[    0.213073] omap_hwmod: mcbsp2_sidetone using broken dt data from mcbsp
+[    0.214050] omap_hwmod: mcbsp3_sidetone using broken dt data from mcbsp
+[    0.284332] audit: initializing netlink subsys (disabled)
+[    0.286743] thermal_sys: Registered thermal governor 'fair_share'
+[    0.286773] thermal_sys: Registered thermal governor 'step_wise'
+[    0.286773] thermal_sys: Registered thermal governor 'user_space'
+[    0.287017] audit: type=2000 audit(0.270:1): state=initialized audit_enabled=0 res=1
+[    0.287078] cpuidle: using governor menu
+[    0.287597] Reprogramming SDRC clock to 332000000 Hz
+[    0.328582] /ocp@68000000: Fixed dependency cycle(s) with /ocp@68000000/interrupt-controller@48200000
+[    0.364501] OMAP GPIO hardware version 2.5
+[    0.406097] /ocp@68000000/dss@48050000: Fixed dependency cycle(s) with /display
+[    0.406433] /display: Fixed dependency cycle(s) with /ocp@68000000/dss@48050000
+[    0.407165] No ATAGs?
+[    0.407165] hw-breakpoint: debug architecture 0x4 unsupported.
+[    0.416137] kprobes: kprobe jump-optimization is enabled. All kprobes are optimized if possible.
+[    0.436828] iommu: Default domain type: Translated
+[    0.436859] iommu: DMA domain TLB invalidation policy: strict mode
+[    0.440704] platform 480bc000.isp: Adding to iommu group 0
+[    0.440979] omap-iommu 480bd400.mmu: 480bd400.mmu registered
+[    0.458038] SCSI subsystem initialized
+[    0.469573] omap_i2c 48070000.i2c: bus 0 rev3.3 at 400 kHz
+[    0.471466] omap_i2c 48072000.i2c: bus 1 rev3.3 at 400 kHz
+[    0.473175] omap_i2c 48060000.i2c: bus 2 rev3.3 at 400 kHz
+[    0.473754] pps_core: LinuxPPS API ver. 1 registered
+[    0.473754] pps_core: Software ver. 5.3.6 - Copyright 2005-2007 Rodolfo Giometti <giometti@linux.it>
+[    0.473815] PTP clock support registered
+[    0.487091] vgaarb: loaded
+[    0.487548] clocksource: Switched to clocksource 32k_counter
+[    1.935699] NET: Registered PF_INET protocol family
+[    1.936187] IP idents hash table entries: 2048 (order: 2, 16384 bytes, linear)
+[    1.937774] tcp_listen_portaddr_hash hash table entries: 512 (order: 0, 4096 bytes, linear)
+[    1.937835] Table-perturb hash table entries: 65536 (order: 6, 262144 bytes, linear)
+[    1.937866] TCP established hash table entries: 1024 (order: 0, 4096 bytes, linear)
+[    1.937896] TCP bind hash table entries: 1024 (order: 2, 16384 bytes, linear)
+[    1.937957] TCP: Hash tables configured (established 1024 bind 1024)
+[    1.938171] UDP hash table entries: 256 (order: 2, 14336 bytes, linear)
+[    1.938232] UDP-Lite hash table entries: 256 (order: 2, 14336 bytes, linear)
+[    1.938568] NET: Registered PF_UNIX/PF_LOCAL protocol family
+[    1.940795] RPC: Registered named UNIX socket transport module.
+[    1.940826] RPC: Registered udp transport module.
+[    1.940826] RPC: Registered tcp transport module.
+[    1.940856] RPC: Registered tcp-with-tls transport module.
+[    1.940856] RPC: Registered tcp NFSv4.1 backchannel transport module.
+[    1.940887] PCI: CLS 0 bytes, default 64
+[    1.943603] Initialise system trusted keyrings
+[    1.945098] workingset: timestamp_bits=14 max_order=15 bucket_order=1
+[    1.947204] NFS: Registering the id_resolver key type
+[    1.947296] Key type id_resolver registered
+[    1.947296] Key type id_legacy registered
+[    1.947448] jffs2: version 2.2. (NAND) (SUMMARY)  © 2001-2006 Red Hat, Inc.
+[    1.948730] Key type asymmetric registered
+[    1.948760] Asymmetric key parser 'x509' registered
+[    1.948883] io scheduler mq-deadline registered
+[    1.948913] io scheduler kyber registered
+[    1.949005] io scheduler bfq registered
+[    1.971191] omap-dma-engine 48056000.dma-controller: OMAP DMA engine driver
+[    1.979553] ti-sysc 480cb024.target-module: sysc_flags 00000100 != 00000110
+[    1.981079] ti-sysc 480c9024.target-module: sysc_flags 00000100 != 00000110
+[    1.988037] pinctrl-single 48002030.pinmux: 284 pins, size 568
+[    1.988891] pinctrl-single 48002a00.pinmux: 46 pins, size 92
+[    1.989959] pinctrl-single 480025d8.pinmux: 18 pins, size 36
+[    1.992218] ledtrig-cpu: registered to indicate activity on CPUs
+[    2.000091] Serial: 8250/16550 driver, 6 ports, IRQ sharing enabled
+[    2.011383] printk: legacy console [ttyS0] disabled
+[    2.012756] 4806a000.serial: ttyS0 at MMIO 0x4806a000 (irq = 88, base_baud = 3000000) is a 8250
+[    2.012908] printk: legacy console [ttyS0] enabled
+[    2.848571] 4806c000.serial: ttyS1 at MMIO 0x4806c000 (irq = 89, base_baud = 3000000) is a 8250
+[    2.862579] 49020000.serial: ttyS2 at MMIO 0x49020000 (irq = 90, base_baud = 3000000) is a 8250
+[    2.899658] brd: module loaded
+[    2.917297] loop: module loaded
+[    2.923370] Skipping twl internal clock init and using bootloader value (unknown osc rate)
+[    2.938415] twl 0-0048: PIH (irq 23) chaining IRQs 147..155
+[    2.944244] twl 0-0048: power (irq 152) chaining IRQs 155..162
+[    2.966827] twl4030_gpio twl4030-gpio: gpio (irq 147) chaining IRQs 163..180
+[    4.087738] twl: Read failed (mod 4, reg 0x4e count 1)
+[    4.096923] omap_i2c 48070000.i2c: timeout waiting on XUDF bit
+[    4.106384] omap_i2c 48070000.i2c: timeout waiting on XUDF bit
+[    5.147705] twl: Write failed (mod 4, reg 0x4d count 1)
+[    5.156707] omap_i2c 48070000.i2c: timeout waiting on XUDF bit
+[    6.187713] twl: Read failed (mod 4, reg 0x46 count 1)
+[    6.196899] omap_i2c 48070000.i2c: timeout waiting on XUDF bit
+[    6.206359] omap_i2c 48070000.i2c: timeout waiting on XUDF bit
+[    7.227722] twl: Write failed (mod 4, reg 0x45 count 1)
+[    7.236724] omap_i2c 48070000.i2c: timeout waiting on XUDF bit
+[    7.246215] omap_i2c 48070000.i2c: timeout waiting on XUDF bit
+[    8.267730] twl: Write failed (mod 4, reg 0x49 count 1)
+[    8.276733] omap_i2c 48070000.i2c: timeout waiting on XUDF bit
+[    8.286193] omap_i2c 48070000.i2c: timeout waiting on XUDF bit
+[    9.307678] twl: Write failed (mod 4, reg 0x29 count 1)
+[    9.316711] omap_i2c 48070000.i2c: timeout waiting on XUDF bit
+[    9.326171] omap_i2c 48070000.i2c: timeout waiting on XUDF bit
+[   10.347686] twl: Write failed (mod 3, reg 0x0e count 1)
+[   10.356567] omap_i2c 48070000.i2c: timeout waiting on XUDF bit
+[   10.365997] omap_i2c 48070000.i2c: timeout waiting on XUDF bit
+[   11.387695] twl: Write failed (mod 3, reg 0x0e count 1)
+[   11.392974] TWL4030 Unable to unlock registers
+[   11.397460] twl4030_power 48070000.i2c:twl@48:power: probe with driver twl4030_power failed with error -110
+[   11.409698] mtdoops: mtd device (mtddev=name/number) must be supplied
+[   11.422546] omap_i2c 48070000.i2c: timeout waiting on XUDF bit
+[   11.432037] omap_i2c 48070000.i2c: timeout waiting on XUDF bit
+[   11.453216] i2c_dev: i2c /dev entries driver
+[   11.460632] ti-soc-thermal 48002524.bandgap: This OMAP thermal sensor is unreliable. You've been warned
+[   11.470336] ti-soc-thermal 48002524.bandgap: Non-trimmed BGAP, Temp not accurate
+[   11.484374] sdhci: Secure Digital Host Controller Interface driver
+[   11.490814] sdhci: Copyright(c) Pierre Ossman
+[   11.496612] sdhci-pltfm: SDHCI platform and OF driver helper
+[   11.511535] omap-gpmc 6e000000.gpmc: GPMC revision 5.0
+[   11.516754] gpmc_mem_init: disabling cs 0 mapped at 0x0-0x1000000
+[   11.571197] smsc911x 2c000000.ethernet eth0: MAC Address: a2:3d:6d:f6:7c:54
+[   11.580413] omap2-onenand 30000000.onenand: initializing on CS0 (0x30000000), va (ptrval), DMA mode
+[   11.589782] Muxed OneNAND 128MB 1.8V 16-bit (0x30)
+[   11.594604] OneNAND version = 0x0221
+[   11.599273] Scanning device for bad blocks
+[   11.658264] 5 fixed-partitions partitions found on MTD device 30000000.onenand
+[   11.665588] Creating 5 MTD partitions on "30000000.onenand":
+[   11.671356] 0x000000000000-0x000000080000 : "xloader-onenand"
+[   11.681243] 0x000000080000-0x000000260000 : "uboot-onenand"
+[   11.690734] 0x000000260000-0x000000280000 : "params-onenand"
+[   11.700317] 0x000000280000-0x000000780000 : "linux-onenand"
+[   11.709899] 0x000000780000-0x000008000000 : "jffs2-onenand"
+[   11.724792] hw perfevents: enabled with armv7_cortex_a8 PMU driver, 5 (8000000f) counters available
+[   11.736175] Initializing XFRM netlink socket
+[   11.740936] NET: Registered PF_INET6 protocol family
+[   11.750793] Segment Routing with IPv6
+[   11.754669] In-situ OAM (IOAM) with IPv6
+[   11.759002] sit: IPv6, IPv4 and MPLS over IPv4 tunneling driver
+[   11.766540] NET: Registered PF_PACKET protocol family
+[   11.771789] NET: Registered PF_KEY protocol family
+[   11.776824] Key type dns_resolver registered
+[   11.781524] ThumbEE CPU extension supported.
+[   11.785888] Registering SWP/SWPB emulation handler
+[   11.791717] PM: no software I/O chain control; some wakeups may be lost
+[   11.801208] SmartReflex Class3 initialized
+[   11.824096] Loading compiled-in X.509 certificates
+[   11.893859] smartreflex 480cb000.smartreflex: omap_sr_probe: SmartReflex driver initialized
+[   11.902587] smartreflex 480cb000.smartreflex: omap_sr_probe: smartreflex_core: No Voltage table for the corresponding vdd. Cannot create debugfs entries for n-values
+[   11.917877] smartreflex 480cb000.smartreflex: probe with driver smartreflex failed with error -61
+[   11.927307] smartreflex 480c9000.smartreflex: omap_sr_probe: SmartReflex driver initialized
+[   11.936096] smartreflex 480c9000.smartreflex: omap_sr_probe: smartreflex_mpu_iva: No Voltage table for the corresponding vdd. Cannot create debugfs entries for n-values
+[   11.952850] smartreflex 480c9000.smartreflex: probe with driver smartreflex failed with error -61
+[   12.507843] twl: Write failed (mod 4, reg 0x2d count 1)
+[   12.516967] omap_i2c 48070000.i2c: timeout waiting on XUDF bit
+[   12.526458] omap_i2c 48070000.i2c: timeout waiting on XUDF bit
+[   13.527893] twl: Write failed (mod 7, reg 0x04 count 1)
+[   13.533203] leds-gpio leds: error -ETIMEDOUT: Failed to get GPIO '/leds/ledb'
+[   13.540496] leds-gpio leds: probe with driver leds-gpio failed with error -110
+[   13.551818] omap_i2c 48070000.i2c: timeout waiting on XUDF bit
+[   13.560699] clk: Disabling unused clocks
+[   13.565063] PM: genpd: Disabling unused power domains
+[   13.572753] check access for rdinit=/init failed: -2, ignoring
+[   14.587860] twl: Read failed (mod 4, reg 0x32 count 1)
+[   14.597137] omap_i2c 48070000.i2c: timeout waiting on XUDF bit
+[   14.606597] omap_i2c 48070000.i2c: timeout waiting on XUDF bit
+[   15.627868] twl: Write failed (mod 4, reg 0x31 count 1)
+[   15.636993] omap_i2c 48070000.i2c: timeout waiting on XUDF bit
+[   15.646484] omap_i2c 48070000.i2c: timeout waiting on XUDF bit
+[   16.667877] twl: Write failed (mod 4, reg 0x39 count 1)
+[   16.676971] omap_i2c 48070000.i2c: timeout waiting on XUDF bit
+[   16.686462] omap_i2c 48070000.i2c: timeout waiting on XUDF bit
+[   17.707855] twl: Write failed (mod 4, reg 0x33 count 1)
+[   17.713165] VPLL2: failed to enable: -ETIMEDOUT
+[   17.717834] twl4030_reg 48070000.i2c:twl@48:regulator-vpll2: can't register VPLL2, -110
+[   17.725891] twl4030_reg 48070000.i2c:twl@48:regulator-vpll2: probe with driver twl4030_reg failed with error -110
+[   17.740600] omap_i2c 48070000.i2c: timeout waiting on XUDF bit
+[   18.807891] twl: Read failed (mod 4, reg 0x1e count 1)
+[   18.817108] omap_i2c 48070000.i2c: timeout waiting on XUDF bit
+[   18.826568] omap_i2c 48070000.i2c: timeout waiting on XUDF bit
+[   19.867889] twl: Write failed (mod 4, reg 0x1d count 1)
+[   19.876983] omap_i2c 48070000.i2c: timeout waiting on XUDF bit
+[   20.907836] twl: Read failed (mod 4, reg 0x27 count 1)
+[   20.916625] omap_i2c 48070000.i2c: timeout waiting on XUDF bit
+[   21.947875] twl: Read failed (mod 4, reg 0x27 count 1)
+[   21.953063] VMMC1: is_enabled() failed: -ETIMEDOUT
+[   21.957977] omap_hsmmc 4809c000.mmc: fail to disable boot enabled vmmc reg
+[   21.965545] omap_hsmmc 4809c000.mmc: probe with driver omap_hsmmc failed with error -110
+[   21.976135] Waiting for root device /dev/mmcblk0p2...
+
+
+Texas Instruments X-Loader 1.42
+Detected Samsung MuxOneNAND1G Flash 
+Starting OS Bootloader...
+No OOB scheme defined for oobsize 0
+Scanning device for bad blocks
+OneNAND: 128 MB
+No NAND device found!!!
+0 MiB
+
+
+U-Boot 2008.10 (May 22 2009 - 20:37:53)
+
+OMAP35X-Family-GP rev 2, CPU-OPP2 L3-165MHz
+OMAP3 EVM board + LPDDR/ONENAND
+In:    serial
+Out:   serial
+Err:   serial
+
+Texas Instruments X-Loader 1.42
+Detected Samsung MuxOneNAND1G Flash 
+Starting OS Bootloader...
+No OOB scheme defined for oobsize 0
+Scanning device for bad blocks
+OneNAND: 128 MB
+No NAND device found!!!
+0 MiB
+
+
+U-Boot 2008.10 (May 22 2009 - 20:37:53)
+
+OMAP35X-Family-GP rev 2, CPU-OPP2 L3-165MHz
+OMAP3 EVM board + LPDDR/ONENAND
+In:    serial
+Out:   serial
+Err:   serial
+U-Boot SPL 2026.10-00001-g9e2d9f44f5cc (Nov 24 2026 - 21:29:56 +0100)
+Trying to boot from MMC1
+
+
+U-Boot 2026.10-00001-g9e2d9f44f5cc (Nov 24 2026 - 21:29:56 +0100)
+
+OMAP3530-GP ES2.1, CPU-OPP2, L3-165MHz, Max CPU Clock 600 MHz
+Model: TI OMAP35XX EVM (TMDSEVM3530)
+OMAP3 EVM board + LPDDR/NAND
+DRAM:  128 MiB
+Core:  49 devices, 16 uclasses, devicetree: separate
+NAND:  0 MiB
+MMC:   OMAP SD/MMC: 0, OMAP SD/MMC: 1
+Loading Environment from FAT...Loading Environment from FAT... OK
+Read back SMSC id 0x1150000
+OMAP die ID: <redacted>
+Net:   eth0: ethernet@2c000000
+switch to partitions #0, OK
+mmc0 is current device
+SD/MMC found on device 0
+730 bytes read in 5 ms (142.6 KiB/s)
+Running bootscript from mmc0 ...
+## Executing script at 82000000
+== boot.scr: TMDSEVM3530 Rev D
+5745744 bytes read in 3481 ms (1.6 MiB/s)
+71451 bytes read in 47 ms (1.4 MiB/s)
+Kernel image @ 0x82000000 [ 0x000000 - 0x57ac50 ]
+## Flattened Device Tree blob at 83000000
+   Booting using the fdt blob at 0x83000000
+Working FDT set to 83000000
+   Loading Device Tree to 84f14000, end 84f2871a ... OK
+Working FDT set to 84f14000
+
+Starting kernel ...
+
+[    0.000000] Booting Linux on physical CPU 0x0
+[    0.000000] Linux version 6.18.65-omapng (emagip@ElLinux) (arm-linux-gnueabihf-gcc (Ubuntu 15.2.0-16ubuntu1) 15.2.0, GNU ld (GNU Binutils for Ubuntu) 2.46) #4 SMP Tue Nov 24 23:01:04 CET 2026
+[    0.000000] CPU: ARMv7 Processor [411fc082] revision 2 (ARMv7), cr=10c5387d
+[    0.000000] CPU: PIPT / VIPT nonaliasing data cache, VIPT nonaliasing instruction cache
+[    0.000000] OF: fdt: Machine model: TI OMAP35XX EVM (TMDSEVM3530) Rev D, OneNAND
+[    0.000000] Memory policy: Data cache writeback
+[    0.000000] cma: Reserved 16 MiB at 0x86800000
+[    0.000000] Zone ranges:
+[    0.000000]   Normal   [mem 0x0000000080000000-0x0000000087dfffff]
+[    0.000000]   HighMem  empty
+[    0.000000] Movable zone start for each node
+[    0.000000] Early memory node ranges
+[    0.000000]   node   0: [mem 0x0000000080000000-0x0000000087dfffff]
+[    0.000000] Initmem setup node 0 [mem 0x0000000080000000-0x0000000087dfffff]
+[    0.000000] On node 0, zone Normal: 512 pages in unavailable ranges
+[    0.000000] OF: reserved mem: Reserved memory: No reserved-memory node in the DT
+[    0.000000] CPU: All CPU(s) started in SVC mode.
+[    0.000000] OMAP3430/3530 ES2.1 (l2cache iva sgx neon isp)
+[    0.000000] percpu: Embedded 17 pages/cpu s40716 r8192 d20724 u69632
+[    0.000000] Kernel command line: console=ttyS0,115200n8 root=/dev/mmcblk0p2 rootfstype=ext4 rw rootwait
+[    0.000000] printk: log buffer data + meta data: 65536 + 204800 = 270336 bytes
+[    0.000000] Dentry cache hash table entries: 16384 (order: 4, 65536 bytes, linear)
+[    0.000000] Inode-cache hash table entries: 8192 (order: 3, 32768 bytes, linear)
+[    0.000000] Built 1 zonelists, mobility grouping on.  Total pages: 32256
+[    0.000000] mem auto-init: stack:all(zero), heap alloc:off, heap free:off
+[    0.000000] SLUB: HWalign=64, Order=0-3, MinObjects=0, CPUs=1, Nodes=1
+[    0.000000] rcu: Hierarchical RCU implementation.
+[    0.000000] rcu: 	RCU event tracing is enabled.
+[    0.000000] rcu: 	RCU restricting CPUs from NR_CPUS=2 to nr_cpu_ids=1.
+[    0.000000] 	Tracing variant of Tasks RCU enabled.
+[    0.000000] rcu: RCU calculated value of scheduler-enlistment delay is 10 jiffies.
+[    0.000000] rcu: Adjusting geometry for rcu_fanout_leaf=16, nr_cpu_ids=1
+[    0.000000] RCU Tasks Trace: Setting shift to 0 and lim to 1 rcu_task_cb_adjust=1 rcu_task_cpu_ids=1.
+[    0.000000] NR_IRQS: 16, nr_irqs: 16, preallocated irqs: 16
+[    0.000000] IRQ: Found an INTC at 0x(ptrval) (revision 4.0) with 96 interrupts
+[    0.000000] rcu: srcu_init: Setting srcu_struct sizes based on contention.
+[    0.000000] clocksource: jiffies: mask: 0xffffffff max_cycles: 0xffffffff, max_idle_ns: 19112604462750000 ns
+[    0.000000] Clocking rate (Crystal/Core/MPU): 26.0/332/600 MHz
+[    0.000000] OMAP clocksource: 32k_counter at 32768 Hz
+[    0.000000] clocksource: 32k_counter: mask: 0xffffffff max_cycles: 0xffffffff, max_idle_ns: 58327039986419 ns
+[    0.000030] sched_clock: 32 bits at 33kHz, resolution 30517ns, wraps every 65535999984741ns
+[    0.004547] TI gptimer clockevent: always-on 32768 Hz at /ocp@68000000/target-module@48318000
+[    0.006256] Console: colour dummy device 80x30
+[    0.006378] Calibrating delay loop... 600.47 BogoMIPS (lpj=3002368)
+[    0.125274] CPU: Testing write buffer coherency: ok
+[    0.125366] CPU0: Spectre v2: using BPIALL workaround
+[    0.125366] pid_max: default: 32768 minimum: 301
+[    0.125610] LSM: initializing lsm=capability
+[    0.125823] VFS: Disk quotas dquot_6.6.0
+[    0.125885] VFS: Dquot-cache hash table entries: 1024 (order 0, 4096 bytes)
+[    0.125946] Mount-cache hash table entries: 1024 (order: 0, 4096 bytes, linear)
+[    0.125976] Mountpoint-cache hash table entries: 1024 (order: 0, 4096 bytes, linear)
+[    0.128326] CPU0: thread -1, cpu 0, socket -1, mpidr 0
+[    0.132263] Setting up static identity map for 0x80100000 - 0x80100078
+[    0.132812] rcu: Hierarchical SRCU implementation.
+[    0.132812] rcu: 	Max phase no-delay instances is 1000.
+[    0.134704] smp: Bringing up secondary CPUs ...
+[    0.134765] smp: Brought up 1 node, 1 CPU
+[    0.134765] SMP: Total of 1 processors activated (600.47 BogoMIPS).
+[    0.134796] CPU: All CPU(s) started in SVC mode.
+[    0.135131] Memory: 90688K/129024K available (12288K kernel code, 1179K rwdata, 2880K rodata, 1024K init, 255K bss, 20540K reserved, 16384K cma-reserved, 0K highmem)
+[    0.136505] devtmpfs: initialized
+[    0.169952] VFP support v0.3: implementor 41 architecture 3 part 30 variant c rev 1
+[    0.170989] posixtimers hash table entries: 512 (order: 0, 4096 bytes, linear)
+[    0.171051] futex hash table entries: 256 (16384 bytes on 1 NUMA nodes, total 16 KiB, linear).
+[    0.172393] pinctrl core: initialized pinctrl subsystem
+[    0.175811] NET: Registered PF_NETLINK/PF_ROUTE protocol family
+[    0.180725] DMA: preallocated 256 KiB pool for atomic coherent allocations
+[    0.213104] omap_hwmod: mcbsp2_sidetone using broken dt data from mcbsp
+[    0.214080] omap_hwmod: mcbsp3_sidetone using broken dt data from mcbsp
+[    0.284179] audit: initializing netlink subsys (disabled)
+[    0.286560] thermal_sys: Registered thermal governor 'fair_share'
+[    0.286590] thermal_sys: Registered thermal governor 'step_wise'
+[    0.286590] thermal_sys: Registered thermal governor 'user_space'
+[    0.286773] audit: type=2000 audit(0.270:1): state=initialized audit_enabled=0 res=1
+[    0.286895] cpuidle: using governor menu
+[    0.287384] Reprogramming SDRC clock to 332000000 Hz
+[    0.328308] /ocp@68000000: Fixed dependency cycle(s) with /ocp@68000000/interrupt-controller@48200000
+[    0.364196] OMAP GPIO hardware version 2.5
+[    0.405792] /ocp@68000000/dss@48050000: Fixed dependency cycle(s) with /display
+[    0.406005] /display: Fixed dependency cycle(s) with /ocp@68000000/dss@48050000
+[    0.406829] No ATAGs?
+[    0.406860] hw-breakpoint: debug architecture 0x4 unsupported.
+[    0.415832] kprobes: kprobe jump-optimization is enabled. All kprobes are optimized if possible.
+[    0.437286] iommu: Default domain type: Translated
+[    0.437316] iommu: DMA domain TLB invalidation policy: strict mode
+[    0.441192] platform 480bc000.isp: Adding to iommu group 0
+[    0.441436] omap-iommu 480bd400.mmu: 480bd400.mmu registered
+[    0.457611] SCSI subsystem initialized
+[    0.469116] omap_i2c 48070000.i2c: bus 0 rev3.3 at 400 kHz
+[    0.471008] omap_i2c 48072000.i2c: bus 1 rev3.3 at 400 kHz
+[    0.472686] omap_i2c 48060000.i2c: bus 2 rev3.3 at 400 kHz
+[    0.473266] pps_core: LinuxPPS API ver. 1 registered
+[    0.473297] pps_core: Software ver. 5.3.6 - Copyright 2005-2007 Rodolfo Giometti <giometti@linux.it>
+[    0.473358] PTP clock support registered
+[    0.487091] vgaarb: loaded
+[    0.487579] clocksource: Switched to clocksource 32k_counter
+[    1.937469] NET: Registered PF_INET protocol family
+[    1.938140] IP idents hash table entries: 2048 (order: 2, 16384 bytes, linear)
+[    1.939605] tcp_listen_portaddr_hash hash table entries: 512 (order: 0, 4096 bytes, linear)
+[    1.939666] Table-perturb hash table entries: 65536 (order: 6, 262144 bytes, linear)
+[    1.939697] TCP established hash table entries: 1024 (order: 0, 4096 bytes, linear)
+[    1.939727] TCP bind hash table entries: 1024 (order: 2, 16384 bytes, linear)
+[    1.939788] TCP: Hash tables configured (established 1024 bind 1024)
+[    1.939971] UDP hash table entries: 256 (order: 2, 14336 bytes, linear)
+[    1.940032] UDP-Lite hash table entries: 256 (order: 2, 14336 bytes, linear)
+[    1.940399] NET: Registered PF_UNIX/PF_LOCAL protocol family
+[    1.942596] RPC: Registered named UNIX socket transport module.
+[    1.942657] RPC: Registered udp transport module.
+[    1.942657] RPC: Registered tcp transport module.
+[    1.942657] RPC: Registered tcp-with-tls transport module.
+[    1.942657] RPC: Registered tcp NFSv4.1 backchannel transport module.
+[    1.942718] PCI: CLS 0 bytes, default 64
+[    1.945404] Initialise system trusted keyrings
+[    1.946838] workingset: timestamp_bits=14 max_order=15 bucket_order=1
+[    1.949279] NFS: Registering the id_resolver key type
+[    1.949401] Key type id_resolver registered
+[    1.949401] Key type id_legacy registered
+[    1.949554] jffs2: version 2.2. (NAND) (SUMMARY)  © 2001-2006 Red Hat, Inc.
+[    1.950561] Key type asymmetric registered
+[    1.950592] Asymmetric key parser 'x509' registered
+[    1.950683] io scheduler mq-deadline registered
+[    1.950714] io scheduler kyber registered
+[    1.950805] io scheduler bfq registered
+[    1.973144] omap-dma-engine 48056000.dma-controller: OMAP DMA engine driver
+[    1.981475] ti-sysc 480cb024.target-module: sysc_flags 00000100 != 00000110
+[    1.982971] ti-sysc 480c9024.target-module: sysc_flags 00000100 != 00000110
+[    1.989990] pinctrl-single 48002030.pinmux: 284 pins, size 568
+[    1.990814] pinctrl-single 48002a00.pinmux: 46 pins, size 92
+[    1.991882] pinctrl-single 480025d8.pinmux: 18 pins, size 36
+[    1.994171] ledtrig-cpu: registered to indicate activity on CPUs
+[    2.002105] Serial: 8250/16550 driver, 6 ports, IRQ sharing enabled
+[    2.013427] printk: legacy console [ttyS0] disabled
+[    2.014801] 4806a000.serial: ttyS0 at MMIO 0x4806a000 (irq = 88, base_baud = 3000000) is a 8250
+[    2.014923] printk: legacy console [ttyS0] enabled
+[    2.850646] 4806c000.serial: ttyS1 at MMIO 0x4806c000 (irq = 89, base_baud = 3000000) is a 8250
+[    2.864715] 49020000.serial: ttyS2 at MMIO 0x49020000 (irq = 90, base_baud = 3000000) is a 8250
+[    2.901855] brd: module loaded
+[    2.919647] loop: module loaded
+[    2.925537] Skipping twl internal clock init and using bootloader value (unknown osc rate)
+[    2.940612] twl 0-0048: PIH (irq 23) chaining IRQs 147..155
+[    2.946441] twl 0-0048: power (irq 152) chaining IRQs 155..162
+[    2.969146] twl4030_gpio twl4030-gpio: gpio (irq 147) chaining IRQs 163..180
+[    3.030975] mtdoops: mtd device (mtddev=name/number) must be supplied
+[    3.056823] i2c_dev: i2c /dev entries driver
+[    3.064331] ti-soc-thermal 48002524.bandgap: This OMAP thermal sensor is unreliable. You've been warned
+[    3.074066] ti-soc-thermal 48002524.bandgap: Non-trimmed BGAP, Temp not accurate
+[    3.088256] sdhci: Secure Digital Host Controller Interface driver
+[    3.094512] sdhci: Copyright(c) Pierre Ossman
+[    3.100372] sdhci-pltfm: SDHCI platform and OF driver helper
+[    3.114990] omap-gpmc 6e000000.gpmc: GPMC revision 5.0
+[    3.120422] gpmc_mem_init: disabling cs 0 mapped at 0x0-0x1000000
+[    3.172424] omap2-onenand 30000000.onenand: initializing on CS0 (0x30000000), va (ptrval), DMA mode
+[    3.181823] Muxed OneNAND 128MB 1.8V 16-bit (0x30)
+[    3.186645] OneNAND version = 0x0221
+[    3.191284] Scanning device for bad blocks
+[    3.251129] 5 fixed-partitions partitions found on MTD device 30000000.onenand
+[    3.258544] Creating 5 MTD partitions on "30000000.onenand":
+[    3.264251] 0x000000000000-0x000000080000 : "xloader-onenand"
+[    3.274291] 0x000000080000-0x000000260000 : "uboot-onenand"
+[    3.283874] 0x000000260000-0x000000280000 : "params-onenand"
+[    3.293426] 0x000000280000-0x000000780000 : "linux-onenand"
+[    3.303009] 0x000000780000-0x000008000000 : "jffs2-onenand"
+[    3.317565] hw perfevents: enabled with armv7_cortex_a8 PMU driver, 5 (8000000f) counters available
+[    3.329071] Initializing XFRM netlink socket
+[    3.333648] NET: Registered PF_INET6 protocol family
+[    3.343353] Segment Routing with IPv6
+[    3.347229] In-situ OAM (IOAM) with IPv6
+[    3.351562] sit: IPv6, IPv4 and MPLS over IPv4 tunneling driver
+[    3.359069] NET: Registered PF_PACKET protocol family
+[    3.364227] NET: Registered PF_KEY protocol family
+[    3.369384] Key type dns_resolver registered
+[    3.374053] ThumbEE CPU extension supported.
+[    3.378479] Registering SWP/SWPB emulation handler
+[    3.384246] PM: no software I/O chain control; some wakeups may be lost
+[    3.393768] SmartReflex Class3 initialized
+[    3.416748] Loading compiled-in X.509 certificates
+[    3.486633] smartreflex 480cb000.smartreflex: omap_sr_probe: SmartReflex driver initialized
+[    3.495452] smartreflex 480cb000.smartreflex: omap_sr_probe: smartreflex_core: No Voltage table for the corresponding vdd. Cannot create debugfs entries for n-values
+[    3.510955] smartreflex 480cb000.smartreflex: probe with driver smartreflex failed with error -61
+[    3.520538] smartreflex 480c9000.smartreflex: omap_sr_probe: SmartReflex driver initialized
+[    3.529205] smartreflex 480c9000.smartreflex: omap_sr_probe: smartreflex_mpu_iva: No Voltage table for the corresponding vdd. Cannot create debugfs entries for n-values
+[    3.546173] smartreflex 480c9000.smartreflex: probe with driver smartreflex failed with error -61
+[    3.566162] clk: Disabling unused clocks
+[    3.570770] PM: genpd: Disabling unused power domains
+[    3.576721] check access for rdinit=/init failed: -2, ignoring
+[    3.583404] Waiting for root device /dev/mmcblk0p2...
+[    3.679229] mmc0: host does not support reading read-only switch, assuming write-enable
+[    3.691345] mmc0: new high speed SDXC card at address e624
+[    3.698883] mmcblk0: mmc0:e624 SL64G 59.5 GiB
+[    3.723724]  mmcblk0: p1 p2
+[    3.799743] EXT4-fs (mmcblk0p2): recovery complete
+[    3.804992] EXT4-fs (mmcblk0p2): mounted filesystem 443e3125-f32c-4e25-8625-fad7340ad433 r/w with ordered data mode. Quota mode: none.
+[    3.852966] VFS: Mounted root (ext4 filesystem) on device 179:2.
+[    3.862670] devtmpfs: mounted
+[    3.868896] Freeing unused kernel image (initmem) memory: 1024K
+[    3.875885] Run /sbin/init as init process
+[   10.268035] EXT4-fs (mmcblk0p2): re-mounted 443e3125-f32c-4e25-8625-fad7340ad433.
+Saving 256 bits of non-creditable seed for next boot
+Starting syslogd: OK
+Starting klogd: OK
+Running sysctl: OK
+Starting mdev... OK
+[   13.617858] random: crng init done
+[   14.999053] Driver for 1-wire Dallas network protocol.
+[   15.014495] omap_hdq 480b2000.1w: OMAP HDQ Hardware Rev 0.5. Driver in Interrupt mode
+[   15.033203] w1_master_driver w1_bus_master1: Attaching one wire slave 01.000000000000 crc 3d
+[   15.093811] w1_master_driver w1_bus_master1: Family 1 for 01.000000000000.3d is not registered.
+[   17.787872] twl: Read failed (mod 4, reg 0x27 count 1)
+[   17.796783] omap_i2c 48070000.i2c: timeout waiting on XUDF bit
+[   17.806274] omap_i2c 48070000.i2c: timeout waiting on XUDF bit
+[   18.808013] twl: Write failed (mod 7, reg 0x00 count 1)
+[   18.816986] omap_i2c 48070000.i2c: timeout waiting on XUDF bit
+[   19.867858] twl: Read failed (mod 4, reg 0x2a count 1)
+[   19.876708] omap_i2c 48070000.i2c: timeout waiting on XUDF bit
+[   19.886199] omap_i2c 48070000.i2c: timeout waiting on XUDF bit
+[   20.907867] twl: Write failed (mod 7, reg 0x00 count 1)
+[   20.916839] omap_i2c 48070000.i2c: timeout waiting on XUDF bit
+[   20.926300] omap_i2c 48070000.i2c: timeout waiting on XUDF bit
+[   21.947875] twl: Write failed (mod 4, reg 0x2a count 1)
+[   21.953186] omap_hsmmc 4809c000.mmc: could not set regulator OCR (-110)
+[   21.963562] omap_i2c 48070000.i2c: timeout waiting on XUDF bit
+[   21.973052] omap_i2c 48070000.i2c: timeout waiting on XUDF bit
+[   22.000274] mmc0: tried to HW reset card, got error -110
+[   22.987915] twl: Write failed (mod 7, reg 0x00 count 1)
+[   22.996887] omap_i2c 48070000.i2c: timeout waiting on XUDF bit
+[   24.007934] twl: Read failed (mod 4, reg 0x2a count 1)
+[   24.016815] omap_i2c 48070000.i2c: timeout waiting on XUDF bit
+[   24.026336] omap_i2c 48070000.i2c: timeout waiting on XUDF bit
+[   25.067901] twl: Write failed (mod 7, reg 0x00 count 1)
+[   25.076812] omap_i2c 48070000.i2c: timeout waiting on XUDF bit
+[   26.087951] twl: Read failed (mod 4, reg 0x27 count 1)
+[   26.096771] omap_i2c 48070000.i2c: timeout waiting on XUDF bit
+[   26.106201] omap_i2c 48070000.i2c: timeout waiting on XUDF bit
+[   27.147888] twl: Write failed (mod 7, reg 0x00 count 1)
+[   27.156768] omap_i2c 48070000.i2c: timeout waiting on XUDF bit
+[   28.187896] twl: Read failed (mod 4, reg 0x2a count 1)
+[   28.196716] omap_i2c 48070000.i2c: timeout waiting on XUDF bit
+[   28.206146] omap_i2c 48070000.i2c: timeout waiting on XUDF bit
+[   29.227905] twl: Write failed (mod 7, reg 0x00 count 1)
+[   29.236816] omap_i2c 48070000.i2c: timeout waiting on XUDF bit
+[   29.246246] omap_i2c 48070000.i2c: timeout waiting on XUDF bit
+[   30.267944] twl: Write failed (mod 4, reg 0x2a count 1)
+[   30.273254] omap_hsmmc 4809c000.mmc: could not set regulator OCR (-110)
+[   30.283569] omap_i2c 48070000.i2c: timeout waiting on XUDF bit
+[   30.293060] omap_i2c 48070000.i2c: timeout waiting on XUDF bit
+[   30.319274] mmc0: tried to HW reset card, got error -110
+[   30.324645] mmcblk0: recovery failed!
+[   30.328430] I/O error, dev mmcblk0, sector 241857 op 0x1:(WRITE) flags 0x4000 phys_seg 64 prio class 2
+[   30.344268] mmcblk0: recovery failed!
+[   30.348083] I/O error, dev mmcblk0, sector 177025 op 0x0:(READ) flags 0x80700 phys_seg 3 prio class 2
+[   30.363739] mmcblk0: recovery failed!
+[   30.367462] I/O error, dev mmcblk0, sector 242369 op 0x1:(WRITE) flags 0x4000 phys_seg 64 prio class 2
+[   30.383056] mmcblk0: recovery failed!
+[   30.386779] I/O error, dev mmcblk0, sector 242881 op 0x1:(WRITE) flags 0x4000 phys_seg 64 prio class 2
+[   30.403717] mmcblk0: recovery failed!
+[   30.407501] I/O error, dev mmcblk0, sector 177025 op 0x0:(READ) flags 0x0 phys_seg 1 prio class 2
+[   30.422363] mmcblk0: recovery failed!
+[   30.426086] I/O error, dev mmcblk0, sector 243393 op 0x1:(WRITE) flags 0x0 phys_seg 64 prio class 2
+[   30.441467] mmcblk0: recovery failed!
+[   30.445251] I/O error, dev mmcblk0, sector 243905 op 0x1:(WRITE) flags 0x4800 phys_seg 64 prio class 2
+[   30.460510] mmcblk0: recovery failed!
+[   30.464202] I/O error, dev mmcblk0, sector 244417 op 0x1:(WRITE) flags 0x4800 phys_seg 64 prio class 2
+[   30.479949] mmcblk0: recovery failed!
+[   30.483703] I/O error, dev mmcblk0, sector 244929 op 0x1:(WRITE) flags 0x4800 phys_seg 64 prio class 2
+[   30.498687] mmcblk0: recovery failed!
+[   30.502380] I/O error, dev mmcblk0, sector 245441 op 0x1:(WRITE) flags 0x800 phys_seg 64 prio class 2
+[   30.519561] mmcblk0: recovery failed!
+[   30.524139] Aborting journal on device mmcblk0p2-8.
+[   30.529479] EXT4-fs error (device mmcblk0p2) in ext4_reserve_inode_write:6399: Journal has aborted
+[   30.538696] EXT4-fs error (device mmcblk0p2): ext4_dirty_inode:6619: inode #1515: comm syslogd: mark_inode_dirty error
+[   30.549560] EXT4-fs error (device mmcblk0p2) in ext4_dirty_inode:6620: Journal has aborted
+[   30.559265] EXT4-fs error (device mmcblk0p2): ext4_journal_check_start:87: comm syslogd: Detected aborted journal
+[   30.573486] mmcblk0: recovery failed!
+[   30.577423] EXT4-fs error (device mmcblk0p2): ext4_journal_check_start:87: comm modprobe: Detected aborted journal
+[   30.593658] mmcblk0: recovery failed!
+[   30.597412] Buffer I/O error on dev mmcblk0p2, logical block 65536, lost sync page write
+[   30.605865] JBD2: I/O error when updating journal superblock for mmcblk0p2-8.
+[   30.618316] mmcblk0: recovery failed!
+[   30.622039] Buffer I/O error on dev mmcblk0p2, logical block 0, lost sync page write
+[   30.630035] EXT4-fs (mmcblk0p2): I/O error while writing superblock
+[   30.642730] mmcblk0: recovery failed!
+[   30.646453] Buffer I/O error on dev mmcblk0p2, logical block 0, lost sync page write
+[   30.654449] EXT4-fs (mmcblk0p2): previous I/O error to superblock detected
+[   30.668701] mmcblk0: recovery failed!
+[   30.672424] Buffer I/O error on dev mmcblk0p2, logical block 0, lost sync page write
+[   30.680389] EXT4-fs (mmcblk0p2): I/O error while writing superblock
+[   30.686706] EXT4-fs (mmcblk0p2): Remounting filesystem read-only
+modprobe: can't load module twl4030_keypad (kernel/drivers/input[   30.699096] mmcblk0: recovery failed!
+/keyboard/twl4030_keypad.ko): Input/output error
+[   30.709075] mmcblk0: recovery failed!
+modprobe: can't load module industrialio (kernel/drivers/iio/industrialio.ko): Input/output error
+[   30.719818] mmcblk0: recovery failed!
+[   30.732086] mmcblk0: recovery failed!
+modprobe: can't load module hsi (kernel/drivers/hsi/hsi.ko): Input/output error
+[   30.751159] mmcblk0: recovery failed!
+[   30.761535] mmcblk0: recovery failed!
+/etc/init.d/rcS: line 23: [   30.773132] mmcblk0: recovery failed!
+[   30.783386] mmcblk0: recovery failed!
+[   30.793457] mmcblk0: recovery failed!
+Bus error
+[   30.809356] mmcblk0: recovery failed!
+[   30.819305] mmcblk0: recovery failed!
+/etc/init.d/rcS: line 23: [   30.830841] mmcblk0: recovery failed!
+[   30.841339] mmcblk0: recovery failed!
+[   30.851501] mmcblk0: recovery failed!
+Bus error
+[   30.867340] mmcblk0: recovery failed!
+[   30.877532] mmcblk0: recovery failed!
+/etc/init.d/rcS: line 23: [   30.889373] mmcblk0: recovery failed!
+[   30.899627] mmcblk0: recovery failed!
+[   30.909729] mmcblk0: recovery failed!
+Bus error
+[   30.927246] mmcblk0: recovery failed!
+[   30.937408] mmcblk0: recovery failed!
+/etc/init.d/rcS: line 23: [   30.948883] mmcblk0: recovery failed!
+[   30.959167] mmcblk0: recovery failed!
+[   30.969238] mmcblk0: recovery failed!
+Bus error
+
+[   31.095397] mmcblk0: recovery failed!
+[   31.105529] mmcblk0: recovery failed!
+omap3evm login: [   31.307861] twl: Write failed (mod 7, reg 0x00 count 1)
+[   31.316802] omap_i2c 48070000.i2c: timeout waiting on XUDF bit
+[   31.326293] omap_i2c 48070000.i2c: timeout waiting on XUDF bit
+[   32.347839] twl: Write failed (mod 7, reg 0x00 count 1)
+[   32.356750] omap_i2c 48070000.i2c: timeout waiting on XUDF bit
+[   32.366210] omap_i2c 48070000.i2c: timeout waiting on XUDF bit
+[   33.387847] twl: Write failed (mod 7, reg 0x00 count 1)
+[   33.396789] omap_i2c 48070000.i2c: timeout waiting on XUDF bit
+[   33.406249] omap_i2c 48070000.i2c: timeout waiting on XUDF bit
+[   34.095947] mmcblk0: recovery failed!
+[   34.099822] Buffer I/O error on dev mmcblk0p2, logical block 33, lost async page write
+[   34.113983] mmcblk0: recovery failed!
+[   34.117889] Buffer I/O error on dev mmcblk0p2, logical block 37, lost async page write
+[   34.131774] mmcblk0: recovery failed!
+[   34.135559] Buffer I/O error on dev mmcblk0p2, logical block 43, lost async page write
+[   34.143737] Buffer I/O error on dev mmcblk0p2, logical block 44, lost async page write
+[   34.151794] Buffer I/O error on dev mmcblk0p2, logical block 45, lost async page write
+[   34.165618] mmcblk0: recovery failed!
+[   34.169464] Buffer I/O error on dev mmcblk0p2, logical block 47, lost async page write
+[   34.183715] mmcblk0: recovery failed!
+[   34.193664] mmcblk0: recovery failed!
+[   34.203613] mmcblk0: recovery failed!
+[   34.213562] mmcblk0: recovery failed!
+[   34.223571] mmcblk0: recovery failed!
+[   34.233612] mmcblk0: recovery failed!
+[   34.243591] mmcblk0: recovery failed!
+[   34.253601] mmcblk0: recovery failed!
+[   34.263580] mmcblk0: recovery failed!
+[   34.273590] mmcblk0: recovery failed!
+[   34.283294] mmcblk0: recovery failed!
+[   34.427856] twl: Write failed (mod 7, reg 0x00 count 1)
+[   34.436859] omap_i2c 48070000.i2c: timeout waiting on XUDF bit
+[   35.467895] twl: Read failed (mod 4, reg 0x71 count 1)
+[   35.476745] omap_i2c 48070000.i2c: timeout waiting on XUDF bit
+[   35.486236] omap_i2c 48070000.i2c: timeout waiting on XUDF bit
+[   36.487884] twl: Write failed (mod 7, reg 0x00 count 1)
+[   36.496826] omap_i2c 48070000.i2c: timeout waiting on XUDF bit
+[   37.547912] twl: Read failed (mod 4, reg 0x74 count 1)
+[   37.556793] omap_i2c 48070000.i2c: timeout waiting on XUDF bit
+[   37.566253] omap_i2c 48070000.i2c: timeout waiting on XUDF bit
+[   38.587860] twl: Write failed (mod 7, reg 0x00 count 1)
+[   38.596832] omap_i2c 48070000.i2c: timeout waiting on XUDF bit
+[   39.607910] twl: Read failed (mod 4, reg 0x77 count 1)
+[   39.616760] omap_i2c 48070000.i2c: timeout waiting on XUDF bit
+[   39.626251] omap_i2c 48070000.i2c: timeout waiting on XUDF bit
+[   40.648010] twl: Write failed (mod 7, reg 0x00 count 1)
+[   40.656982] omap_i2c 48070000.i2c: timeout waiting on XUDF bit
+[   41.707885] twl: Read failed (mod 4, reg 0x17 count 1)
+[   41.716735] omap_i2c 48070000.i2c: timeout waiting on XUDF bit
+[   41.726196] omap_i2c 48070000.i2c: timeout waiting on XUDF bit
+[   42.747863] twl: Write failed (mod 7, reg 0x00 count 1)
+[   42.756805] omap_i2c 48070000.i2c: timeout waiting on XUDF bit
+[   43.787872] twl: Read failed (mod 4, reg 0x1f count 1)
+[   43.796722] omap_i2c 48070000.i2c: timeout waiting on XUDF bit
+[   43.806213] omap_i2c 48070000.i2c: timeout waiting on XUDF bit
+[   44.827880] twl: Write failed (mod 7, reg 0x00 count 1)
+[   44.836853] omap_i2c 48070000.i2c: timeout waiting on XUDF bit
+[   45.867858] twl: Read failed (mod 4, reg 0x23 count 1)
+[   45.876708] omap_i2c 48070000.i2c: timeout waiting on XUDF bit
+[   45.886169] omap_i2c 48070000.i2c: timeout waiting on XUDF bit
+[   46.907867] twl: Write failed (mod 7, reg 0x00 count 1)
+[   46.916839] omap_i2c 48070000.i2c: timeout waiting on XUDF bit
+[   47.947875] twl: Read failed (mod 4, reg 0x3b count 1)
+[   47.956726] omap_i2c 48070000.i2c: timeout waiting on XUDF bit
+[   47.966186] omap_i2c 48070000.i2c: timeout waiting on XUDF bit
+[   48.968017] twl: Write failed (mod 7, reg 0x00 count 1)
+[   48.976989] omap_i2c 48070000.i2c: timeout waiting on XUDF bit
+[   50.027862] twl: Read failed (mod 4, reg 0x27 count 1)
+[   50.036712] omap_i2c 48070000.i2c: timeout waiting on XUDF bit
+[   50.046173] omap_i2c 48070000.i2c: timeout waiting on XUDF bit
+[   51.048034] twl: Write failed (mod 7, reg 0x00 count 1)
+[   51.057006] omap_i2c 48070000.i2c: timeout waiting on XUDF bit
+[   52.107879] twl: Read failed (mod 4, reg 0x2b count 1)
+[   52.116729] omap_i2c 48070000.i2c: timeout waiting on XUDF bit
+[   52.126220] omap_i2c 48070000.i2c: timeout waiting on XUDF bit
+[   53.147857] twl: Write failed (mod 7, reg 0x00 count 1)
+[   53.156799] omap_i2c 48070000.i2c: timeout waiting on XUDF bit
+[   54.187866] twl: Read failed (mod 4, reg 0x37 count 1)
+[   54.196716] omap_i2c 48070000.i2c: timeout waiting on XUDF bit
+[   54.206176] omap_i2c 48070000.i2c: timeout waiting on XUDF bit
+[   55.227844] twl: Write failed (mod 7, reg 0x00 count 1)
+[   55.236785] omap_i2c 48070000.i2c: timeout waiting on XUDF bit
+[   55.246246] omap_i2c 48070000.i2c: timeout waiting on XUDF bit
+[   56.267852] twl: Write failed (mod 7, reg 0x00 count 1)
+[   56.276763] omap_i2c 48070000.i2c: timeout waiting on XUDF bit
+[   56.286224] omap_i2c 48070000.i2c: timeout waiting on XUDF bit
+[   57.287994] twl: Write failed (mod 7, reg 0x00 count 1)
+[   57.296905] omap_i2c 48070000.i2c: timeout waiting on XUDF bit
+[   57.306365] omap_i2c 48070000.i2c: timeout waiting on XUDF bit
+[   58.347839] twl: Write failed (mod 7, reg 0x00 count 1)
+[   58.356750] omap_i2c 48070000.i2c: timeout waiting on XUDF bit
+[   58.366210] omap_i2c 48070000.i2c: timeout waiting on XUDF bit
+[   59.387847] twl: Write failed (mod 7, reg 0x00 count 1)
+[   59.396759] omap_i2c 48070000.i2c: timeout waiting on XUDF bit
+[   59.406219] omap_i2c 48070000.i2c: timeout waiting on XUDF bit
+[   60.427825] twl: Write failed (mod 7, reg 0x00 count 1)
+[   60.436737] omap_i2c 48070000.i2c: timeout waiting on XUDF bit
+[   60.446197] omap_i2c 48070000.i2c: timeout waiting on XUDF bit
+[   61.467834] twl: Write failed (mod 7, reg 0x00 count 1)
+[   61.476745] omap_i2c 48070000.i2c: timeout waiting on XUDF bit
+[   61.486206] omap_i2c 48070000.i2c: timeout waiting on XUDF bit
+[   62.507843] twl: Write failed (mod 7, reg 0x00 count 1)
+[   62.516754] omap_i2c 48070000.i2c: timeout waiting on XUDF bit
+[   62.526214] omap_i2c 48070000.i2c: timeout waiting on XUDF bit
+[   63.547851] twl: Write failed (mod 7, reg 0x00 count 1)
+[   63.556762] omap_i2c 48070000.i2c: timeout waiting on XUDF bit
+[   63.566223] omap_i2c 48070000.i2c: timeout waiting on XUDF bit
+[   64.587829] twl: Write failed (mod 7, reg 0x00 count 1)
+[   64.596771] omap_i2c 48070000.i2c: timeout waiting on XUDF bit
+[   64.606231] omap_i2c 48070000.i2c: timeout waiting on XUDF bit
+[   65.607849] twl: Write failed (mod 7, reg 0x00 count 1)
+[   65.616790] omap_i2c 48070000.i2c: timeout waiting on XUDF bit
+[   65.626251] omap_i2c 48070000.i2c: timeout waiting on XUDF bit
+[   66.667846] twl: Write failed (mod 7, reg 0x00 count 1)
+[   66.676788] omap_i2c 48070000.i2c: timeout waiting on XUDF bit
+[   66.686248] omap_i2c 48070000.i2c: timeout waiting on XUDF bit
+[   67.707824] twl: Write failed (mod 7, reg 0x00 count 1)
+[   67.716735] omap_i2c 48070000.i2c: timeout waiting on XUDF bit
+[   67.726196] omap_i2c 48070000.i2c: timeout waiting on XUDF bit
+[   68.747833] twl: Write failed (mod 7, reg 0x00 count 1)
+[   68.756744] omap_i2c 48070000.i2c: timeout waiting on XUDF bit
+[   68.766204] omap_i2c 48070000.i2c: timeout waiting on XUDF bit
+[   69.767852] twl: Write failed (mod 7, reg 0x00 count 1)
+[   69.776794] omap_i2c 48070000.i2c: timeout waiting on XUDF bit
+[   69.786254] omap_i2c 48070000.i2c: timeout waiting on XUDF bit
+[   70.827850] twl: Write failed (mod 7, reg 0x00 count 1)
+[   70.836761] omap_i2c 48070000.i2c: timeout waiting on XUDF bit
+[   70.846221] omap_i2c 48070000.i2c: timeout waiting on XUDF bit
+[   71.867828] twl: Write failed (mod 7, reg 0x00 count 1)
+[   71.876739] omap_i2c 48070000.i2c: timeout waiting on XUDF bit
+[   71.886199] omap_i2c 48070000.i2c: timeout waiting on XUDF bit
+[   72.907836] twl: Write failed (mod 7, reg 0x00 count 1)
+[   72.916748] omap_i2c 48070000.i2c: timeout waiting on XUDF bit
+[   72.926208] omap_i2c 48070000.i2c: timeout waiting on XUDF bit
+[   73.947845] twl: Write failed (mod 7, reg 0x00 count 1)
+[   73.956756] omap_i2c 48070000.i2c: timeout waiting on XUDF bit
+[   73.966217] omap_i2c 48070000.i2c: timeout waiting on XUDF bit
+[   74.987854] twl: Write failed (mod 7, reg 0x00 count 1)
+[   74.996765] omap_i2c 48070000.i2c: timeout waiting on XUDF bit
+[   75.006225] omap_i2c 48070000.i2c: timeout waiting on XUDF bit
+[   76.007995] twl: Write failed (mod 7, reg 0x00 count 1)
+[   76.016906] omap_i2c 48070000.i2c: timeout waiting on XUDF bit
+[   76.026367] omap_i2c 48070000.i2c: timeout waiting on XUDF bit
+[   77.048004] twl: Write failed (mod 7, reg 0x00 count 1)
+[   77.056915] omap_i2c 48070000.i2c: timeout waiting on XUDF bit
+[   77.066375] omap_i2c 48070000.i2c: timeout waiting on XUDF bit
+[   78.107849] twl: Write failed (mod 7, reg 0x00 count 1)
+[   78.116760] omap_i2c 48070000.i2c: timeout waiting on XUDF bit
+[   78.126220] omap_i2c 48070000.i2c: timeout waiting on XUDF bit
+[   79.147827] twl: Write failed (mod 7, reg 0x00 count 1)
+[   79.156738] omap_i2c 48070000.i2c: timeout waiting on XUDF bit
+[   79.166198] omap_i2c 48070000.i2c: timeout waiting on XUDF bit
+[   80.187866] twl: Write failed (mod 7, reg 0x00 count 1)
+[   80.196807] omap_i2c 48070000.i2c: timeout waiting on XUDF bit
+[   80.206268] omap_i2c 48070000.i2c: timeout waiting on XUDF bit
+[   81.227844] twl: Write failed (mod 7, reg 0x00 count 1)
+[   81.236755] omap_i2c 48070000.i2c: timeout waiting on XUDF bit
+[   81.246215] omap_i2c 48070000.i2c: timeout waiting on XUDF bit
+[   82.267852] twl: Write failed (mod 7, reg 0x00 count 1)
+[   82.276763] omap_i2c 48070000.i2c: timeout waiting on XUDF bit
+[   82.286224] omap_i2c 48070000.i2c: timeout waiting on XUDF bit
+[   83.307830] twl: Write failed (mod 7, reg 0x00 count 1)
+[   83.316741] omap_i2c 48070000.i2c: timeout waiting on XUDF bit
+[   83.326202] omap_i2c 48070000.i2c: timeout waiting on XUDF bit
+[   84.347839] twl: Write failed (mod 7, reg 0x00 count 1)
+[   84.356750] omap_i2c 48070000.i2c: timeout waiting on XUDF bit
+[   84.366210] omap_i2c 48070000.i2c: timeout waiting on XUDF bit
+[   85.387847] twl: Write failed (mod 7, reg 0x00 count 1)
+[   85.396759] omap_i2c 48070000.i2c: timeout waiting on XUDF bit
+[   85.406219] omap_i2c 48070000.i2c: timeout waiting on XUDF bit
+
+U-Boot SPL 2026.10-00001-g9e2d9f44f5cc (Nov 24 2026 - 21:29:56 +0100)
+Trying to boot from MMC1
+
+
+U-Boot 2026.10-00001-g9e2d9f44f5cc (Nov 24 2026 - 21:29:56 +0100)
+
+OMAP3530-GP ES2.1, CPU-OPP2, L3-165MHz, Max CPU Clock 600 MHz
+Model: TI OMAP35XX EVM (TMDSEVM3530)
+OMAP3 EVM board + LPDDR/NAND
+DRAM:  128 MiB
+Core:  49 devices, 16 uclasses, devicetree: separate
+NAND:  0 MiB
+MMC:   OMAP SD/MMC: 0, OMAP SD/MMC: 1
+Loading Environment from FAT...Loading Environment from FAT... OK
+Read back SMSC id 0x1150000
+OMAP die ID: <redacted>
+Net:   eth0: ethernet@2c000000
+switch to partitions #0, OK
+mmc0 is current device
+SD/MMC found on device 0
+730 bytes read in 5 ms (142.6 KiB/s)
+Running bootscript from mmc0 ...
+## Executing script at 82000000
+== boot.scr: TMDSEVM3530 Rev D
+5745744 bytes read in 3481 ms (1.6 MiB/s)
+71451 bytes read in 47 ms (1.4 MiB/s)
+Kernel image @ 0x82000000 [ 0x000000 - 0x57ac50 ]
+## Flattened Device Tree blob at 83000000
+   Booting using the fdt blob at 0x83000000
+Working FDT set to 83000000
+   Loading Device Tree to 84f14000, end 84f2871a ... OK
+Working FDT set to 84f14000
+
+Starting kernel ...
+
+[    0.000000] Booting Linux on physical CPU 0x0
+[    0.000000] Linux version 6.18.65-omapng (emagip@ElLinux) (arm-linux-gnueabihf-gcc (Ubuntu 15.2.0-16ubuntu1) 15.2.0, GNU ld (GNU Binutils for Ubuntu) 2.46) #4 SMP Tue Nov 24 23:01:04 CET 2026
+[    0.000000] CPU: ARMv7 Processor [411fc082] revision 2 (ARMv7), cr=10c5387d
+[    0.000000] CPU: PIPT / VIPT nonaliasing data cache, VIPT nonaliasing instruction cache
+[    0.000000] OF: fdt: Machine model: TI OMAP35XX EVM (TMDSEVM3530) Rev D, OneNAND
+[    0.000000] Memory policy: Data cache writeback
+[    0.000000] cma: Reserved 16 MiB at 0x86800000
+[    0.000000] Zone ranges:
+[    0.000000]   Normal   [mem 0x0000000080000000-0x0000000087dfffff]
+[    0.000000]   HighMem  empty
+[    0.000000] Movable zone start for each node
+[    0.000000] Early memory node ranges
+[    0.000000]   node   0: [mem 0x0000000080000000-0x0000000087dfffff]
+[    0.000000] Initmem setup node 0 [mem 0x0000000080000000-0x0000000087dfffff]
+[    0.000000] On node 0, zone Normal: 512 pages in unavailable ranges
+[    0.000000] OF: reserved mem: Reserved memory: No reserved-memory node in the DT
+[    0.000000] CPU: All CPU(s) started in SVC mode.
+[    0.000000] OMAP3430/3530 ES2.1 (l2cache iva sgx neon isp)
+[    0.000000] percpu: Embedded 17 pages/cpu s40716 r8192 d20724 u69632
+[    0.000000] Kernel command line: console=ttyS0,115200n8 root=/dev/mmcblk0p2 rootfstype=ext4 rw rootwait
+[    0.000000] printk: log buffer data + meta data: 65536 + 204800 = 270336 bytes
+[    0.000000] Dentry cache hash table entries: 16384 (order: 4, 65536 bytes, linear)
+[    0.000000] Inode-cache hash table entries: 8192 (order: 3, 32768 bytes, linear)
+[    0.000000] Built 1 zonelists, mobility grouping on.  Total pages: 32256
+[    0.000000] mem auto-init: stack:all(zero), heap alloc:off, heap free:off
+[    0.000000] SLUB: HWalign=64, Order=0-3, MinObjects=0, CPUs=1, Nodes=1
+[    0.000000] rcu: Hierarchical RCU implementation.
+[    0.000000] rcu: 	RCU event tracing is enabled.
+[    0.000000] rcu: 	RCU restricting CPUs from NR_CPUS=2 to nr_cpu_ids=1.
+[    0.000000] 	Tracing variant of Tasks RCU enabled.
+[    0.000000] rcu: RCU calculated value of scheduler-enlistment delay is 10 jiffies.
+[    0.000000] rcu: Adjusting geometry for rcu_fanout_leaf=16, nr_cpu_ids=1
+[    0.000000] RCU Tasks Trace: Setting shift to 0 and lim to 1 rcu_task_cb_adjust=1 rcu_task_cpu_ids=1.
+[    0.000000] NR_IRQS: 16, nr_irqs: 16, preallocated irqs: 16
+[    0.000000] IRQ: Found an INTC at 0x(ptrval) (revision 4.0) with 96 interrupts
+[    0.000000] rcu: srcu_init: Setting srcu_struct sizes based on contention.
+[    0.000000] clocksource: jiffies: mask: 0xffffffff max_cycles: 0xffffffff, max_idle_ns: 19112604462750000 ns
+[    0.000000] Clocking rate (Crystal/Core/MPU): 26.0/332/600 MHz
+[    0.000000] OMAP clocksource: 32k_counter at 32768 Hz
+[    0.000000] clocksource: 32k_counter: mask: 0xffffffff max_cycles: 0xffffffff, max_idle_ns: 58327039986419 ns
+[    0.000000] sched_clock: 32 bits at 33kHz, resolution 30517ns, wraps every 65535999984741ns
+[    0.004547] TI gptimer clockevent: always-on 32768 Hz at /ocp@68000000/target-module@48318000
+[    0.006256] Console: colour dummy device 80x30
+[    0.006378] Calibrating delay loop... 600.47 BogoMIPS (lpj=3002368)
+[    0.125274] CPU: Testing write buffer coherency: ok
+[    0.125366] CPU0: Spectre v2: using BPIALL workaround
+[    0.125366] pid_max: default: 32768 minimum: 301
+[    0.125610] LSM: initializing lsm=capability
+[    0.125823] VFS: Disk quotas dquot_6.6.0
+[    0.125854] VFS: Dquot-cache hash table entries: 1024 (order 0, 4096 bytes)
+[    0.125946] Mount-cache hash table entries: 1024 (order: 0, 4096 bytes, linear)
+[    0.125976] Mountpoint-cache hash table entries: 1024 (order: 0, 4096 bytes, linear)
+[    0.128295] CPU0: thread -1, cpu 0, socket -1, mpidr 0
+[    0.132232] Setting up static identity map for 0x80100000 - 0x80100078
+[    0.132781] rcu: Hierarchical SRCU implementation.
+[    0.132781] rcu: 	Max phase no-delay instances is 1000.
+[    0.134704] smp: Bringing up secondary CPUs ...
+[    0.134765] smp: Brought up 1 node, 1 CPU
+[    0.134765] SMP: Total of 1 processors activated (600.47 BogoMIPS).
+[    0.134796] CPU: All CPU(s) started in SVC mode.
+[    0.135131] Memory: 90688K/129024K available (12288K kernel code, 1179K rwdata, 2880K rodata, 1024K init, 255K bss, 20540K reserved, 16384K cma-reserved, 0K highmem)
+[    0.136505] devtmpfs: initialized
+[    0.169952] VFP support v0.3: implementor 41 architecture 3 part 30 variant c rev 1
+[    0.170989] posixtimers hash table entries: 512 (order: 0, 4096 bytes, linear)
+[    0.171051] futex hash table entries: 256 (16384 bytes on 1 NUMA nodes, total 16 KiB, linear).
+[    0.172363] pinctrl core: initialized pinctrl subsystem
+[    0.175842] NET: Registered PF_NETLINK/PF_ROUTE protocol family
+[    0.180725] DMA: preallocated 256 KiB pool for atomic coherent allocations
+[    0.213134] omap_hwmod: mcbsp2_sidetone using broken dt data from mcbsp
+[    0.214111] omap_hwmod: mcbsp3_sidetone using broken dt data from mcbsp
+[    0.284149] audit: initializing netlink subsys (disabled)
+[    0.286560] thermal_sys: Registered thermal governor 'fair_share'
+[    0.286590] thermal_sys: Registered thermal governor 'step_wise'
+[    0.286590] thermal_sys: Registered thermal governor 'user_space'
+[    0.286773] audit: type=2000 audit(0.270:1): state=initialized audit_enabled=0 res=1
+[    0.286895] cpuidle: using governor menu
+[    0.287414] Reprogramming SDRC clock to 332000000 Hz
+[    0.328338] /ocp@68000000: Fixed dependency cycle(s) with /ocp@68000000/interrupt-controller@48200000
+[    0.364257] OMAP GPIO hardware version 2.5
+[    0.405822] /ocp@68000000/dss@48050000: Fixed dependency cycle(s) with /display
+[    0.406036] /display: Fixed dependency cycle(s) with /ocp@68000000/dss@48050000
+[    0.406860] No ATAGs?
+[    0.406890] hw-breakpoint: debug architecture 0x4 unsupported.
+[    0.415893] kprobes: kprobe jump-optimization is enabled. All kprobes are optimized if possible.
+[    0.437164] iommu: Default domain type: Translated
+[    0.437194] iommu: DMA domain TLB invalidation policy: strict mode
+[    0.441070] platform 480bc000.isp: Adding to iommu group 0
+[    0.441345] omap-iommu 480bd400.mmu: 480bd400.mmu registered
+[    0.458862] SCSI subsystem initialized
+[    0.470611] omap_i2c 48070000.i2c: bus 0 rev3.3 at 400 kHz
+[    0.472473] omap_i2c 48072000.i2c: bus 1 rev3.3 at 400 kHz
+[    0.478027] omap_i2c 48060000.i2c: bus 2 rev3.3 at 400 kHz
+[    0.478637] pps_core: LinuxPPS API ver. 1 registered
+[    0.478668] pps_core: Software ver. 5.3.6 - Copyright 2005-2007 Rodolfo Giometti <giometti@linux.it>
+[    0.478698] PTP clock support registered
+[    0.487152] vgaarb: loaded
+[    0.487609] clocksource: Switched to clocksource 32k_counter
+[    1.939361] NET: Registered PF_INET protocol family
+[    1.939849] IP idents hash table entries: 2048 (order: 2, 16384 bytes, linear)
+[    1.941314] tcp_listen_portaddr_hash hash table entries: 512 (order: 0, 4096 bytes, linear)
+[    1.941345] Table-perturb hash table entries: 65536 (order: 6, 262144 bytes, linear)
+[    1.941375] TCP established hash table entries: 1024 (order: 0, 4096 bytes, linear)
+[    1.941436] TCP bind hash table entries: 1024 (order: 2, 16384 bytes, linear)
+[    1.941497] TCP: Hash tables configured (established 1024 bind 1024)
+[    1.941680] UDP hash table entries: 256 (order: 2, 14336 bytes, linear)
+[    1.941741] UDP-Lite hash table entries: 256 (order: 2, 14336 bytes, linear)
+[    1.942077] NET: Registered PF_UNIX/PF_LOCAL protocol family
+[    1.944335] RPC: Registered named UNIX socket transport module.
+[    1.944366] RPC: Registered udp transport module.
+[    1.944366] RPC: Registered tcp transport module.
+[    1.944366] RPC: Registered tcp-with-tls transport module.
+[    1.944396] RPC: Registered tcp NFSv4.1 backchannel transport module.
+[    1.944427] PCI: CLS 0 bytes, default 64
+[    1.947113] Initialise system trusted keyrings
+[    1.948822] workingset: timestamp_bits=14 max_order=15 bucket_order=1
+[    1.950958] NFS: Registering the id_resolver key type
+[    1.951049] Key type id_resolver registered
+[    1.951080] Key type id_legacy registered
+[    1.951232] jffs2: version 2.2. (NAND) (SUMMARY)  © 2001-2006 Red Hat, Inc.
+[    1.952178] Key type asymmetric registered
+[    1.952209] Asymmetric key parser 'x509' registered
+[    1.952301] io scheduler mq-deadline registered
+[    1.952331] io scheduler kyber registered
+[    1.952453] io scheduler bfq registered
+[    1.974822] omap-dma-engine 48056000.dma-controller: OMAP DMA engine driver
+[    1.983154] ti-sysc 480cb024.target-module: sysc_flags 00000100 != 00000110
+[    1.984649] ti-sysc 480c9024.target-module: sysc_flags 00000100 != 00000110
+[    1.991577] pinctrl-single 48002030.pinmux: 284 pins, size 568
+[    1.992401] pinctrl-single 48002a00.pinmux: 46 pins, size 92
+[    1.993469] pinctrl-single 480025d8.pinmux: 18 pins, size 36
+[    1.995758] ledtrig-cpu: registered to indicate activity on CPUs
+[    2.003631] Serial: 8250/16550 driver, 6 ports, IRQ sharing enabled
+[    2.015106] printk: legacy console [ttyS0] disabled
+[    2.016510] 4806a000.serial: ttyS0 at MMIO 0x4806a000 (irq = 88, base_baud = 3000000) is a 8250
+[    2.016632] printk: legacy console [ttyS0] enabled
+[    2.852233] 4806c000.serial: ttyS1 at MMIO 0x4806c000 (irq = 89, base_baud = 3000000) is a 8250
+[    2.866363] 49020000.serial: ttyS2 at MMIO 0x49020000 (irq = 90, base_baud = 3000000) is a 8250
+[    2.903137] brd: module loaded
+[    2.920959] loop: module loaded
+[    2.926849] Skipping twl internal clock init and using bootloader value (unknown osc rate)
+[    2.941925] twl 0-0048: PIH (irq 23) chaining IRQs 147..155
+[    2.947845] twl 0-0048: power (irq 152) chaining IRQs 155..162
+[    2.970520] twl4030_gpio twl4030-gpio: gpio (irq 147) chaining IRQs 163..180
+[    3.032409] mtdoops: mtd device (mtddev=name/number) must be supplied
+[    3.058746] i2c_dev: i2c /dev entries driver
+[    3.065979] ti-soc-thermal 48002524.bandgap: This OMAP thermal sensor is unreliable. You've been warned
+[    3.075714] ti-soc-thermal 48002524.bandgap: Non-trimmed BGAP, Temp not accurate
+[    3.089904] sdhci: Secure Digital Host Controller Interface driver
+[    3.096160] sdhci: Copyright(c) Pierre Ossman
+[    3.102111] sdhci-pltfm: SDHCI platform and OF driver helper
+[    3.116729] omap-gpmc 6e000000.gpmc: GPMC revision 5.0
+[    3.122100] gpmc_mem_init: disabling cs 0 mapped at 0x0-0x1000000
+[    3.181518] smsc911x 2c000000.ethernet eth0: MAC Address: da:7f:32:d8:dc:d0
+[    3.191497] omap2-onenand 30000000.onenand: initializing on CS0 (0x30000000), va (ptrval), DMA mode
+[    3.200866] Muxed OneNAND 128MB 1.8V 16-bit (0x30)
+[    3.205688] OneNAND version = 0x0221
+[    3.210327] Scanning device for bad blocks
+[    3.269775] 5 fixed-partitions partitions found on MTD device 30000000.onenand
+[    3.277069] Creating 5 MTD partitions on "30000000.onenand":
+[    3.282867] 0x000000000000-0x000000080000 : "xloader-onenand"
+[    3.292755] 0x000000080000-0x000000260000 : "uboot-onenand"
+[    3.302215] 0x000000260000-0x000000280000 : "params-onenand"
+[    3.311798] 0x000000280000-0x000000780000 : "linux-onenand"
+[    3.321380] 0x000000780000-0x000008000000 : "jffs2-onenand"
+[    3.336273] hw perfevents: enabled with armv7_cortex_a8 PMU driver, 5 (8000000f) counters available
+[    3.347808] Initializing XFRM netlink socket
+[    3.352416] NET: Registered PF_INET6 protocol family
+[    3.362548] Segment Routing with IPv6
+[    3.366424] In-situ OAM (IOAM) with IPv6
+[    3.370727] sit: IPv6, IPv4 and MPLS over IPv4 tunneling driver
+[    3.378295] NET: Registered PF_PACKET protocol family
+[    3.383453] NET: Registered PF_KEY protocol family
+[    3.388580] Key type dns_resolver registered
+[    3.393218] ThumbEE CPU extension supported.
+[    3.397552] Registering SWP/SWPB emulation handler
+[    3.403411] PM: no software I/O chain control; some wakeups may be lost
+[    3.412902] SmartReflex Class3 initialized
+[    3.435668] Loading compiled-in X.509 certificates
+[    3.505737] smartreflex 480cb000.smartreflex: omap_sr_probe: SmartReflex driver initialized
+[    3.514526] smartreflex 480cb000.smartreflex: omap_sr_probe: smartreflex_core: No Voltage table for the corresponding vdd. Cannot create debugfs entries for n-values
+[    3.530059] smartreflex 480cb000.smartreflex: probe with driver smartreflex failed with error -61
+[    3.539611] smartreflex 480c9000.smartreflex: omap_sr_probe: SmartReflex driver initialized
+[    3.548339] smartreflex 480c9000.smartreflex: omap_sr_probe: smartreflex_mpu_iva: No Voltage table for the corresponding vdd. Cannot create debugfs entries for n-values
+[    3.565399] smartreflex 480c9000.smartreflex: probe with driver smartreflex failed with error -61
+[    3.585937] clk: Disabling unused clocks
+[    3.590545] PM: genpd: Disabling unused power domains
+[    3.596679] check access for rdinit=/init failed: -2, ignoring
+[    3.603729] Waiting for root device /dev/mmcblk0p2...
+[    3.613037] mmc0: host does not support reading read-only switch, assuming write-enable
+[    3.622924] thermal thermal_zone0: cpu-thermal: critical temperature reached
+[    3.630157] reboot: HARDWARE PROTECTION shutdown (Temperature too high)
+[    3.637878] reboot: Failed to start orderly shutdown: forcing the issue
+[    3.644958] Emergency Sync complete
+[    3.650115] mmc0: new high speed SDXC card at address e624
+[    3.661254] reboot: Power down
+
+U-Boot SPL 2026.10-00001-g9e2d9f44f5cc (Nov 24 2026 - 21:29:56 +0100)
+Trying to boot from MMC1
+
+
+U-Boot 2026.10-00001-g9e2d9f44f5cc (Nov 24 2026 - 21:29:56 +0100)
+
+OMAP3530-GP ES2.1, CPU-OPP2, L3-165MHz, Max CPU Clock 600 MHz
+Model: TI OMAP35XX EVM (TMDSEVM3530)
+OMAP3 EVM board + LPDDR/NAND
+DRAM:  128 MiB
+Core:  49 devices, 16 uclasses, devicetree: separate
+NAND:  0 MiB
+MMC:   OMAP SD/MMC: 0, OMAP SD/MMC: 1
+Loading Environment from FAT...Loading Environment from FAT... OK
+Read back SMSC id 0x1150000
+OMAP die ID: <redacted>
+Net:   eth0: ethernet@2c000000
+switch to partitions #0, OK
+mmc0 is current device
+SD/MMC found on device 0
+730 bytes read in 5 ms (142.6 KiB/s)
+Running bootscript from mmc0 ...
+## Executing script at 82000000
+== boot.scr: TMDSEVM3530 Rev D
+5745744 bytes read in 3480 ms (1.6 MiB/s)
+71451 bytes read in 47 ms (1.4 MiB/s)
+Kernel image @ 0x82000000 [ 0x000000 - 0x57ac50 ]
+## Flattened Device Tree blob at 83000000
+   Booting using the fdt blob at 0x83000000
+Working FDT set to 83000000
+   Loading Device Tree to 84f14000, end 84f2871a ... OK
+Working FDT set to 84f14000
+
+Starting kernel ...
+
+[    0.000000] Booting Linux on physical CPU 0x0
+[    0.000000] Linux version 6.18.65-omapng (emagip@ElLinux) (arm-linux-gnueabihf-gcc (Ubuntu 15.2.0-16ubuntu1) 15.2.0, GNU ld (GNU Binutils for Ubuntu) 2.46) #4 SMP Tue Nov 24 23:01:04 CET 2026
+[    0.000000] CPU: ARMv7 Processor [411fc082] revision 2 (ARMv7), cr=10c5387d
+[    0.000000] CPU: PIPT / VIPT nonaliasing data cache, VIPT nonaliasing instruction cache
+[    0.000000] OF: fdt: Machine model: TI OMAP35XX EVM (TMDSEVM3530) Rev D, OneNAND
+[    0.000000] Memory policy: Data cache writeback
+[    0.000000] cma: Reserved 16 MiB at 0x86800000
+[    0.000000] Zone ranges:
+[    0.000000]   Normal   [mem 0x0000000080000000-0x0000000087dfffff]
+[    0.000000]   HighMem  empty
+[    0.000000] Movable zone start for each node
+[    0.000000] Early memory node ranges
+[    0.000000]   node   0: [mem 0x0000000080000000-0x0000000087dfffff]
+[    0.000000] Initmem setup node 0 [mem 0x0000000080000000-0x0000000087dfffff]
+[    0.000000] On node 0, zone Normal: 512 pages in unavailable ranges
+[    0.000000] OF: reserved mem: Reserved memory: No reserved-memory node in the DT
+[    0.000000] CPU: All CPU(s) started in SVC mode.
+[    0.000000] OMAP3430/3530 ES2.1 (l2cache iva sgx neon isp)
+[    0.000000] percpu: Embedded 17 pages/cpu s40716 r8192 d20724 u69632
+[    0.000000] Kernel command line: console=ttyS0,115200n8 root=/dev/mmcblk0p2 rootfstype=ext4 rw rootwait
+[    0.000000] printk: log buffer data + meta data: 65536 + 204800 = 270336 bytes
+[    0.000000] Dentry cache hash table entries: 16384 (order: 4, 65536 bytes, linear)
+[    0.000000] Inode-cache hash table entries: 8192 (order: 3, 32768 bytes, linear)
+[    0.000000] Built 1 zonelists, mobility grouping on.  Total pages: 32256
+[    0.000000] mem auto-init: stack:all(zero), heap alloc:off, heap free:off
+[    0.000000] SLUB: HWalign=64, Order=0-3, MinObjects=0, CPUs=1, Nodes=1
+[    0.000000] rcu: Hierarchical RCU implementation.
+[    0.000000] rcu: 	RCU event tracing is enabled.
+[    0.000000] rcu: 	RCU restricting CPUs from NR_CPUS=2 to nr_cpu_ids=1.
+[    0.000000] 	Tracing variant of Tasks RCU enabled.
+[    0.000000] rcu: RCU calculated value of scheduler-enlistment delay is 10 jiffies.
+[    0.000000] rcu: Adjusting geometry for rcu_fanout_leaf=16, nr_cpu_ids=1
+[    0.000000] RCU Tasks Trace: Setting shift to 0 and lim to 1 rcu_task_cb_adjust=1 rcu_task_cpu_ids=1.
+[    0.000000] NR_IRQS: 16, nr_irqs: 16, preallocated irqs: 16
+[    0.000000] IRQ: Found an INTC at 0x(ptrval) (revision 4.0) with 96 interrupts
+[    0.000000] rcu: srcu_init: Setting srcu_struct sizes based on contention.
+[    0.000000] clocksource: jiffies: mask: 0xffffffff max_cycles: 0xffffffff, max_idle_ns: 19112604462750000 ns
+[    0.000000] Clocking rate (Crystal/Core/MPU): 26.0/332/600 MHz
+[    0.000000] OMAP clocksource: 32k_counter at 32768 Hz
+[    0.000000] clocksource: 32k_counter: mask: 0xffffffff max_cycles: 0xffffffff, max_idle_ns: 58327039986419 ns
+[    0.000000] sched_clock: 32 bits at 33kHz, resolution 30517ns, wraps every 65535999984741ns
+[    0.004516] TI gptimer clockevent: always-on 32768 Hz at /ocp@68000000/target-module@48318000
+[    0.006225] Console: colour dummy device 80x30
+[    0.006347] Calibrating delay loop... 600.47 BogoMIPS (lpj=3002368)
+[    0.125244] CPU: Testing write buffer coherency: ok
+[    0.125335] CPU0: Spectre v2: using BPIALL workaround
+[    0.125366] pid_max: default: 32768 minimum: 301
+[    0.125579] LSM: initializing lsm=capability
+[    0.125793] VFS: Disk quotas dquot_6.6.0
+[    0.125823] VFS: Dquot-cache hash table entries: 1024 (order 0, 4096 bytes)
+[    0.125915] Mount-cache hash table entries: 1024 (order: 0, 4096 bytes, linear)
+[    0.125946] Mountpoint-cache hash table entries: 1024 (order: 0, 4096 bytes, linear)
+[    0.128265] CPU0: thread -1, cpu 0, socket -1, mpidr 0
+[    0.132202] Setting up static identity map for 0x80100000 - 0x80100078
+[    0.132751] rcu: Hierarchical SRCU implementation.
+[    0.132751] rcu: 	Max phase no-delay instances is 1000.
+[    0.134674] smp: Bringing up secondary CPUs ...
+[    0.134735] smp: Brought up 1 node, 1 CPU
+[    0.134735] SMP: Total of 1 processors activated (600.47 BogoMIPS).
+[    0.134765] CPU: All CPU(s) started in SVC mode.
+[    0.135101] Memory: 90688K/129024K available (12288K kernel code, 1179K rwdata, 2880K rodata, 1024K init, 255K bss, 20540K reserved, 16384K cma-reserved, 0K highmem)
+[    0.136444] devtmpfs: initialized
+[    0.169891] VFP support v0.3: implementor 41 architecture 3 part 30 variant c rev 1
+[    0.170928] posixtimers hash table entries: 512 (order: 0, 4096 bytes, linear)
+[    0.171020] futex hash table entries: 256 (16384 bytes on 1 NUMA nodes, total 16 KiB, linear).
+[    0.172332] pinctrl core: initialized pinctrl subsystem
+[    0.175781] NET: Registered PF_NETLINK/PF_ROUTE protocol family
+[    0.180694] DMA: preallocated 256 KiB pool for atomic coherent allocations
+[    0.213012] omap_hwmod: mcbsp2_sidetone using broken dt data from mcbsp
+[    0.213958] omap_hwmod: mcbsp3_sidetone using broken dt data from mcbsp
+[    0.284027] audit: initializing netlink subsys (disabled)
+[    0.286407] thermal_sys: Registered thermal governor 'fair_share'
+[    0.286437] thermal_sys: Registered thermal governor 'step_wise'
+[    0.286468] thermal_sys: Registered thermal governor 'user_space'
+[    0.286621] audit: type=2000 audit(0.270:1): state=initialized audit_enabled=0 res=1
+[    0.286743] cpuidle: using governor menu
+[    0.287261] Reprogramming SDRC clock to 332000000 Hz
+[    0.328247] /ocp@68000000: Fixed dependency cycle(s) with /ocp@68000000/interrupt-controller@48200000
+[    0.364166] OMAP GPIO hardware version 2.5
+[    0.405792] /ocp@68000000/dss@48050000: Fixed dependency cycle(s) with /display
+[    0.406036] /display: Fixed dependency cycle(s) with /ocp@68000000/dss@48050000
+[    0.406860] No ATAGs?
+[    0.406860] hw-breakpoint: debug architecture 0x4 unsupported.
+[    0.415863] kprobes: kprobe jump-optimization is enabled. All kprobes are optimized if possible.
+[    0.437194] iommu: Default domain type: Translated
+[    0.437225] iommu: DMA domain TLB invalidation policy: strict mode
+[    0.441070] platform 480bc000.isp: Adding to iommu group 0
+[    0.441345] omap-iommu 480bd400.mmu: 480bd400.mmu registered
+[    0.457641] SCSI subsystem initialized
+[    0.470520] omap_i2c 48070000.i2c: bus 0 rev3.3 at 400 kHz
+[    0.472351] omap_i2c 48072000.i2c: bus 1 rev3.3 at 400 kHz
+[    0.474060] omap_i2c 48060000.i2c: bus 2 rev3.3 at 400 kHz
+[    0.474639] pps_core: LinuxPPS API ver. 1 registered
+[    0.474639] pps_core: Software ver. 5.3.6 - Copyright 2005-2007 Rodolfo Giometti <giometti@linux.it>
+[    0.474700] PTP clock support registered
+[    0.486938] vgaarb: loaded
+[    0.487426] clocksource: Switched to clocksource 32k_counter
+[    1.937957] NET: Registered PF_INET protocol family
+[    1.938415] IP idents hash table entries: 2048 (order: 2, 16384 bytes, linear)
+[    1.939758] tcp_listen_portaddr_hash hash table entries: 512 (order: 0, 4096 bytes, linear)
+[    1.939910] Table-perturb hash table entries: 65536 (order: 6, 262144 bytes, linear)
+[    1.939941] TCP established hash table entries: 1024 (order: 0, 4096 bytes, linear)
+[    1.939971] TCP bind hash table entries: 1024 (order: 2, 16384 bytes, linear)
+[    1.940032] TCP: Hash tables configured (established 1024 bind 1024)
+[    1.940216] UDP hash table entries: 256 (order: 2, 14336 bytes, linear)
+[    1.940307] UDP-Lite hash table entries: 256 (order: 2, 14336 bytes, linear)
+[    1.940643] NET: Registered PF_UNIX/PF_LOCAL protocol family
+[    1.942871] RPC: Registered named UNIX socket transport module.
+[    1.942901] RPC: Registered udp transport module.
+[    1.942901] RPC: Registered tcp transport module.
+[    1.942932] RPC: Registered tcp-with-tls transport module.
+[    1.942932] RPC: Registered tcp NFSv4.1 backchannel transport module.
+[    1.942962] PCI: CLS 0 bytes, default 64
+[    1.945678] Initialise system trusted keyrings
+[    1.947143] workingset: timestamp_bits=14 max_order=15 bucket_order=1
+[    1.949523] NFS: Registering the id_resolver key type
+[    1.949615] Key type id_resolver registered
+[    1.949645] Key type id_legacy registered
+[    1.949798] jffs2: version 2.2. (NAND) (SUMMARY)  © 2001-2006 Red Hat, Inc.
+[    1.950775] Key type asymmetric registered
+[    1.950805] Asymmetric key parser 'x509' registered
+[    1.950897] io scheduler mq-deadline registered
+[    1.950927] io scheduler kyber registered
+[    1.951019] io scheduler bfq registered
+[    1.973388] omap-dma-engine 48056000.dma-controller: OMAP DMA engine driver
+[    1.981689] ti-sysc 480cb024.target-module: sysc_flags 00000100 != 00000110
+[    1.983184] ti-sysc 480c9024.target-module: sysc_flags 00000100 != 00000110
+[    1.990234] pinctrl-single 48002030.pinmux: 284 pins, size 568
+[    1.991058] pinctrl-single 48002a00.pinmux: 46 pins, size 92
+[    1.992126] pinctrl-single 480025d8.pinmux: 18 pins, size 36
+[    1.994384] ledtrig-cpu: registered to indicate activity on CPUs
+[    2.002319] Serial: 8250/16550 driver, 6 ports, IRQ sharing enabled
+[    2.013702] printk: legacy console [ttyS0] disabled
+[    2.015045] 4806a000.serial: ttyS0 at MMIO 0x4806a000 (irq = 88, base_baud = 3000000) is a 8250
+[    2.015197] printk: legacy console [ttyS0] enabled
+[    2.850952] 4806c000.serial: ttyS1 at MMIO 0x4806c000 (irq = 89, base_baud = 3000000) is a 8250
+[    2.865020] 49020000.serial: ttyS2 at MMIO 0x49020000 (irq = 90, base_baud = 3000000) is a 8250
+[    2.902038] brd: module loaded
+[    2.919891] loop: module loaded
+[    2.925781] Skipping twl internal clock init and using bootloader value (unknown osc rate)
+[    2.940856] twl 0-0048: PIH (irq 23) chaining IRQs 147..155
+[    2.946685] twl 0-0048: power (irq 152) chaining IRQs 155..162
+[    2.969421] twl4030_gpio twl4030-gpio: gpio (irq 147) chaining IRQs 163..180
+[    3.031280] mtdoops: mtd device (mtddev=name/number) must be supplied
+[    3.057159] i2c_dev: i2c /dev entries driver
+[    3.064666] ti-soc-thermal 48002524.bandgap: This OMAP thermal sensor is unreliable. You've been warned
+[    3.074401] ti-soc-thermal 48002524.bandgap: Non-trimmed BGAP, Temp not accurate
+[    3.088592] sdhci: Secure Digital Host Controller Interface driver
+[    3.094879] sdhci: Copyright(c) Pierre Ossman
+[    3.100769] sdhci-pltfm: SDHCI platform and OF driver helper
+[    3.115356] omap-gpmc 6e000000.gpmc: GPMC revision 5.0
+[    3.120788] gpmc_mem_init: disabling cs 0 mapped at 0x0-0x1000000
+[    3.182220] omap2-onenand 30000000.onenand: initializing on CS0 (0x30000000), va (ptrval), DMA mode
+[    3.191528] Muxed OneNAND 128MB 1.8V 16-bit (0x30)
+[    3.196380] OneNAND version = 0x0221
+[    3.201171] Scanning device for bad blocks
+[    3.260437] 5 fixed-partitions partitions found on MTD device 30000000.onenand
+[    3.267791] Creating 5 MTD partitions on "30000000.onenand":
+[    3.273529] 0x000000000000-0x000000080000 : "xloader-onenand"
+[    3.283355] 0x000000080000-0x000000260000 : "uboot-onenand"
+[    3.292938] 0x000000260000-0x000000280000 : "params-onenand"
+[    3.302459] 0x000000280000-0x000000780000 : "linux-onenand"
+[    3.312042] 0x000000780000-0x000008000000 : "jffs2-onenand"
+[    3.326019] hw perfevents: enabled with armv7_cortex_a8 PMU driver, 5 (8000000f) counters available
+[    3.337402] Initializing XFRM netlink socket
+[    3.342193] NET: Registered PF_INET6 protocol family
+[    3.352050] Segment Routing with IPv6
+[    3.355926] In-situ OAM (IOAM) with IPv6
+[    3.360198] sit: IPv6, IPv4 and MPLS over IPv4 tunneling driver
+[    3.367797] NET: Registered PF_PACKET protocol family
+[    3.372955] NET: Registered PF_KEY protocol family
+[    3.378173] Key type dns_resolver registered
+[    3.382843] ThumbEE CPU extension supported.
+[    3.387176] Registering SWP/SWPB emulation handler
+[    3.393035] PM: no software I/O chain control; some wakeups may be lost
+[    3.402526] SmartReflex Class3 initialized
+[    3.425262] Loading compiled-in X.509 certificates
+[    3.495239] smartreflex 480cb000.smartreflex: omap_sr_probe: SmartReflex driver initialized
+[    3.504089] smartreflex 480cb000.smartreflex: omap_sr_probe: smartreflex_core: No Voltage table for the corresponding vdd. Cannot create debugfs entries for n-values
+[    3.519622] smartreflex 480cb000.smartreflex: probe with driver smartreflex failed with error -61
+[    3.529205] smartreflex 480c9000.smartreflex: omap_sr_probe: SmartReflex driver initialized
+[    3.537841] smartreflex 480c9000.smartreflex: omap_sr_probe: smartreflex_mpu_iva: No Voltage table for the corresponding vdd. Cannot create debugfs entries for n-values
+[    3.554870] smartreflex 480c9000.smartreflex: probe with driver smartreflex failed with error -61
+[    3.575378] clk: Disabling unused clocks
+[    3.579986] PM: genpd: Disabling unused power domains
+[    3.586090] check access for rdinit=/init failed: -2, ignoring
+[    3.593170] Waiting for root device /dev/mmcblk0p2...
+[    3.602447] mmc0: host does not support reading read-only switch, assuming write-enable
+[    3.614685] mmc0: new high speed SDXC card at address e624
+[    3.622253] mmcblk0: mmc0:e624 SL64G 59.5 GiB
+[    3.647064]  mmcblk0: p1 p2
+[    4.960235] EXT4-fs (mmcblk0p2): recovery complete
+[    4.967864] EXT4-fs (mmcblk0p2): mounted filesystem 443e3125-f32c-4e25-8625-fad7340ad433 r/w with ordered data mode. Quota mode: none.
+[    4.980316] VFS: Mounted root (ext4 filesystem) on device 179:2.
+[    4.990051] devtmpfs: mounted
+[    4.996124] Freeing unused kernel image (initmem) memory: 1024K
+[    5.003265] Run /sbin/init as init process
+[   10.187835] EXT4-fs (mmcblk0p2): re-mounted 443e3125-f32c-4e25-8625-fad7340ad433.
+[   11.167785] random: crng init done
+Saving 256 bits of creditable seed for next boot
+Starting syslogd: OK
+Starting klogd: OK
+Running sysctl: OK
+Starting mdev... OK
+[   16.020874] Driver for 1-wire Dallas network protocol.
+[   16.039825] omap_hdq 480b2000.1w: OMAP HDQ Hardware Rev 0.5. Driver in Interrupt mode
+[   16.050231] w1_master_driver w1_bus_master1: Attaching one wire slave 01.000000000000 crc 3d
+[   16.122772] w1_master_driver w1_bus_master1: Family 1 for 01.000000000000.3d is not registered.
+[   16.554931] input: TWL4030 Keypad as /devices/platform/68000000.ocp/48070000.i2c/i2c-0/0-0048/48070000.i2c:twl@48:keypad/input/input0
+[   17.110321] twl4030_madc 48070000.i2c:twl@48:madc: clk disabled, enabling
+[   17.118530] twl4030_madc 48070000.i2c:twl@48:madc: supply vusb3v1 not found, using dummy regulator
+[   17.158691] omap_ssi 48058000.ssi-controller: ssi controller 0 initialized (2 ports)!
+[   17.168334] omap_ssi_port 4805a000.ssi-port: couldn't get cawake gpio (err=-2)!
+[   17.175689] omap_ssi_port 4805a000.ssi-port: probe with driver omap_ssi_port failed with error -2
+[   17.185150] omap_ssi_port 4805b000.ssi-port: couldn't get cawake gpio (err=-2)!
+[   17.192565] omap_ssi_port 4805b000.ssi-port: probe with driver omap_ssi_port failed with error -2
+Starting network: Waiting for interface eth0 to appear............^C... timeout!
+run-parts: /etc/network/if-pre-up.d/wait_iface: exit status 1
+FAIL
+Starting crond: OK
+Starting dropbear sshd: [   33.769775] VUSB1V5: disabling
+[   33.774047] VUSB1V8: disabling
+[   33.778656] VUSB3V1: disabling
+[   33.783599] VAUX3: disabling
+[   33.788391] VDAC: disabling
+OK
+
+omap-ng - TMDSEVM3530 Rev D
+omap3evm login: root
+Illegal status in __nss_next.
+omap-ng - TMDSEVM3530 Rev D
+omap3evm login: root
+Illegal status in __nss_next.
+omap-ng - TMDSEVM3530 Rev D
+omap3evm login: omap-ng
+
+omap-ng - TMDSEVM3530 Rev D
+omap3evm login: root
+Password: 
+Login incorrect
+omap3evm login: root
+Password: 
+
+  omap-ng on the TI TMDSEVM3530 (OMAP3530 ES2.1, Rev D)
+  https://github.com/Emagip/omap-ng
+  GPIO: gpiodetect / gpioinfo / gpioset   I2C: i2cdetect -y 1|2   SPI: spi-config
+
+# uname -a
+Linux omap3evm 6.18.65-omapng #4 SMP Tue Nov 24 23:01:04 CET 2026 armv7l GNU/Linux
+# cat /proc/memingofo | head -3
+MemTotal:         109508 kB
+MemFree:           69408 kB
+MemAvailable:      89360 kB
+# ip addr show etho0
+ip: can't find device 'etho0'
+# # ip addr show etho000
+ip: can't find device 'eth0'
+# gpiodetect
+gpiochip0 [gpio-0-31] (32 lines)
+gpiochip1 [gpio-32-63] (32 lines)
+gpiochip2 [gpio-64-95] (32 lines)
+gpiochip3 [gpio-96-127] (32 lines)
+gpiochip4 [gpio-128-159] (32 lines)
+gpiochip5 [twl4030] (20 lines)
+gpiochip6 [omap-gpmc] (4 lines)
+gpiochip7 [gpio-160-191] (32 lines)
+# i2cdetect -l$
+i2c-0	i2c       	OMAP I2C adapter                	I2C adapter
+i2c-1	i2c       	OMAP I2C adapter                	I2C adapter
+i2c-2	i2c       	OMAP I2C adapter                	I2C adapter
+# lsc/Dev/ /dev/spidev*
+ls: /dev/spidev*: No such file or directory
+# # ls /dev/spidev* /edev/i2c-ù* /dev/mtd*
+ls: /dev/spidev*: No such file or directory
+ls: /dev/i2c-�*: No such file or directory
+/dev/mtd0       /dev/mtd2       /dev/mtd4       /dev/mtdblock2
+/dev/mtd0ro     /dev/mtd2ro     /dev/mtd4ro     /dev/mtdblock3
+/dev/mtd1       /dev/mtd3       /dev/mtdblock0  /dev/mtdblock4
+/dev/mtd1ro     /dev/mtd3ro     /dev/mtdblock1
+# dmesg | grep -a -Ei- -E "smsc|ehth0|error|fail"
+[    3.135833] smsc911x 2c000000.ethernet: using DT '/ocp@68000000/gpmc@6e000000/ethernet@gpmc' for 'reset' GPIO lookup
+[    3.136047] smsc911x 2c000000.ethernet: using lookup tables for GPIO lookup
+[    3.136077] smsc911x 2c000000.ethernet: No GPIO consumer reset found
+[    3.519622] smartreflex 480cb000.smartreflex: probe with driver smartreflex failed with error -61
+[    3.554870] smartreflex 480c9000.smartreflex: probe with driver smartreflex failed with error -61
+[    3.586090] check access for rdinit=/init failed: -2, ignoring
+[   17.175689] omap_ssi_port 4805a000.ssi-port: probe with driver omap_ssi_port failed with error -2
+[   17.192565] omap_ssi_port 4805b000.ssi-port: probe with driver omap_ssi_port failed with error -2
+# 
