@@ -183,13 +183,12 @@ The full pinout is in `doc/EXPANSION-CONNECTORS.md`. In short, for this Rev D bo
 - **GPIO:** about 35 free pads. The 12 camera data pads, the camera control pads, MMC2 (no Wi-Fi), McBSP1/3 and UART2 are the best candidates.
 - **Analog:** TWL4030 MADC inputs on P7.
 - **Supply:** VIO_1V8 is available on P7. All logic is 1.8 V.
-- **SW4:** for SD boot with OneNAND fallback, `ON ON ON ON OFF OFF OFF OFF`. This assumes ON = 0; check against the current positions first.
+- **SW4:** for SD boot with OneNAND fallback, `ON ON ON ON OFF OFF OFF OFF`. Polarity **confirmed from the schematic**: ON = grounded = 0.
 - **Caveat:** the public schematic is Rev G. On Rev D the `EXP_*` nets are expected to be wired directly, without the Rev E+ bus switches. Verify by inspection or a continuity check.
 
 Still open:
 
 1. Confirm the Rev D routing of the `EXP_*` nets and the power pins (multimeter).
-2. Confirm the SW4 polarity from the current switch positions.
-3. What will be attached (voltage, buses)?
+2. First GPIO use: an LED test. See `GPIO-LED-TEST.md`.
 
 Reference documentation is collected in `doc/`; see `doc/README.md`.

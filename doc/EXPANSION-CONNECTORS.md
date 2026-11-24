@@ -120,21 +120,36 @@ Mostly the GPMC memory bus, camera port, ETK/trace and SYS_BOOT. **Don't use the
 
 Every pad you use needs a `pinctrl-single` entry in a Rev D board `.dts` to select mode 4 (GPIO) or the function mode (I2C/SPI). See `04-linux-mainline/kernel-docs/pinctrl-single.yaml` and the `OMAP3_CORE1_IOPAD()` macro in `dt-bindings-pinctrl-omap.h`. The pad register offsets are in the TRM, chapter 7 (SCM, `CONTROL_PADCONF_*`).
 
-## SW4 boot switch (sheet 9 + TRM Table 25-3/25-4 + Mistral errata)
+## SW4 boot switch (schematic sheets 9 and 10, TRM §25.2.3, Tables 25-3/25-4)
 
-SW4 positions 1–7 drive SYS_BOOT0–6 and position 8 drives BOOT_UART.
+Online sources disagree, mostly because they mix up boards (main-board SW4 vs processor-module SW1), board revisions, and the two different polarity conventions. This section uses only the schematic and the TRM.
 
-**Polarity: ON = 0.** This is inferred: with the opposite polarity, the errata's corrected NAND setting (`OFF ON OFF ON OFF OFF OFF OFF`) would decode to a reserved code. With ON = 0 it decodes to SYS_BOOT5 = 1, [4:0] = 0b10101, which is UART3 then NAND, a valid setting.
+### What each switch does (sheet 9, crop: `01-board-evm/expansion-connectors/SW4-sys-boot.png`)
 
-| Goal | sys_boot[5] / [4:0] | Boot order | SW4 1–8 |
+- SW4 positions 1–7 connect `SYS_BOOT0`…`SYS_BOOT6` (through 10 kΩ) to SW4 pins 1–7, and **pins 1–8 are all tied to GND**. Each SYS_BOOT line has a **100 kΩ pull-up to VIO_1V8**.
+- So: **switch ON = 0 (grounded), switch OFF = 1 (pulled up).** This is confirmed from the drawing, not inferred.
+- **Position 7 = SYS_BOOT6** selects whether the internal oscillator is bypassed (TRM §25.2.3). Every Mistral and TI setting has it **OFF**. Leave it OFF.
+- **Position 8 = BOOT_UART** (sheet 10). It drives the select pin of the U32 multiplexer (SN74CB3Q3257), which chooses what reaches the "UART3 Debug/Boot RS-232" DB9 (P21). It has nothing to do with the boot *order*. Leave it OFF.
+- The ROM samples SYS_BOOT only at **power-on reset**. Change switches with the power off.
+
+### Decoding
+
+`sys_boot[5]` (position 6) picks between the TRM tables:
+
+- 0 = Table 25-3, memory devices first
+- 1 = Table 25-4, peripheral (USB/UART3) devices first
+
+`sys_boot[4:0]` (positions 5…1) picks the row.
+
+| Goal | sys_boot[5] / [4:0] | ROM boot order | SW4 positions 1 2 3 4 5 6 7 8 |
 |---|---|---|---|
-| **SD card first, factory OneNAND as fallback (recommended)** | 1 / 0b10000 | USB → UART3 → **MMC1** → **OneNAND** | `ON ON ON ON OFF OFF OFF OFF` |
-| SD card only, then UART3 | 0 / 0b11000 | **MMC1** → UART3 | `ON ON ON OFF OFF ON OFF OFF` |
-| OneNAND first (likely the factory setting for a Samsung module) | 0 / 0b10110 | OneNAND → UART3 | `ON OFF OFF ON OFF ON OFF OFF` |
+| **SD card first, OneNAND as fallback (recommended)** | 1 / 0b10000 | USB → UART3 → **MMC1** → OneNAND | **ON ON ON ON OFF OFF OFF OFF** |
+| SD card only, then UART3 | 0 / 0b11000 | MMC1 → UART3 | ON ON ON OFF OFF ON OFF OFF |
+| OneNAND first (Samsung-module flash boot) | 0 / 0b10110 | OneNAND → UART3 | ON OFF OFF ON OFF ON OFF OFF |
+| NAND (Micron modules only; Mistral errata) | 1 / 0b10101 | UART3 → NAND | OFF ON OFF ON OFF OFF OFF OFF |
 
-**Check before changing:**
+**Notes:**
+- In the recommended setting the ROM first tries USB and UART3 briefly. With nothing talking on them it moves on: SD card if one with a bootable FAT partition and an `MLO` is present, else OneNAND. It is the most forgiving setting.
+- Your OneNAND contents have been modified in the past, so the OneNAND fallback may or may not boot anything. That doesn't matter for SD boot.
 
-1. Note the switch positions as they are now. Your board currently boots from OneNAND.
-2. Decode them with ON = 0 using the table above. If they decode to a OneNAND-first entry, the polarity is confirmed.
-3. Only then move to the SD setting.
-4. Write down the original positions so you can always go back.
+To decode any switch position you find: for positions 1–6, write ON as 0 and OFF as 1. The bits are `sys_boot0` … `sys_boot5`. Look the result up in TRM Table 25-3 (if bit 5 = 0) or Table 25-4 (if bit 5 = 1), in `02-soc-omap3530/spruf98y-…pdf`, §25.2.3.
