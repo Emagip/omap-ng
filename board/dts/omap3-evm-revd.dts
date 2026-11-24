@@ -154,10 +154,23 @@
 };
 
 /*
- * ---- I2C1 (TWL4030 power module): 400 kHz instead of 2.6 MHz HS mode ----
- * In HS mode the link to the separate power module failed intermittently on this
- * unit ("timeout waiting on XUDF bit", twl read/write -ETIMEDOUT), which then
- * made the VMMC1 regulator and the SD card probe fail. Fast mode is reliable.
+ * ---- TWL4030 power scripts: none ----
+ * The mainline EVM DT uses "ti,twl4030-power-omap3-evm", which loads TI's OMAP3
+ * idle sleep/wakeup scripts into the TWL4030 (all resources incl. VIO, CLKEN and
+ * HFCLKOUT go to sleep when the OMAP signals idle). On this unit (Rev D main board,
+ * T4030-PW-1518 power module) the TWL4030 then stops answering on I2C1 a few
+ * seconds after boot ("timeout waiting on XUDF bit", twl -ETIMEDOUT), which takes
+ * the VMMC1/VSIM regulators, the SD card and the LED down with it.
+ * Plain "ti,twl4030-power" loads no scripts but keeps power-off support.
+ */
+&twl_power {
+	compatible = "ti,twl4030-power";
+};
+
+/*
+ * I2C1 to the TWL4030 at 400 kHz instead of 2.6 MHz HS mode: slowed down while
+ * chasing the failure above. Not the cause, but a long multi-connector route,
+ * and fast mode is plenty for PMIC register access.
  */
 &i2c1 {
 	clock-frequency = <400000>;
