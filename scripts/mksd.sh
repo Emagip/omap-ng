@@ -10,9 +10,10 @@
 #   MLO, u-boot.img        (required)
 #   anything else in there (zImage, *.dtb, boot.scr, uEnv.txt...) is copied too.
 #
-# Layout (chosen for the old OMAP3 ES2.1 boot ROM, which is picky about FAT):
-#   p1: start sector 63, 64 MiB, type 0x0C (FAT32 LBA), bootable, FAT32 with 255/63 geometry
-#   p2: rest of the card, ext4 (root filesystem, filled later)
+# Layout (for the OMAP3 boot ROM, which wants a 255-head/63-sector partition table):
+#   p1: cylinders 0-8 = LBA 63..144584 (~70 MB), type 0x0C (FAT32 LBA), bootable,
+#       FAT32 with 255/63 geometry and 63 hidden sectors in the boot sector
+#   p2: from cylinder 9 to the end, ext4 (root filesystem, filled later)
 set -euo pipefail
 
 die() { echo "ERROR: $*" >&2; exit 1; }
@@ -57,15 +58,41 @@ if [ "$MODE" = format ]; then
 	read -r -p "ALL DATA on $DEV will be destroyed. Type the device name ($NAME) to continue: " ans
 	[ "$ans" = "$NAME" ] || die "aborted"
 	wipefs -a "$DEV"
-	# 64 MiB = 131072 sectors; p1 starts at 63 (legacy CHS alignment), p2 aligned to 64 MiB
-	sfdisk --no-reread --wipe always "$DEV" <<EOF
-label: dos
-unit: sectors
-start=63,     size=131009, type=c, bootable
-start=131072,             type=83
-EOF
-	partprobe "$DEV" || true; udevadm settle
-	mkfs.vfat -F 32 -n BOOT -g 255/63 -h 63 "$P1"
+	dd if=/dev/zero of="$DEV" bs=1M count=8 conv=fsync status=none
+	# Write the MBR ourselves with an explicit 255-head / 63-sector geometry, as the
+	# OMAP3 boot ROM expects (TI wiki "MMC Boot Format"). Modern sfdisk derives the
+	# CHS fields from whatever geometry the card reader reports, which breaks ROM boot.
+	#   p1: cylinders 0..8  -> LBA 63..144584   (FAT32, bootable, ~70 MB)
+	#   p2: cylinder 9..end -> LBA 144585..end  (Linux)
+	python3 -I - "$DEV" "$(blockdev --getsz "$DEV")" <<'PY'
+import sys, os
+dev, total = sys.argv[1], int(sys.argv[2])
+H, S = 255, 63
+CYL = H * S                                  # 16065 sectors per cylinder
+def chs(lba):
+    c, r = divmod(lba, CYL); h, s = divmod(r, S); s += 1
+    if c > 1023: c, h, s = 1023, 254, 63
+    return bytes([h, ((c >> 2) & 0xC0) | s, c & 0xFF])
+def entry(boot, ptype, start, size):
+    return (bytes([0x80 if boot else 0]) + chs(start) + bytes([ptype]) +
+            chs(start + size - 1) + start.to_bytes(4, 'little') + size.to_bytes(4, 'little'))
+p1_start, p1_end = 63, 9 * CYL - 1
+p2_start = 9 * CYL
+p2_size = (total - p2_start) // CYL * CYL    # whole cylinders
+mbr = bytearray(512)
+mbr[440:444] = os.urandom(4)                 # disk signature
+mbr[446:462] = entry(True, 0x0C, p1_start, p1_end - p1_start + 1)
+mbr[462:478] = entry(False, 0x83, p2_start, p2_size)
+mbr[510:512] = b'\x55\xaa'
+with open(dev, 'r+b') as f:
+    f.write(mbr); f.flush(); os.fsync(f.fileno())
+print("MBR written: p1 LBA %d-%d (FAT32, boot), p2 LBA %d+%d" % (p1_start, p1_end, p2_start, p2_size))
+PY
+	blockdev --rereadpt "$DEV" || partprobe "$DEV" || true; udevadm settle
+	fdisk -l "$DEV"
+	# -s 1: 1 sector/cluster -> ~142k clusters. With the default (64) the volume has
+	# only ~2k clusters, which by the FAT spec is NOT FAT32 and the ROM rejects it.
+	mkfs.vfat -F 32 -s 1 -n BOOT -g 255/63 -h 63 "$P1"
 	mkfs.ext4 -F -q -L rootfs "$P2"
 fi
 
