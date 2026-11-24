@@ -51,6 +51,7 @@ Module.symvers
 .config
 .config.old
 *.cmd
+!/board/*.cmd
 .tmp_*
 # cross-compiled user programs
 /examples/**/bin/
