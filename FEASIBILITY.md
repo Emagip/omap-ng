@@ -141,6 +141,8 @@ With that, the last step is a desk exercise: for each connector pin, find its OM
 |---|---|---|
 | Main board | `OMAP-EVM-MB-1518`, **Rev D** | **Gen 1** main board: LAN9115 Ethernet, U-Boot `OMAP3EVM_BOARD_GEN_1` |
 | Processor module | `O3530-PB-1518`, silkscreen "OMAP 35XX REV B" | OMAP3530 processor board, Rev B. This is the minimum PSP 2.x supports. |
+| Silicon | `CONTROL_IDCODE` = 0x2B7AE02F | **OMAP3530 ES2.1**, GP device. Supported by mainline (see `logs/baseline/FINDINGS.md`). |
+| OneNAND | `onenand info`: "Muxed OneNAND 128MB 1.8V 16-bit" | **128 MB** OneNAND confirmed |
 | PoP memory | **Samsung K5W1G1GACM-DL60** | Samsung MCP: OneNAND + mobile DDR. Per Samsung's part numbering, likely 1 Gb (128 MB) OneNAND + 1 Gb (**128 MB**) mDDR; no datasheet found online. The PSP's `initenv-samsung.txt` uses `mem=128M`, which confirms **128 MB RAM**. |
 | Power module | `T4030-PW-1518` | TWL4030 power module (the standard one, not the TPS6235x PR785 variant) |
 | Daughter card | none | |

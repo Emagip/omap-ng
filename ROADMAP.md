@@ -6,8 +6,8 @@ Each step ends with a **checkpoint**. Don't move on until it passes.
 
 | # | Step | Status |
 |---|---|---|
-| 0 | Host and serial setup | todo |
-| 1 | Baseline: capture what the board boots today | todo |
+| 0 | Host and serial setup | **done**: USB-serial chain works |
+| 1 | Baseline: capture what the board boots today | **done** (2026-11-24); see `logs/baseline/FINDINGS.md`. Multimeter checks still to do. |
 | 2 | Mainline U-Boot on SD | todo |
 | 3 | Mainline kernel + Rev D device tree | todo |
 | 4 | Buildroot root filesystem + cross SDK | todo |
