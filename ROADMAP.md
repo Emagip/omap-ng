@@ -66,7 +66,9 @@ Nothing is written to the board in this step.
 1. Power off. **Write down the current SW4 positions** (1–8) and the J8 position.
 2. Connect the console, start `picocom` with logging, power on.
 3. Capture everything: x-loader/U-Boot banners, any kernel output. If a U-Boot prompt appears, stop autoboot and run:
-   `version`, `bdinfo`, `printenv`, `onenand info` (or `nand info`), `mmc info` (with a card in), `md 0x4800244c 1` (silicon ID register; ES revision)
+   - `version`, `bdinfo`, `printenv`, `onenand info` (or `nand info`), `mmc info` (with a card in)
+   - `md.l 0x4830a204 1`: CONTROL_IDCODE (silicon revision, ES 2.x / 3.x)
+   - `md.l 0x480022f0 1`: CONTROL_STATUS. The low 6 bits are the latched `sys_boot[5:0]`, a hardware check of the SW4 decoding in `doc/EXPANSION-CONNECTORS.md`.
 4. Multimeter checks, board **unpowered** unless noted:
    - P7 A3/A4 = VIO_1V8 and A1/A2 = VBAT (powered measurements)
    - whether U134 / U122 / U126 are fitted
