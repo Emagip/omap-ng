@@ -1,0 +1,5 @@
+
+  omap-ng on the TI TMDSEVM3530 (OMAP3530 ES2.1, Rev D)
+  https://github.com/Emagip/omap-ng
+  GPIO: gpiodetect / gpioinfo / gpioset   I2C: i2cdetect -y 1|2   SPI: spi-config
+

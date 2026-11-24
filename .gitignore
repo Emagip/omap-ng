@@ -23,7 +23,7 @@ sysroot/
 staging/
 toolchain/
 toolchains/
-buildroot*/
+/buildroot*/
 rootfs/
 # kernel / U-Boot / boot artefacts
 *.o
