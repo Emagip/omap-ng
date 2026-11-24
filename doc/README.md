@@ -25,8 +25,6 @@ The target board:
 
 | File | What it is | Source |
 |---|---|---|
-| `ti-omap35x-evm-mainboard-schematic-revG.pdf` | **Main-board schematic, Rev G** (20 sheets, Sept 2009; revision history from Rev D). Sheet 9 = expansion connectors P7/P18 and SW4; sheet 16 = the Rev E+ bus switches. **Decoded in `../EXPANSION-CONNECTORS.md`.** | e2e.ti.com forum attachment (downloaded by the user) |
-| `expansion-connectors/*.png` | High-resolution crops of sheet 9: P7, P18, their power pins, SW4 | rendered from the schematic |
 | `mistral-omap35x-evm-datasheet-old-build.pdf` | Mistral EVM datasheet, **old build**. Interfaces, memory options, expansion-connector interface list. | archive.org copy of mistralsolutions.com `datasheets/35x_EVM_old_build.pdf` (2010) |
 | `mistral-omap35x-evm-datasheet.pdf` | Same datasheet, newer build | farnell.com/datasheets/1500928.pdf |
 | `mistral-hw-user-guide-errata-SW4-SW1.pdf` | **Correct SW4 (boot) and SW1 settings.** Corrects the Hardware User Guide. Read it before changing switches. | archive.org copy of Mistral `Errata.pdf` (2009) |
@@ -51,7 +49,6 @@ The target board:
 | File | What it is | Source |
 |---|---|---|
 | `swcs032f-tps65950-twl4030-data-manual.pdf` | TPS65950 data manual, Rev F. The TPS65950 is the catalog version of the TWL4030: same GPIOs, regulators, MADC, keypad. | ti.com/lit/pdf/swcs032 |
-| `swcu050g-tps65950-twl4030-technical-reference-manual.pdf` | TPS65950 TRM, Rev G (947 pp). Full register map: GPIO, regulators, USB PHY, MADC. | ti.com SWCU050 (login required, downloaded by the user) |
 | `microchip-lan9115-ethernet-datasheet.pdf` | SMSC/Microchip LAN9115. **The Ethernet chip on this Rev D (Gen 1) main board.** | ww1.microchip.com DS00002269A |
 | `microchip-lan9220-ethernet-datasheet.pdf` | LAN9220, used on Gen 2 (Rev ≥ E) main boards | ww1.microchip.com DS00002417A |
 
@@ -83,6 +80,16 @@ The target board:
 - `mach-omap2/board-omap3evm-flash.c`: the **OneNAND partition map** (x-loader 512 KiB, u-boot 1.875 MiB, params 128 KiB, kernel 5 MiB, jffs2 rest) and the NAND map.
 - `include/mach/mux.h`: the old pad-mux names, handy to cross-check against the TRM.
 - `configs/omap3_evm_defconfig`: the 2009 kernel config.
+
+## Not redistributed: get them yourself, keep them in `doc/private/` (git-ignored)
+
+These documents are needed for some details but **must not be pushed to the public repo**. Put them in `doc/private/` under the file names below and the references in this repo will match.
+
+| Local file name (`doc/private/`) | What it is | Why it isn't in the repo | Where to get it |
+|---|---|---|---|
+| `ti-omap35x-evm-mainboard-schematic-revG.pdf` | **OMAP35x EVM main-board schematic, Rev G** (20 sheets, Sept 2009; revision history back to Rev D). Sheet 9 = expansion connectors P7/P18 and SW4; sheet 10 = UARTs; sheet 16 = the Rev E+ bus switches. Decoded (as tables) in `EXPANSION-CONNECTORS.md`. | Stamped "TI Proprietary Information / Under Non-Disclosure Agreement" | Attachment on TI's E2E forum: https://e2e.ti.com/cfs-file/__key/communityserver-discussions-components-files/791/omap35x_5F00_evm_5F00_mb_5F00_sch_5F00_revg.pdf (download in a browser). Originally on the EVM's DVD and Mistral's (login-gated, now defunct) support site. |
+| `schematic-crops/*.png` | High-resolution crops of schematic sheet 9 (P7, P18, power pins, SW4) | Derived from the NDA-stamped schematic | Render them yourself: `pdftoppm -f 9 -l 9 -r 300 -png <schematic>.pdf sheet9` |
+| `swcu050g-tps65950-twl4030-technical-reference-manual.pdf` | **TPS65950 (TWL4030) Technical Reference Manual, SWCU050 Rev G** (947 pp): full register map for GPIO, LED, regulators, USB PHY, MADC | Distributed by TI only behind a myTI login | https://www.ti.com/lit/pdf/swcu050 (free myTI account required) |
 
 ## Not obtained (links only)
 

@@ -1,6 +1,6 @@
 # OMAP35x EVM expansion connectors: P7 and P18 (Rev D main board)
 
-**Source:** `01-board-evm/ti-omap35x-evm-mainboard-schematic-revG.pdf`, sheet 9 ("Expansion Module Connectors"). Cropped images of the connector symbols are in `01-board-evm/expansion-connectors/`.
+**Source:** the TI OMAP35x EVM main-board schematic, Rev G, sheet 9 ("Expansion Module Connectors"). That schematic is NDA-stamped, so it's **not in this repo**. See `README.md`, "Not redistributed", for where to get it; keep it locally as `private/ti-omap35x-evm-mainboard-schematic-revG.pdf`, with crops in `private/schematic-crops/`. The tables below are a transcription of pin numbers and net names.
 
 **Pad → GPIO numbers:** from `02-soc-omap3530/sprs507h-omap3530-datasheet.pdf`. Mode 4 = `gpio_N`. In Linux, `gpio_N` is line `N % 32` of bank `N / 32 + 1`: `gpio_178` is `gpio6` line 18, i.e. gpiochip5 line 18 in libgpiod numbering. Check with `gpioinfo`.
 
@@ -124,7 +124,7 @@ Every pad you use needs a `pinctrl-single` entry in a Rev D board `.dts` to sele
 
 Online sources disagree, mostly because they mix up boards (main-board SW4 vs processor-module SW1), board revisions, and the two different polarity conventions. This section uses only the schematic and the TRM.
 
-### What each switch does (sheet 9, crop: `01-board-evm/expansion-connectors/SW4-sys-boot.png`)
+### What each switch does (schematic sheet 9; local crop `private/schematic-crops/SW4-sys-boot.png`)
 
 - SW4 positions 1–7 connect `SYS_BOOT0`…`SYS_BOOT6` (through 10 kΩ) to SW4 pins 1–7, and **pins 1–8 are all tied to GND**. Each SYS_BOOT line has a **100 kΩ pull-up to VIO_1V8**.
 - So: **switch ON = 0 (grounded), switch OFF = 1 (pulled up).** This is confirmed from the drawing, not inferred.

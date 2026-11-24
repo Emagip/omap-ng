@@ -1,5 +1,80 @@
-build/
+# ---- Non-redistributable documents (kept locally, see doc/README.md) ----
+doc/private/
+
+# ---- Upstream source checkouts / downloads (re-fetchable) ----
 src/
 dl/
+downloads/
+*.tar
+*.tar.gz
+*.tgz
+*.tar.bz2
+*.tar.xz
+*.tar.zst
+*.zip
+
+# ---- Build trees and outputs ----
+build/
 out/
+output/
+deploy/
+images/
+sysroot/
+staging/
+toolchain/
+toolchains/
+buildroot*/
+rootfs/
+# kernel / U-Boot / boot artefacts
+*.o
+*.ko
+*.a
+*.so
+*.so.*
+*.elf
+*.map
+*.dtb
+*.dtbo
+*.dtb.tmp
+*.img
+*.bin
+*.ift
+MLO
+zImage
+uImage
+Image
+vmlinux*
+System.map
+u-boot*.img
+modules.order
+Module.symvers
+.config
+.config.old
+*.cmd
+.tmp_*
+# cross-compiled user programs
+/examples/**/bin/
+/examples/**/*.out
+
+# ---- SD card / filesystem images ----
+*.ext2
+*.ext4
+*.jffs2
+*.ubi
+*.ubifs
+*.sdcard
+*.wic
+
+# ---- Editors, OS, misc ----
+*~
+*.swp
+*.swo
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+*.log
+.cache/
+
+# ---- NTFS (ntfs-3g/fuse) artefacts on this drive ----
 .fuse_hidden*
