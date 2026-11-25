@@ -132,6 +132,14 @@
 		gpmc,rd-cycle-ns = <186>;	/* 31 ticks = 188 ns > 165 ns min */
 		gpmc,wr-cycle-ns = <186>;	/* 31 ticks */
 		gpmc,access-ns = <144>;		/* 24 ticks */
+
+		/*
+		 * LAN9115 nRESET on Gen 1 boards: gpmc_wait2.gpio_64 (Gen 2: gpio_7),
+		 * as in U-Boot's board/ti/omap3evm. smsc911x pulses it at probe
+		 * (patches/linux/0003); U-Boot's own 1 us pulse is below spec.
+		 */
+		pinctrl-0 = <&smsc911x_pins &lan9115_rst_pins>;
+		reset-gpios = <&gpio3 0 GPIO_ACTIVE_LOW>;	/* gpio_64 */
 	};
 };
 
@@ -175,6 +183,12 @@
 	led_test_pins: led-test-pins {
 		pinctrl-single,pins = <
 			OMAP3_CORE1_IOPAD(0x2190, PIN_OUTPUT | MUX_MODE4)	/* mcbsp1_dx.gpio_158, P7 A18 */
+		>;
+	};
+
+	lan9115_rst_pins: lan9115-rst-pins {
+		pinctrl-single,pins = <
+			OMAP3_CORE1_IOPAD(0x20d0, PIN_OUTPUT_PULLUP | MUX_MODE4)	/* gpmc_wait2.gpio_64, LAN9115 nRESET */
 		>;
 	};
 };

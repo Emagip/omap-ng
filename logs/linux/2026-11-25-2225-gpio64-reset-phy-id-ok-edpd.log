@@ -1,0 +1,1172 @@
+
+U-Boot SPL 2026.10-00001-g9e2d9f44f5cc (Nov 24 2026 - 21:29:56 +0100)
+Trying to boot from MMC1
+
+
+U-Boot 2026.10-00001-g9e2d9f44f5cc (Nov 24 2026 - 21:29:56 +0100)
+
+OMAP3530-GP ES2.1, CPU-OPP2, L3-165MHz, Max CPU Clock 600 MHz
+Model: TI OMAP35XX EVM (TMDSEVM3530)
+OMAP3 EVM board + LPDDR/NAND
+DRAM:  128 MiB
+Core:  49 devices, 16 uclasses, devicetree: separate
+NAND:  0 MiB
+MMC:   OMAP SD/MMC: 0, OMAP SD/MMC: 1
+Loading Environment from FAT...Loading Environment from FAT... OK
+Read back SMSC id 0x1150000
+OMAP die ID: 2a0e00020000000004013ddc0301500a
+Net:   eth0: ethernet@2c000000
+[2KHit any key to stop autoboot: 2[2KHit any key to stop autoboot: 0
+OMAP3_EVM # d setenv optargs
+OMAP3_EVM # sae veenv
+Saving Environment to FAT... OK
+OMAP3_EVM # boot
+switch to partitions #0, OK
+mmc0 is current device
+SD/MMC found on device 0
+730 bytes read in 6 ms (118.2 KiB/s)
+Running bootscript from mmc0 ...
+## Executing script at 82000000
+== boot.scr: TMDSEVM3530 Rev D
+5747168 bytes read in 4141 ms (1.3 MiB/s)
+71565 bytes read in 56 ms (1.2 MiB/s)
+Kernel image @ 0x82000000 [ 0x000000 - 0x57b1e0 ]
+## Flattened Device Tree blob at 83000000
+   Booting using the fdt blob at 0x83000000
+Working FDT set to 83000000
+   Loading Device Tree to 84f14000, end 84f2878c ... OK
+Working FDT set to 84f14000
+
+Starting kernel ...
+
+[    0.000000] Booting Linux on physical CPU 0x0
+[    0.000000] Linux version 6.18.65-omapng (emagip@ElLinux) (arm-linux-gnueabihf-gcc (Ubuntu 15.2.0-16ubuntu1) 15.2.0, GNU ld (GNU Binutils for Ubuntu) 2.46) #5 SMP Wed Nov 25 21:44:18 CET 2026
+[    0.000000] CPU: ARMv7 Processor [411fc082] revision 2 (ARMv7), cr=10c5387d
+[    0.000000] CPU: PIPT / VIPT nonaliasing data cache, VIPT nonaliasing instruction cache
+[    0.000000] OF: fdt: Machine model: TI OMAP35XX EVM (TMDSEVM3530) Rev D, OneNAND
+[    0.000000] Memory policy: Data cache writeback
+[    0.000000] cma: Reserved 16 MiB at 0x86800000
+[    0.000000] Zone ranges:
+[    0.000000]   Normal   [mem 0x0000000080000000-0x0000000087dfffff]
+[    0.000000]   HighMem  empty
+[    0.000000] Movable zone start for each node
+[    0.000000] Early memory node ranges
+[    0.000000]   node   0: [mem 0x0000000080000000-0x0000000087dfffff]
+[    0.000000] Initmem setup node 0 [mem 0x0000000080000000-0x0000000087dfffff]
+[    0.000000] On node 0, zone Normal: 512 pages in unavailable ranges
+[    0.000000] OF: reserved mem: Reserved memory: No reserved-memory node in the DT
+[    0.000000] CPU: All CPU(s) started in SVC mode.
+[    0.000000] OMAP3430/3530 ES2.1 (l2cache iva sgx neon isp)
+[    0.000000] percpu: Embedded 17 pages/cpu s40716 r8192 d20724 u69632
+[    0.000000] Kernel command line: console=ttyS0,115200n8 root=/dev/mmcblk0p2 rootfstype=ext4 rw rootwait
+[    0.000000] printk: log buffer data + meta data: 65536 + 204800 = 270336 bytes
+[    0.000000] Dentry cache hash table entries: 16384 (order: 4, 65536 bytes, linear)
+[    0.000000] Inode-cache hash table entries: 8192 (order: 3, 32768 bytes, linear)
+[    0.000000] Built 1 zonelists, mobility grouping on.  Total pages: 32256
+[    0.000000] mem auto-init: stack:all(zero), heap alloc:off, heap free:off
+[    0.000000] SLUB: HWalign=64, Order=0-3, MinObjects=0, CPUs=1, Nodes=1
+[    0.000000] rcu: Hierarchical RCU implementation.
+[    0.000000] rcu: 	RCU event tracing is enabled.
+[    0.000000] rcu: 	RCU restricting CPUs from NR_CPUS=2 to nr_cpu_ids=1.
+[    0.000000] 	Tracing variant of Tasks RCU enabled.
+[    0.000000] rcu: RCU calculated value of scheduler-enlistment delay is 10 jiffies.
+[    0.000000] rcu: Adjusting geometry for rcu_fanout_leaf=16, nr_cpu_ids=1
+[    0.000000] RCU Tasks Trace: Setting shift to 0 and lim to 1 rcu_task_cb_adjust=1 rcu_task_cpu_ids=1.
+[    0.000000] NR_IRQS: 16, nr_irqs: 16, preallocated irqs: 16
+[    0.000000] IRQ: Found an INTC at 0x(ptrval) (revision 4.0) with 96 interrupts
+[    0.000000] rcu: srcu_init: Setting srcu_struct sizes based on contention.
+[    0.000000] clocksource: jiffies: mask: 0xffffffff max_cycles: 0xffffffff, max_idle_ns: 19112604462750000 ns
+[    0.000000] Clocking rate (Crystal/Core/MPU): 26.0/332/600 MHz
+[    0.000000] OMAP clocksource: 32k_counter at 32768 Hz
+[    0.000000] clocksource: 32k_counter: mask: 0xffffffff max_cycles: 0xffffffff, max_idle_ns: 58327039986419 ns
+[    0.000030] sched_clock: 32 bits at 33kHz, resolution 30517ns, wraps every 65535999984741ns
+[    0.004547] TI gptimer clockevent: always-on 32768 Hz at /ocp@68000000/target-module@48318000
+[    0.006256] Console: colour dummy device 80x30
+[    0.006378] Calibrating delay loop... 600.47 BogoMIPS (lpj=3002368)
+[    0.125274] CPU: Testing write buffer coherency: ok
+[    0.125366] CPU0: Spectre v2: using BPIALL workaround
+[    0.125366] pid_max: default: 32768 minimum: 301
+[    0.125610] LSM: initializing lsm=capability
+[    0.125823] VFS: Disk quotas dquot_6.6.0
+[    0.125885] VFS: Dquot-cache hash table entries: 1024 (order 0, 4096 bytes)
+[    0.125946] Mount-cache hash table entries: 1024 (order: 0, 4096 bytes, linear)
+[    0.125976] Mountpoint-cache hash table entries: 1024 (order: 0, 4096 bytes, linear)
+[    0.128326] CPU0: thread -1, cpu 0, socket -1, mpidr 0
+[    0.132232] Setting up static identity map for 0x80100000 - 0x80100078
+[    0.132751] rcu: Hierarchical SRCU implementation.
+[    0.132781] rcu: 	Max phase no-delay instances is 1000.
+[    0.134674] smp: Bringing up secondary CPUs ...
+[    0.134735] smp: Brought up 1 node, 1 CPU
+[    0.134765] SMP: Total of 1 processors activated (600.47 BogoMIPS).
+[    0.134765] CPU: All CPU(s) started in SVC mode.
+[    0.135101] Memory: 90684K/129024K available (12288K kernel code, 1179K rwdata, 2884K rodata, 1024K init, 255K bss, 20544K reserved, 16384K cma-reserved, 0K highmem)
+[    0.136474] devtmpfs: initialized
+[    0.170532] VFP support v0.3: implementor 41 architecture 3 part 30 variant c rev 1
+[    0.171569] posixtimers hash table entries: 512 (order: 0, 4096 bytes, linear)
+[    0.171630] futex hash table entries: 256 (16384 bytes on 1 NUMA nodes, total 16 KiB, linear).
+[    0.172973] pinctrl core: initialized pinctrl subsystem
+[    0.176422] NET: Registered PF_NETLINK/PF_ROUTE protocol family
+[    0.181335] DMA: preallocated 256 KiB pool for atomic coherent allocations
+[    0.213684] omap_hwmod: mcbsp2_sidetone using broken dt data from mcbsp
+[    0.214660] omap_hwmod: mcbsp3_sidetone using broken dt data from mcbsp
+[    0.284881] audit: initializing netlink subsys (disabled)
+[    0.287261] thermal_sys: Registered thermal governor 'fair_share'
+[    0.287292] thermal_sys: Registered thermal governor 'step_wise'
+[    0.287322] thermal_sys: Registered thermal governor 'user_space'
+[    0.287475] audit: type=2000 audit(0.270:1): state=initialized audit_enabled=0 res=1
+[    0.287597] cpuidle: using governor menu
+[    0.288116] Reprogramming SDRC clock to 332000000 Hz
+[    0.329498] /ocp@68000000: Fixed dependency cycle(s) with /ocp@68000000/interrupt-controller@48200000
+[    0.365631] OMAP GPIO hardware version 2.5
+[    0.407348] /ocp@68000000/dss@48050000: Fixed dependency cycle(s) with /display
+[    0.407592] /display: Fixed dependency cycle(s) with /ocp@68000000/dss@48050000
+[    0.408264] No ATAGs?
+[    0.408264] hw-breakpoint: debug architecture 0x4 unsupported.
+[    0.417327] kprobes: kprobe jump-optimization is enabled. All kprobes are optimized if possible.
+[    0.437744] iommu: Default domain type: Translated
+[    0.437774] iommu: DMA domain TLB invalidation policy: strict mode
+[    0.441650] platform 480bc000.isp: Adding to iommu group 0
+[    0.441894] omap-iommu 480bd400.mmu: 480bd400.mmu registered
+[    0.457611] SCSI subsystem initialized
+[    0.469177] omap_i2c 48070000.i2c: bus 0 rev3.3 at 400 kHz
+[    0.471069] omap_i2c 48072000.i2c: bus 1 rev3.3 at 400 kHz
+[    0.472747] omap_i2c 48060000.i2c: bus 2 rev3.3 at 400 kHz
+[    0.473327] pps_core: LinuxPPS API ver. 1 registered
+[    0.473358] pps_core: Software ver. 5.3.6 - Copyright 2005-2007 Rodolfo Giometti <giometti@linux.it>
+[    0.473419] PTP clock support registered
+[    0.486938] vgaarb: loaded
+[    0.487426] clocksource: Switched to clocksource 32k_counter
+[    1.937377] NET: Registered PF_INET protocol family
+[    1.938079] IP idents hash table entries: 2048 (order: 2, 16384 bytes, linear)
+[    1.939544] tcp_listen_portaddr_hash hash table entries: 512 (order: 0, 4096 bytes, linear)
+[    1.939605] Table-perturb hash table entries: 65536 (order: 6, 262144 bytes, linear)
+[    1.939636] TCP established hash table entries: 1024 (order: 0, 4096 bytes, linear)
+[    1.939666] TCP bind hash table entries: 1024 (order: 2, 16384 bytes, linear)
+[    1.939727] TCP: Hash tables configured (established 1024 bind 1024)
+[    1.939941] UDP hash table entries: 256 (order: 2, 14336 bytes, linear)
+[    1.940002] UDP-Lite hash table entries: 256 (order: 2, 14336 bytes, linear)
+[    1.940338] NET: Registered PF_UNIX/PF_LOCAL protocol family
+[    1.942596] RPC: Registered named UNIX socket transport module.
+[    1.942626] RPC: Registered udp transport module.
+[    1.942626] RPC: Registered tcp transport module.
+[    1.942626] RPC: Registered tcp-with-tls transport module.
+[    1.942657] RPC: Registered tcp NFSv4.1 backchannel transport module.
+[    1.942687] PCI: CLS 0 bytes, default 64
+[    1.945373] Initialise system trusted keyrings
+[    1.946838] workingset: timestamp_bits=14 max_order=15 bucket_order=1
+[    1.949249] NFS: Registering the id_resolver key type
+[    1.949340] Key type id_resolver registered
+[    1.949371] Key type id_legacy registered
+[    1.949523] jffs2: version 2.2. (NAND) (SUMMARY)  © 2001-2006 Red Hat, Inc.
+[    1.950500] Key type asymmetric registered
+[    1.950531] Asymmetric key parser 'x509' registered
+[    1.950622] io scheduler mq-deadline registered
+[    1.950653] io scheduler kyber registered
+[    1.950775] io scheduler bfq registered
+[    1.973236] omap-dma-engine 48056000.dma-controller: OMAP DMA engine driver
+[    1.981628] ti-sysc 480cb024.target-module: sysc_flags 00000100 != 00000110
+[    1.983123] ti-sysc 480c9024.target-module: sysc_flags 00000100 != 00000110
+[    1.990112] pinctrl-single 48002030.pinmux: 284 pins, size 568
+[    1.990936] pinctrl-single 48002a00.pinmux: 46 pins, size 92
+[    1.991973] pinctrl-single 480025d8.pinmux: 18 pins, size 36
+[    1.994201] ledtrig-cpu: registered to indicate activity on CPUs
+[    2.002105] Serial: 8250/16550 driver, 6 ports, IRQ sharing enabled
+[    2.013488] printk: legacy console [ttyS0] disabled
+[    2.014862] 4806a000.serial: ttyS0 at MMIO 0x4806a000 (irq = 88, base_baud = 3000000) is a 8250
+[    2.014984] printk: legacy console [ttyS0] enabled
+[    2.850738] 4806c000.serial: ttyS1 at MMIO 0x4806c000 (irq = 89, base_baud = 3000000) is a 8250
+[    2.864807] 49020000.serial: ttyS2 at MMIO 0x49020000 (irq = 90, base_baud = 3000000) is a 8250
+[    2.902282] brd: module loaded
+[    2.920288] loop: module loaded
+[    2.926177] Skipping twl internal clock init and using bootloader value (unknown osc rate)
+[    2.941467] twl 0-0048: PIH (irq 23) chaining IRQs 147..155
+[    2.947296] twl 0-0048: power (irq 152) chaining IRQs 155..162
+[    2.970123] twl4030_gpio twl4030-gpio: gpio (irq 147) chaining IRQs 163..180
+[    3.032043] mtdoops: mtd device (mtddev=name/number) must be supplied
+[    3.058441] i2c_dev: i2c /dev entries driver
+[    3.069458] sdhci: Secure Digital Host Controller Interface driver
+[    3.075744] sdhci: Copyright(c) Pierre Ossman
+[    3.081634] sdhci-pltfm: SDHCI platform and OF driver helper
+[    3.096435] omap-gpmc 6e000000.gpmc: GPMC revision 5.0
+[    3.101837] gpmc_mem_init: disabling cs 0 mapped at 0x0-0x1000000
+[    3.157775] smsc911x 2c000000.ethernet (unnamed net_device) (uninitialized): soft reset stuck (HW_CFG 0x00050001), resetting PHY
+[    3.191131] smsc911x 2c000000.ethernet eth0: MAC Address: 00:50:c2:7e:88:4e
+[    3.200927] omap2-onenand 30000000.onenand: initializing on CS0 (0x30000000), va (ptrval), DMA mode
+[    3.210266] Muxed OneNAND 128MB 1.8V 16-bit (0x30)
+[    3.215118] OneNAND version = 0x0221
+[    3.219818] Scanning device for bad blocks
+[    3.279113] 5 fixed-partitions partitions found on MTD device 30000000.onenand
+[    3.286407] Creating 5 MTD partitions on "30000000.onenand":
+[    3.292175] 0x000000000000-0x000000080000 : "xloader-onenand"
+[    3.302032] 0x000000080000-0x000000260000 : "uboot-onenand"
+[    3.311828] 0x000000260000-0x000000280000 : "params-onenand"
+[    3.321441] 0x000000280000-0x000000780000 : "linux-onenand"
+[    3.331085] 0x000000780000-0x000008000000 : "jffs2-onenand"
+[    3.346008] hw perfevents: enabled with armv7_cortex_a8 PMU driver, 5 (8000000f) counters available
+[    3.357421] Initializing XFRM netlink socket
+[    3.362152] NET: Registered PF_INET6 protocol family
+[    3.370422] Segment Routing with IPv6
+[    3.374298] In-situ OAM (IOAM) with IPv6
+[    3.378601] sit: IPv6, IPv4 and MPLS over IPv4 tunneling driver
+[    3.386077] NET: Registered PF_PACKET protocol family
+[    3.391387] NET: Registered PF_KEY protocol family
+[    3.396423] Key type dns_resolver registered
+[    3.401123] ThumbEE CPU extension supported.
+[    3.405487] Registering SWP/SWPB emulation handler
+[    3.411315] PM: no software I/O chain control; some wakeups may be lost
+[    3.420837] SmartReflex Class3 initialized
+[    3.444030] Loading compiled-in X.509 certificates
+[    3.513641] smartreflex 480cb000.smartreflex: omap_sr_probe: SmartReflex driver initialized
+[    3.522399] smartreflex 480cb000.smartreflex: omap_sr_probe: smartreflex_core: No Voltage table for the corresponding vdd. Cannot create debugfs entries for n-values
+[    3.539489] smartreflex 480cb000.smartreflex: probe with driver smartreflex failed with error -61
+[    3.549133] smartreflex 480c9000.smartreflex: omap_sr_probe: SmartReflex driver initialized
+[    3.557830] smartreflex 480c9000.smartreflex: omap_sr_probe: smartreflex_mpu_iva: No Voltage table for the corresponding vdd. Cannot create debugfs entries for n-values
+[    3.573364] smartreflex 480c9000.smartreflex: probe with driver smartreflex failed with error -61
+[    3.593322] clk: Disabling unused clocks
+[    3.597961] PM: genpd: Disabling unused power domains
+[    3.603912] check access for rdinit=/init failed: -2, ignoring
+[    3.610687] Waiting for root device /dev/mmcblk0p2...
+[    3.629302] mmc0: host does not support reading read-only switch, assuming write-enable
+[    3.641418] mmc0: new high speed SDXC card at address e624
+[    3.649017] mmcblk0: mmc0:e624 SL64G 59.5 GiB
+[    3.670257]  mmcblk0: p1 p2
+[    3.765197] EXT4-fs (mmcblk0p2): mounted filesystem 443e3125-f32c-4e25-8625-fad7340ad433 r/w with ordered data mode. Quota mode: none.
+[    3.777740] VFS: Mounted root (ext4 filesystem) on device 179:2.
+[    3.785369] devtmpfs: mounted
+[    3.791625] Freeing unused kernel image (initmem) memory: 1024K
+[    3.798767] Run /sbin/init as init process
+[    5.947753] twl: Read failed (mod 4, reg 0x27 count 1)
+[    5.956665] omap_i2c 48070000.i2c: timeout waiting on XUDF bit
+[    5.966125] omap_i2c 48070000.i2c: timeout waiting on XUDF bit
+[    6.987762] twl: Write failed (mod 7, reg 0x00 count 1)
+[    6.996704] omap_i2c 48070000.i2c: timeout waiting on XUDF bit
+[    8.027740] twl: Read failed (mod 4, reg 0x2a count 1)
+[    8.036529] omap_i2c 48070000.i2c: timeout waiting on XUDF bit
+[    8.045989] omap_i2c 48070000.i2c: timeout waiting on XUDF bit
+[    9.067718] twl: Write failed (mod 7, reg 0x00 count 1)
+[    9.076629] omap_i2c 48070000.i2c: timeout waiting on XUDF bit
+[    9.086090] omap_i2c 48070000.i2c: timeout waiting on XUDF bit
+[   10.087799] twl: Write failed (mod 4, reg 0x2a count 1)
+[   10.093139] omap_hsmmc 4809c000.mmc: could not set regulator OCR (-110)
+[   10.103576] omap_i2c 48070000.i2c: timeout waiting on XUDF bit
+[   10.113067] omap_i2c 48070000.i2c: timeout waiting on XUDF bit
+[   10.139373] mmc0: tried to HW reset card, got error -110
+[   10.150817] mmcblk0: recovery failed!
+[   10.154571] I/O error, dev mmcblk0, sector 233617 op 0x0:(READ) flags 0x83700 phys_seg 1 prio class 2
+[   10.169494] mmcblk0: recovery failed!
+[   10.173248] I/O error, dev mmcblk0, sector 241841 op 0x0:(READ) flags 0x83700 phys_seg 1 prio class 2
+[   10.188110] mmcblk0: recovery failed!
+[   10.191864] I/O error, dev mmcblk0, sector 250065 op 0x0:(READ) flags 0x83700 phys_seg 1 prio class 2
+[   10.206817] mmcblk0: recovery failed!
+[   10.210571] I/O error, dev mmcblk0, sector 4338889 op 0x0:(READ) flags 0x83700 phys_seg 1 prio class 2
+[   10.226043] mmcblk0: recovery failed!
+[   10.229858] I/O error, dev mmcblk0, sector 4338961 op 0x0:(READ) flags 0x83700 phys_seg 1 prio class 2
+[   10.244842] mmcblk0: recovery failed!
+[   10.248626] I/O error, dev mmcblk0, sector 4338977 op 0x0:(READ) flags 0x83700 phys_seg 1 prio class 2
+[   10.263641] mmcblk0: recovery failed!
+[   10.267395] I/O error, dev mmcblk0, sector 8533193 op 0x0:(READ) flags 0x83700 phys_seg 1 prio class 2
+[   10.282440] mmcblk0: recovery failed!
+[   10.286163] I/O error, dev mmcblk0, sector 12727497 op 0x0:(READ) flags 0x83700 phys_seg 2 prio class 2
+[   10.301757] mmcblk0: recovery failed!
+[   10.305480] I/O error, dev mmcblk0, sector 16921801 op 0x0:(READ) flags 0x83700 phys_seg 1 prio class 2
+[   10.320556] mmcblk0: recovery failed!
+[   10.324310] I/O error, dev mmcblk0, sector 21116105 op 0x0:(READ) flags 0x83700 phys_seg 2 prio class 2
+[   10.339447] mmcblk0: recovery failed!
+[   10.349029] mmcblk0: recovery failed!
+[   10.358734] mmcblk0: recovery failed!
+[   10.368560] mmcblk0: recovery failed!
+[   11.127960] twl: Write failed (mod 7, reg 0x00 count 1)
+[   11.136871] omap_i2c 48070000.i2c: timeout waiting on XUDF bit
+[   12.187774] twl: Read failed (mod 4, reg 0x2a count 1)
+[   12.196594] omap_i2c 48070000.i2c: timeout waiting on XUDF bit
+[   12.206054] omap_i2c 48070000.i2c: timeout waiting on XUDF bit
+[   13.227783] twl: Write failed (mod 7, reg 0x00 count 1)
+[   13.236663] omap_i2c 48070000.i2c: timeout waiting on XUDF bit
+[   14.267791] twl: Read failed (mod 4, reg 0x27 count 1)
+[   14.276611] omap_i2c 48070000.i2c: timeout waiting on XUDF bit
+[   14.286071] omap_i2c 48070000.i2c: timeout waiting on XUDF bit
+[   15.307769] twl: Write failed (mod 7, reg 0x00 count 1)
+[   15.316650] omap_i2c 48070000.i2c: timeout waiting on XUDF bit
+[   16.347778] twl: Read failed (mod 4, reg 0x2a count 1)
+[   16.356567] omap_i2c 48070000.i2c: timeout waiting on XUDF bit
+[   16.365997] omap_i2c 48070000.i2c: timeout waiting on XUDF bit
+[   17.387786] twl: Write failed (mod 7, reg 0x00 count 1)
+[   17.396697] omap_i2c 48070000.i2c: timeout waiting on XUDF bit
+[   17.406127] omap_i2c 48070000.i2c: timeout waiting on XUDF bit
+[   18.407806] twl: Write failed (mod 4, reg 0x2a count 1)
+[   18.413116] omap_hsmmc 4809c000.mmc: could not set regulator OCR (-110)
+[   18.423431] omap_i2c 48070000.i2c: timeout waiting on XUDF bit
+[   18.432922] omap_i2c 48070000.i2c: timeout waiting on XUDF bit
+[   18.459106] mmc0: tried to HW reset card, got error -110
+[   18.464477] mmcblk0: recovery failed!
+[   18.468292] blk_print_req_error: 4 callbacks suppressed
+[   18.468322] I/O error, dev mmcblk0, sector 668873 op 0x1:(WRITE) flags 0x9800 phys_seg 1 prio class 2
+[   18.483032] Buffer I/O error on dev mmcblk0p2, logical block 65536, lost sync page write
+[   18.491485] JBD2: I/O error when updating journal superblock for mmcblk0p2-8.
+[   18.498809] Aborting journal on device mmcblk0p2-8.
+[   18.508972] mmcblk0: recovery failed!
+[   18.512695] I/O error, dev mmcblk0, sector 163729 op 0x0:(READ) flags 0x80700 phys_seg 3 prio class 2
+[   18.528137] mmcblk0: recovery failed!
+[   18.531860] I/O error, dev mmcblk0, sector 29504817 op 0x0:(READ) flags 0x3000 phys_seg 1 prio class 2
+[   18.541595] EXT4-fs error (device mmcblk0p2): ext4_wait_block_bitmap:586: comm ext4lazyinit: Cannot read block bitmap - block_group = 125, block_bitmap = 3670029
+[   18.571441] mmcblk0: recovery failed!
+[   18.575195] I/O error, dev mmcblk0, sector 668873 op 0x1:(WRITE) flags 0x9800 phys_seg 1 prio class 2
+[   18.584594] Buffer I/O error on dev mmcblk0p2, logical block 65536, lost sync page write
+[   18.592926] JBD2: I/O error when updating journal superblock for mmcblk0p2-8.
+[   18.606262] mmcblk0: recovery failed!
+[   18.610076] I/O error, dev mmcblk0, sector 163729 op 0x0:(READ) flags 0x0 phys_seg 1 prio class 2
+[   18.624969] mmcblk0: recovery failed!
+[   18.628845] I/O error, dev mmcblk0, sector 144585 op 0x1:(WRITE) flags 0x3800 phys_seg 1 prio class 2
+[   18.638275] Buffer I/O error on dev mmcblk0p2, logical block 0, lost sync page write
+[   18.646179] EXT4-fs (mmcblk0p2): I/O error while writing superblock
+[   18.658111] mmcblk0: recovery failed!
+[   18.661834] I/O error, dev mmcblk0, sector 33699017 op 0x0:(READ) flags 0x83700 phys_seg 1 prio class 2
+[   18.677429] mmcblk0: recovery failed!
+[   18.681243] I/O error, dev mmcblk0, sector 37893321 op 0x0:(READ) flags 0x83700 phys_seg 1 prio class 2
+[   18.696319] mmcblk0: recovery failed!
+[   18.700134] I/O error, dev mmcblk0, sector 42087625 op 0x0:(READ) flags 0x83700 phys_seg 1 prio class 2
+[   18.715209] mmcblk0: recovery failed!
+[   18.718963] I/O error, dev mmcblk0, sector 46281929 op 0x0:(READ) flags 0x83700 phys_seg 1 prio class 2
+[   18.734527] mmcblk0: recovery failed!
+[   18.744232] mmcblk0: recovery failed!
+[   18.753906] mmcblk0: recovery failed!
+[   18.763610] mmcblk0: recovery failed!
+[   18.773315] mmcblk0: recovery failed!
+[   18.783020] mmcblk0: recovery failed!
+[   18.787170] Kernel panic - not syncing: Attempted to kill init! exitcode=0x00000007
+[   18.794921] ---[ end Kernel panic - not syncing: Attempted to kill init! exitcode=0x00000007 ]---
+
+U-Boot SPL 2026.10-00001-g9e2d9f44f5cc (Nov 24 2026 - 21:29:56 +0100)
+Trying to boot from MMC1
+
+
+U-Boot 2026.10-00001-g9e2d9f44f5cc (Nov 24 2026 - 21:29:56 +0100)
+
+OMAP3530-GP ES2.1, CPU-OPP2, L3-165MHz, Max CPU Clock 600 MHz
+Model: TI OMAP35XX EVM (TMDSEVM3530)
+OMAP3 EVM board + LPDDR/NAND
+DRAM:  128 MiB
+Core:  49 devices, 16 uclasses, devicetree: separate
+NAND:  0 MiB
+MMC:   OMAP SD/MMC: 0, OMAP SD/MMC: 1
+Loading Environment from FAT...Loading Environment from FAT... OK
+Read back SMSC id 0x1150000
+OMAP die ID: 2a0e00020000000004013ddc0301500a
+Net:   eth0: ethernet@2c000000
+[2KHit any key to stop autoboot: 2[2KHit any key to stop autoboot: 1[2KHit any key to stop autoboot: 0
+switch to partitions #0, OK
+mmc0 is current device
+SD/MMC found on device 0
+730 bytes read in 5 ms (142.6 KiB/s)
+Running bootscript from mmc0 ...
+## Executing script at 82000000
+== boot.scr: TMDSEVM3530 Rev D
+5747168 bytes read in 4143 ms (1.3 MiB/s)
+71565 bytes read in 57 ms (1.2 MiB/s)
+Kernel image @ 0x82000000 [ 0x000000 - 0x57b1e0 ]
+## Flattened Device Tree blob at 83000000
+   Booting using the fdt blob at 0x83000000
+Working FDT set to 83000000
+   Loading Device Tree to 84f14000, end 84f2878c ... OK
+Working FDT set to 84f14000
+
+Starting kernel ...
+
+[    0.000000] Booting Linux on physical CPU 0x0
+[    0.000000] Linux version 6.18.65-omapng (emagip@ElLinux) (arm-linux-gnueabihf-gcc (Ubuntu 15.2.0-16ubuntu1) 15.2.0, GNU ld (GNU Binutils for Ubuntu) 2.46) #5 SMP Wed Nov 25 21:44:18 CET 2026
+[    0.000000] CPU: ARMv7 Processor [411fc082] revision 2 (ARMv7), cr=10c5387d
+[    0.000000] CPU: PIPT / VIPT nonaliasing data cache, VIPT nonaliasing instruction cache
+[    0.000000] OF: fdt: Machine model: TI OMAP35XX EVM (TMDSEVM3530) Rev D, OneNAND
+[    0.000000] Memory policy: Data cache writeback
+[    0.000000] cma: Reserved 16 MiB at 0x86800000
+[    0.000000] Zone ranges:
+[    0.000000]   Normal   [mem 0x0000000080000000-0x0000000087dfffff]
+[    0.000000]   HighMem  empty
+[    0.000000] Movable zone start for each node
+[    0.000000] Early memory node ranges
+[    0.000000]   node   0: [mem 0x0000000080000000-0x0000000087dfffff]
+[    0.000000] Initmem setup node 0 [mem 0x0000000080000000-0x0000000087dfffff]
+[    0.000000] On node 0, zone Normal: 512 pages in unavailable ranges
+[    0.000000] OF: reserved mem: Reserved memory: No reserved-memory node in the DT
+[    0.000000] CPU: All CPU(s) started in SVC mode.
+[    0.000000] OMAP3430/3530 ES2.1 (l2cache iva sgx neon isp)
+[    0.000000] percpu: Embedded 17 pages/cpu s40716 r8192 d20724 u69632
+[    0.000000] Kernel command line: console=ttyS0,115200n8 root=/dev/mmcblk0p2 rootfstype=ext4 rw rootwait
+[    0.000000] printk: log buffer data + meta data: 65536 + 204800 = 270336 bytes
+[    0.000000] Dentry cache hash table entries: 16384 (order: 4, 65536 bytes, linear)
+[    0.000000] Inode-cache hash table entries: 8192 (order: 3, 32768 bytes, linear)
+[    0.000000] Built 1 zonelists, mobility grouping on.  Total pages: 32256
+[    0.000000] mem auto-init: stack:all(zero), heap alloc:off, heap free:off
+[    0.000000] SLUB: HWalign=64, Order=0-3, MinObjects=0, CPUs=1, Nodes=1
+[    0.000000] rcu: Hierarchical RCU implementation.
+[    0.000000] rcu: 	RCU event tracing is enabled.
+[    0.000000] rcu: 	RCU restricting CPUs from NR_CPUS=2 to nr_cpu_ids=1.
+[    0.000000] 	Tracing variant of Tasks RCU enabled.
+[    0.000000] rcu: RCU calculated value of scheduler-enlistment delay is 10 jiffies.
+[    0.000000] rcu: Adjusting geometry for rcu_fanout_leaf=16, nr_cpu_ids=1
+[    0.000000] RCU Tasks Trace: Setting shift to 0 and lim to 1 rcu_task_cb_adjust=1 rcu_task_cpu_ids=1.
+[    0.000000] NR_IRQS: 16, nr_irqs: 16, preallocated irqs: 16
+[    0.000000] IRQ: Found an INTC at 0x(ptrval) (revision 4.0) with 96 interrupts
+[    0.000000] rcu: srcu_init: Setting srcu_struct sizes based on contention.
+[    0.000000] clocksource: jiffies: mask: 0xffffffff max_cycles: 0xffffffff, max_idle_ns: 19112604462750000 ns
+[    0.000000] Clocking rate (Crystal/Core/MPU): 26.0/332/600 MHz
+[    0.000000] OMAP clocksource: 32k_counter at 32768 Hz
+[    0.000000] clocksource: 32k_counter: mask: 0xffffffff max_cycles: 0xffffffff, max_idle_ns: 58327039986419 ns
+[    0.000000] sched_clock: 32 bits at 33kHz, resolution 30517ns, wraps every 65535999984741ns
+[    0.004516] TI gptimer clockevent: always-on 32768 Hz at /ocp@68000000/target-module@48318000
+[    0.006195] Console: colour dummy device 80x30
+[    0.006347] Calibrating delay loop... 600.47 BogoMIPS (lpj=3002368)
+[    0.125244] CPU: Testing write buffer coherency: ok
+[    0.125335] CPU0: Spectre v2: using BPIALL workaround
+[    0.125335] pid_max: default: 32768 minimum: 301
+[    0.125579] LSM: initializing lsm=capability
+[    0.125793] VFS: Disk quotas dquot_6.6.0
+[    0.125854] VFS: Dquot-cache hash table entries: 1024 (order 0, 4096 bytes)
+[    0.125915] Mount-cache hash table entries: 1024 (order: 0, 4096 bytes, linear)
+[    0.125946] Mountpoint-cache hash table entries: 1024 (order: 0, 4096 bytes, linear)
+[    0.128295] CPU0: thread -1, cpu 0, socket -1, mpidr 0
+[    0.132232] Setting up static identity map for 0x80100000 - 0x80100078
+[    0.132751] rcu: Hierarchical SRCU implementation.
+[    0.132781] rcu: 	Max phase no-delay instances is 1000.
+[    0.134674] smp: Bringing up secondary CPUs ...
+[    0.134735] smp: Brought up 1 node, 1 CPU
+[    0.134765] SMP: Total of 1 processors activated (600.47 BogoMIPS).
+[    0.134765] CPU: All CPU(s) started in SVC mode.
+[    0.135101] Memory: 90684K/129024K available (12288K kernel code, 1179K rwdata, 2884K rodata, 1024K init, 255K bss, 20544K reserved, 16384K cma-reserved, 0K highmem)
+[    0.136474] devtmpfs: initialized
+[    0.170562] VFP support v0.3: implementor 41 architecture 3 part 30 variant c rev 1
+[    0.171600] posixtimers hash table entries: 512 (order: 0, 4096 bytes, linear)
+[    0.171661] futex hash table entries: 256 (16384 bytes on 1 NUMA nodes, total 16 KiB, linear).
+[    0.173004] pinctrl core: initialized pinctrl subsystem
+[    0.176452] NET: Registered PF_NETLINK/PF_ROUTE protocol family
+[    0.181365] DMA: preallocated 256 KiB pool for atomic coherent allocations
+[    0.213684] omap_hwmod: mcbsp2_sidetone using broken dt data from mcbsp
+[    0.214630] omap_hwmod: mcbsp3_sidetone using broken dt data from mcbsp
+[    0.284851] audit: initializing netlink subsys (disabled)
+[    0.287261] thermal_sys: Registered thermal governor 'fair_share'
+[    0.287292] thermal_sys: Registered thermal governor 'step_wise'
+[    0.287292] thermal_sys: Registered thermal governor 'user_space'
+[    0.287475] audit: type=2000 audit(0.270:1): state=initialized audit_enabled=0 res=1
+[    0.287597] cpuidle: using governor menu
+[    0.288116] Reprogramming SDRC clock to 332000000 Hz
+[    0.329528] /ocp@68000000: Fixed dependency cycle(s) with /ocp@68000000/interrupt-controller@48200000
+[    0.365661] OMAP GPIO hardware version 2.5
+[    0.407684] /ocp@68000000/dss@48050000: Fixed dependency cycle(s) with /display
+[    0.407958] /display: Fixed dependency cycle(s) with /ocp@68000000/dss@48050000
+[    0.408599] No ATAGs?
+[    0.408630] hw-breakpoint: debug architecture 0x4 unsupported.
+[    0.417724] kprobes: kprobe jump-optimization is enabled. All kprobes are optimized if possible.
+[    0.437469] iommu: Default domain type: Translated
+[    0.437530] iommu: DMA domain TLB invalidation policy: strict mode
+[    0.441375] platform 480bc000.isp: Adding to iommu group 0
+[    0.441650] omap-iommu 480bd400.mmu: 480bd400.mmu registered
+[    0.458099] SCSI subsystem initialized
+[    0.461975] omap_i2c 48070000.i2c: bus 0 rev3.3 at 400 kHz
+[    0.467864] omap_i2c 48072000.i2c: bus 1 rev3.3 at 400 kHz
+[    0.469635] omap_i2c 48060000.i2c: bus 2 rev3.3 at 400 kHz
+[    0.470214] pps_core: LinuxPPS API ver. 1 registered
+[    0.470214] pps_core: Software ver. 5.3.6 - Copyright 2005-2007 Rodolfo Giometti <giometti@linux.it>
+[    0.470306] PTP clock support registered
+[    0.487121] vgaarb: loaded
+[    0.487609] clocksource: Switched to clocksource 32k_counter
+[    1.941192] NET: Registered PF_INET protocol family
+[    1.941680] IP idents hash table entries: 2048 (order: 2, 16384 bytes, linear)
+[    1.943084] tcp_listen_portaddr_hash hash table entries: 512 (order: 0, 4096 bytes, linear)
+[    1.943237] Table-perturb hash table entries: 65536 (order: 6, 262144 bytes, linear)
+[    1.943267] TCP established hash table entries: 1024 (order: 0, 4096 bytes, linear)
+[    1.943298] TCP bind hash table entries: 1024 (order: 2, 16384 bytes, linear)
+[    1.943359] TCP: Hash tables configured (established 1024 bind 1024)
+[    1.943572] UDP hash table entries: 256 (order: 2, 14336 bytes, linear)
+[    1.943634] UDP-Lite hash table entries: 256 (order: 2, 14336 bytes, linear)
+[    1.943969] NET: Registered PF_UNIX/PF_LOCAL protocol family
+[    1.946136] RPC: Registered named UNIX socket transport module.
+[    1.946166] RPC: Registered udp transport module.
+[    1.946197] RPC: Registered tcp transport module.
+[    1.946197] RPC: Registered tcp-with-tls transport module.
+[    1.946197] RPC: Registered tcp NFSv4.1 backchannel transport module.
+[    1.946228] PCI: CLS 0 bytes, default 64
+[    1.949188] Initialise system trusted keyrings
+[    1.950714] workingset: timestamp_bits=14 max_order=15 bucket_order=1
+[    1.952789] NFS: Registering the id_resolver key type
+[    1.952880] Key type id_resolver registered
+[    1.952911] Key type id_legacy registered
+[    1.953063] jffs2: version 2.2. (NAND) (SUMMARY)  © 2001-2006 Red Hat, Inc.
+[    1.954040] Key type asymmetric registered
+[    1.954040] Asymmetric key parser 'x509' registered
+[    1.954162] io scheduler mq-deadline registered
+[    1.954193] io scheduler kyber registered
+[    1.954284] io scheduler bfq registered
+[    1.976654] omap-dma-engine 48056000.dma-controller: OMAP DMA engine driver
+[    1.984954] ti-sysc 480cb024.target-module: sysc_flags 00000100 != 00000110
+[    1.986450] ti-sysc 480c9024.target-module: sysc_flags 00000100 != 00000110
+[    1.993377] pinctrl-single 48002030.pinmux: 284 pins, size 568
+[    1.994171] pinctrl-single 48002a00.pinmux: 46 pins, size 92
+[    1.995239] pinctrl-single 480025d8.pinmux: 18 pins, size 36
+[    1.997375] ledtrig-cpu: registered to indicate activity on CPUs
+[    2.004943] Serial: 8250/16550 driver, 6 ports, IRQ sharing enabled
+[    2.016662] printk: legacy console [ttyS0] disabled
+[    2.018280] 4806a000.serial: ttyS0 at MMIO 0x4806a000 (irq = 88, base_baud = 3000000) is a 8250
+[    2.018402] printk: legacy console [ttyS0] enabled
+[    2.853668] 4806c000.serial: ttyS1 at MMIO 0x4806c000 (irq = 89, base_baud = 3000000) is a 8250
+[    2.867584] 49020000.serial: ttyS2 at MMIO 0x49020000 (irq = 90, base_baud = 3000000) is a 8250
+[    2.905029] brd: module loaded
+[    2.923034] loop: module loaded
+[    2.929168] Skipping twl internal clock init and using bootloader value (unknown osc rate)
+[    2.944152] twl 0-0048: PIH (irq 23) chaining IRQs 147..155
+[    2.950073] twl 0-0048: power (irq 152) chaining IRQs 155..162
+[    2.972869] twl4030_gpio twl4030-gpio: gpio (irq 147) chaining IRQs 163..180
+[    3.034667] mtdoops: mtd device (mtddev=name/number) must be supplied
+[    3.060882] i2c_dev: i2c /dev entries driver
+[    3.071929] sdhci: Secure Digital Host Controller Interface driver
+[    3.078369] sdhci: Copyright(c) Pierre Ossman
+[    3.084167] sdhci-pltfm: SDHCI platform and OF driver helper
+[    3.099151] omap-gpmc 6e000000.gpmc: GPMC revision 5.0
+[    3.104400] gpmc_mem_init: disabling cs 0 mapped at 0x0-0x1000000
+[    3.161590] smsc911x 2c000000.ethernet eth0: MAC Address: 00:50:c2:7e:88:4e
+[    3.171569] omap2-onenand 30000000.onenand: initializing on CS0 (0x30000000), va (ptrval), DMA mode
+[    3.180938] Muxed OneNAND 128MB 1.8V 16-bit (0x30)
+[    3.185760] OneNAND version = 0x0221
+[    3.190521] Scanning device for bad blocks
+[    3.250061] 5 fixed-partitions partitions found on MTD device 30000000.onenand
+[    3.257354] Creating 5 MTD partitions on "30000000.onenand":
+[    3.263153] 0x000000000000-0x000000080000 : "xloader-onenand"
+[    3.273071] 0x000000080000-0x000000260000 : "uboot-onenand"
+[    3.282562] 0x000000260000-0x000000280000 : "params-onenand"
+[    3.292144] 0x000000280000-0x000000780000 : "linux-onenand"
+[    3.301696] 0x000000780000-0x000008000000 : "jffs2-onenand"
+[    3.316558] hw perfevents: enabled with armv7_cortex_a8 PMU driver, 5 (8000000f) counters available
+[    3.328094] Initializing XFRM netlink socket
+[    3.332702] NET: Registered PF_INET6 protocol family
+[    3.341186] Segment Routing with IPv6
+[    3.345062] In-situ OAM (IOAM) with IPv6
+[    3.349334] sit: IPv6, IPv4 and MPLS over IPv4 tunneling driver
+[    3.356811] NET: Registered PF_PACKET protocol family
+[    3.362121] NET: Registered PF_KEY protocol family
+[    3.367156] Key type dns_resolver registered
+[    3.371887] ThumbEE CPU extension supported.
+[    3.376220] Registering SWP/SWPB emulation handler
+[    3.382080] PM: no software I/O chain control; some wakeups may be lost
+[    3.391601] SmartReflex Class3 initialized
+[    3.414611] Loading compiled-in X.509 certificates
+[    3.484222] smartreflex 480cb000.smartreflex: omap_sr_probe: SmartReflex driver initialized
+[    3.493011] smartreflex 480cb000.smartreflex: omap_sr_probe: smartreflex_core: No Voltage table for the corresponding vdd. Cannot create debugfs entries for n-values
+[    3.508605] smartreflex 480cb000.smartreflex: probe with driver smartreflex failed with error -61
+[    3.518157] smartreflex 480c9000.smartreflex: omap_sr_probe: SmartReflex driver initialized
+[    3.526733] smartreflex 480c9000.smartreflex: omap_sr_probe: smartreflex_mpu_iva: No Voltage table for the corresponding vdd. Cannot create debugfs entries for n-values
+[    3.543853] smartreflex 480c9000.smartreflex: probe with driver smartreflex failed with error -61
+[    3.564453] clk: Disabling unused clocks
+[    3.569030] PM: genpd: Disabling unused power domains
+[    3.575164] check access for rdinit=/init failed: -2, ignoring
+[    3.582061] Waiting for root device /dev/mmcblk0p2...
+[    3.591186] mmc0: host does not support reading read-only switch, assuming write-enable
+[    3.603515] mmc0: new high speed SDXC card at address e624
+[    3.611053] mmcblk0: mmc0:e624 SL64G 59.5 GiB
+[    3.632873]  mmcblk0: p1 p2
+[    3.715606] EXT4-fs (mmcblk0p2): recovery complete
+[    3.720977] EXT4-fs (mmcblk0p2): mounted filesystem 443e3125-f32c-4e25-8625-fad7340ad433 r/w with ordered data mode. Quota mode: none.
+[    3.733428] VFS: Mounted root (ext4 filesystem) on device 179:2.
+[    3.741149] devtmpfs: mounted
+[    3.747222] Freeing unused kernel image (initmem) memory: 1024K
+[    3.754394] Run /sbin/init as init process
+[    8.407958] twl: Read failed (mod 4, reg 0x37 count 1)
+[    8.413208] omap_hsmmc 4809c000.mmc: vmmc_aux reg enable failed
+[    8.422912] omap_i2c 48070000.i2c: timeout waiting on XUDF bit
+[    8.432373] omap_i2c 48070000.i2c: timeout waiting on XUDF bit
+[    9.447967] twl: Write failed (mod 7, reg 0x00 count 1)
+[    9.456878] omap_i2c 48070000.i2c: timeout waiting on XUDF bit
+[   10.487945] twl: Read failed (mod 4, reg 0x27 count 1)
+[   10.493133] VMMC1: failed to disable: -ETIMEDOUT
+[   10.497863] omap_hsmmc 4809c000.mmc: could not set regulator OCR (-110)
+[   10.508239] omap_i2c 48070000.i2c: timeout waiting on XUDF bit
+[   10.517639] omap_i2c 48070000.i2c: timeout waiting on XUDF bit
+[   10.543579] mmc0: tried to HW reset card, got error -110
+[   11.528076] twl: Write failed (mod 7, reg 0x00 count 1)
+[   11.537017] omap_i2c 48070000.i2c: timeout waiting on XUDF bit
+[   12.587921] twl: Read failed (mod 4, reg 0x27 count 1)
+[   12.593109] VMMC1: failed to disable: -ETIMEDOUT
+[   12.597869] omap_hsmmc 4809c000.mmc: could not set regulator OCR (-110)
+[   12.608215] omap_i2c 48070000.i2c: timeout waiting on XUDF bit
+[   12.617584] omap_i2c 48070000.i2c: timeout waiting on XUDF bit
+[   13.627990] twl: Write failed (mod 7, reg 0x00 count 1)
+[   13.636901] omap_i2c 48070000.i2c: timeout waiting on XUDF bit
+[   14.647979] twl: Read failed (mod 4, reg 0x37 count 1)
+[   14.653167] VSIM: is_enabled() failed: -ETIMEDOUT
+[   14.657989] omap_hsmmc 4809c000.mmc: vmmc_aux re-enable failed
+[   14.667572] omap_i2c 48070000.i2c: timeout waiting on XUDF bit
+[   14.677032] omap_i2c 48070000.i2c: timeout waiting on XUDF bit
+[   15.707946] twl: Write failed (mod 7, reg 0x00 count 1)
+[   15.716857] omap_i2c 48070000.i2c: timeout waiting on XUDF bit
+[   16.747955] twl: Read failed (mod 4, reg 0x2a count 1)
+[   16.756744] omap_i2c 48070000.i2c: timeout waiting on XUDF bit
+[   16.766204] omap_i2c 48070000.i2c: timeout waiting on XUDF bit
+[   17.787963] twl: Write failed (mod 7, reg 0x00 count 1)
+[   17.796844] omap_i2c 48070000.i2c: timeout waiting on XUDF bit
+[   18.807952] twl: Read failed (mod 4, reg 0x27 count 1)
+[   18.816802] omap_i2c 48070000.i2c: timeout waiting on XUDF bit
+[   18.826232] omap_i2c 48070000.i2c: timeout waiting on XUDF bit
+[   19.867950] twl: Write failed (mod 7, reg 0x00 count 1)
+[   19.876831] omap_i2c 48070000.i2c: timeout waiting on XUDF bit
+[   20.907958] twl: Read failed (mod 4, reg 0x2a count 1)
+[   20.916748] omap_i2c 48070000.i2c: timeout waiting on XUDF bit
+[   20.926208] omap_i2c 48070000.i2c: timeout waiting on XUDF bit
+[   21.947967] twl: Write failed (mod 7, reg 0x00 count 1)
+[   21.956848] omap_i2c 48070000.i2c: timeout waiting on XUDF bit
+[   21.966278] omap_i2c 48070000.i2c: timeout waiting on XUDF bit
+[   22.967956] twl: Write failed (mod 4, reg 0x2a count 1)
+[   22.973266] omap_hsmmc 4809c000.mmc: could not set regulator OCR (-110)
+[   22.983642] omap_i2c 48070000.i2c: timeout waiting on XUDF bit
+[   22.993103] omap_i2c 48070000.i2c: timeout waiting on XUDF bit
+[   23.019348] mmc0: tried to HW reset card, got error -110
+[   23.024719] mmcblk0: recovery failed!
+[   23.028503] I/O error, dev mmcblk0, sector 668873 op 0x1:(WRITE) flags 0x9800 phys_seg 1 prio class 2
+[   23.038146] Buffer I/O error on dev mmcblk0p2, logical block 65536, lost sync page write
+[   23.047088] JBD2: I/O error when updating journal superblock for mmcblk0p2-8.
+[   23.054382] Aborting journal on device mmcblk0p2-8.
+[   23.064575] mmcblk0: recovery failed!
+[   23.068420] I/O error, dev mmcblk0, sector 164809 op 0x0:(READ) flags 0x80700 phys_seg 2 prio class 2
+[   23.083770] mmcblk0: recovery failed!
+[   23.087493] I/O error, dev mmcblk0, sector 8586697 op 0x1:(WRITE) flags 0x4000 phys_seg 64 prio class 2
+[   23.103393] mmcblk0: recovery failed!
+[   23.107177] I/O error, dev mmcblk0, sector 8587209 op 0x1:(WRITE) flags 0x4000 phys_seg 64 prio class 2
+[   23.122833] mmcblk0: recovery failed!
+[   23.126617] I/O error, dev mmcblk0, sector 8587721 op 0x1:(WRITE) flags 0x4000 phys_seg 64 prio class 2
+[   23.142395] mmcblk0: recovery failed!
+[   23.146118] I/O error, dev mmcblk0, sector 8588233 op 0x1:(WRITE) flags 0x0 phys_seg 64 prio class 2
+[   23.161743] mmcblk0: recovery failed!
+[   23.165527] I/O error, dev mmcblk0, sector 8588745 op 0x1:(WRITE) flags 0x4800 phys_seg 64 prio class 2
+[   23.180999] mmcblk0: recovery failed!
+[   23.184722] I/O error, dev mmcblk0, sector 8589257 op 0x1:(WRITE) flags 0x4800 phys_seg 64 prio class 2
+[   23.200531] mmcblk0: recovery failed!
+[   23.204315] I/O error, dev mmcblk0, sector 8589769 op 0x1:(WRITE) flags 0x4800 phys_seg 64 prio class 2
+[   23.219390] mmcblk0: recovery failed!
+[   23.223114] I/O error, dev mmcblk0, sector 8590281 op 0x1:(WRITE) flags 0x800 phys_seg 64 prio class 2
+[   23.232757] EXT4-fs error (device mmcblk0p2) in ext4_init_inode_table:1627: IO failure
+[   23.246612] mmcblk0: recovery failed!
+[   23.256378] mmcblk0: recovery failed!
+[   23.260223] Buffer I/O error on dev mmcblk0p2, logical block 65536, lost sync page write
+[   23.268646] JBD2: I/O error when updating journal superblock for mmcblk0p2-8.
+[   23.281494] mmcblk0: recovery failed!
+[   23.285217] Buffer I/O error on dev mmcblk0p2, logical block 0, lost sync page write
+[   23.293212] EXT4-fs (mmcblk0p2): I/O error while writing superblock
+[   23.305633] mmcblk0: recovery failed!
+[   23.309753] Kernel panic - not syncing: Attempted to kill init! exitcode=0x00000007
+[   23.317504] ---[ end Kernel panic - not syncing: Attempted to kill init! exitcode=0x00000007 ]---
+
+U-Boot SPL 2026.10-00001-g9e2d9f44f5cc (Nov 24 2026 - 21:29:56 +0100)
+Trying to boot from MMC1
+
+
+U-Boot 2026.10-00001-g9e2d9f44f5cc (Nov 24 2026 - 21:29:56 +0100)
+
+OMAP3530-GP ES2.1, CPU-OPP2, L3-165MHz, Max CPU Clock 600 MHz
+Model: TI OMAP35XX EVM (TMDSEVM3530)
+OMAP3 EVM board + LPDDR/NAND
+DRAM:  128 MiB
+Core:  49 devices, 16 uclasses, devicetree: separate
+NAND:  0 MiB
+MMC:   OMAP SD/MMC: 0, OMAP SD/MMC: 1
+Loading Environment from FAT...Loading Environment from FAT... OK
+Read back SMSC id 0x1150000
+OMAP die ID: 2a0e00020000000004013ddc0301500a
+Net:   eth0: ethernet@2c000000
+[2KHit any key to stop autoboot: 2[2KHit any key to stop autoboot: 1[2KHit any key to stop autoboot: 0
+OMAP3_EVM # boot
+switch to partitions #0, OK
+mmc0 is current device
+SD/MMC found on device 0
+730 bytes read in 6 ms (118.2 KiB/s)
+Running bootscript from mmc0 ...
+## Executing script at 82000000
+== boot.scr: TMDSEVM3530 Rev D
+5747168 bytes read in 4145 ms (1.3 MiB/s)
+71565 bytes read in 57 ms (1.2 MiB/s)
+Kernel image @ 0x82000000 [ 0x000000 - 0x57b1e0 ]
+## Flattened Device Tree blob at 83000000
+   Booting using the fdt blob at 0x83000000
+Working FDT set to 83000000
+   Loading Device Tree to 84f14000, end 84f2878c ... OK
+Working FDT set to 84f14000
+
+Starting kernel ...
+
+[    0.000000] Booting Linux on physical CPU 0x0
+[    0.000000] Linux version 6.18.65-omapng (emagip@ElLinux) (arm-linux-gnueabihf-gcc (Ubuntu 15.2.0-16ubuntu1) 15.2.0, GNU ld (GNU Binutils for Ubuntu) 2.46) #5 SMP Wed Nov 25 21:44:18 CET 2026
+[    0.000000] CPU: ARMv7 Processor [411fc082] revision 2 (ARMv7), cr=10c5387d
+[    0.000000] CPU: PIPT / VIPT nonaliasing data cache, VIPT nonaliasing instruction cache
+[    0.000000] OF: fdt: Machine model: TI OMAP35XX EVM (TMDSEVM3530) Rev D, OneNAND
+[    0.000000] Memory policy: Data cache writeback
+[    0.000000] cma: Reserved 16 MiB at 0x86800000
+[    0.000000] Zone ranges:
+[    0.000000]   Normal   [mem 0x0000000080000000-0x0000000087dfffff]
+[    0.000000]   HighMem  empty
+[    0.000000] Movable zone start for each node
+[    0.000000] Early memory node ranges
+[    0.000000]   node   0: [mem 0x0000000080000000-0x0000000087dfffff]
+[    0.000000] Initmem setup node 0 [mem 0x0000000080000000-0x0000000087dfffff]
+[    0.000000] On node 0, zone Normal: 512 pages in unavailable ranges
+[    0.000000] OF: reserved mem: Reserved memory: No reserved-memory node in the DT
+[    0.000000] CPU: All CPU(s) started in SVC mode.
+[    0.000000] OMAP3430/3530 ES2.1 (l2cache iva sgx neon isp)
+[    0.000000] percpu: Embedded 17 pages/cpu s40716 r8192 d20724 u69632
+[    0.000000] Kernel command line: console=ttyS0,115200n8 root=/dev/mmcblk0p2 rootfstype=ext4 rw rootwait
+[    0.000000] printk: log buffer data + meta data: 65536 + 204800 = 270336 bytes
+[    0.000000] Dentry cache hash table entries: 16384 (order: 4, 65536 bytes, linear)
+[    0.000000] Inode-cache hash table entries: 8192 (order: 3, 32768 bytes, linear)
+[    0.000000] Built 1 zonelists, mobility grouping on.  Total pages: 32256
+[    0.000000] mem auto-init: stack:all(zero), heap alloc:off, heap free:off
+[    0.000000] SLUB: HWalign=64, Order=0-3, MinObjects=0, CPUs=1, Nodes=1
+[    0.000000] rcu: Hierarchical RCU implementation.
+[    0.000000] rcu: 	RCU event tracing is enabled.
+[    0.000000] rcu: 	RCU restricting CPUs from NR_CPUS=2 to nr_cpu_ids=1.
+[    0.000000] 	Tracing variant of Tasks RCU enabled.
+[    0.000000] rcu: RCU calculated value of scheduler-enlistment delay is 10 jiffies.
+[    0.000000] rcu: Adjusting geometry for rcu_fanout_leaf=16, nr_cpu_ids=1
+[    0.000000] RCU Tasks Trace: Setting shift to 0 and lim to 1 rcu_task_cb_adjust=1 rcu_task_cpu_ids=1.
+[    0.000000] NR_IRQS: 16, nr_irqs: 16, preallocated irqs: 16
+[    0.000000] IRQ: Found an INTC at 0x(ptrval) (revision 4.0) with 96 interrupts
+[    0.000000] rcu: srcu_init: Setting srcu_struct sizes based on contention.
+[    0.000000] clocksource: jiffies: mask: 0xffffffff max_cycles: 0xffffffff, max_idle_ns: 19112604462750000 ns
+[    0.000000] Clocking rate (Crystal/Core/MPU): 26.0/332/600 MHz
+[    0.000000] OMAP clocksource: 32k_counter at 32768 Hz
+[    0.000000] clocksource: 32k_counter: mask: 0xffffffff max_cycles: 0xffffffff, max_idle_ns: 58327039986419 ns
+[    0.000000] sched_clock: 32 bits at 33kHz, resolution 30517ns, wraps every 65535999984741ns
+[    0.004516] TI gptimer clockevent: always-on 32768 Hz at /ocp@68000000/target-module@48318000
+[    0.006225] Console: colour dummy device 80x30
+[    0.006347] Calibrating delay loop... 600.47 BogoMIPS (lpj=3002368)
+[    0.125244] CPU: Testing write buffer coherency: ok
+[    0.125335] CPU0: Spectre v2: using BPIALL workaround
+[    0.125335] pid_max: default: 32768 minimum: 301
+[    0.125579] LSM: initializing lsm=capability
+[    0.125793] VFS: Disk quotas dquot_6.6.0
+[    0.125823] VFS: Dquot-cache hash table entries: 1024 (order 0, 4096 bytes)
+[    0.125915] Mount-cache hash table entries: 1024 (order: 0, 4096 bytes, linear)
+[    0.125946] Mountpoint-cache hash table entries: 1024 (order: 0, 4096 bytes, linear)
+[    0.128295] CPU0: thread -1, cpu 0, socket -1, mpidr 0
+[    0.132263] Setting up static identity map for 0x80100000 - 0x80100078
+[    0.132812] rcu: Hierarchical SRCU implementation.
+[    0.132812] rcu: 	Max phase no-delay instances is 1000.
+[    0.134735] smp: Bringing up secondary CPUs ...
+[    0.134796] smp: Brought up 1 node, 1 CPU
+[    0.134796] SMP: Total of 1 processors activated (600.47 BogoMIPS).
+[    0.134826] CPU: All CPU(s) started in SVC mode.
+[    0.135162] Memory: 90684K/129024K available (12288K kernel code, 1179K rwdata, 2884K rodata, 1024K init, 255K bss, 20544K reserved, 16384K cma-reserved, 0K highmem)
+[    0.136505] devtmpfs: initialized
+[    0.170593] VFP support v0.3: implementor 41 architecture 3 part 30 variant c rev 1
+[    0.171661] posixtimers hash table entries: 512 (order: 0, 4096 bytes, linear)
+[    0.171722] futex hash table entries: 256 (16384 bytes on 1 NUMA nodes, total 16 KiB, linear).
+[    0.173034] pinctrl core: initialized pinctrl subsystem
+[    0.176483] NET: Registered PF_NETLINK/PF_ROUTE protocol family
+[    0.181396] DMA: preallocated 256 KiB pool for atomic coherent allocations
+[    0.213714] omap_hwmod: mcbsp2_sidetone using broken dt data from mcbsp
+[    0.214660] omap_hwmod: mcbsp3_sidetone using broken dt data from mcbsp
+[    0.284973] audit: initializing netlink subsys (disabled)
+[    0.287384] thermal_sys: Registered thermal governor 'fair_share'
+[    0.287414] thermal_sys: Registered thermal governor 'step_wise'
+[    0.287414] thermal_sys: Registered thermal governor 'user_space'
+[    0.287597] audit: type=2000 audit(0.270:1): state=initialized audit_enabled=0 res=1
+[    0.287719] cpuidle: using governor menu
+[    0.288238] Reprogramming SDRC clock to 332000000 Hz
+[    0.329650] /ocp@68000000: Fixed dependency cycle(s) with /ocp@68000000/interrupt-controller@48200000
+[    0.365722] OMAP GPIO hardware version 2.5
+[    0.407653] /ocp@68000000/dss@48050000: Fixed dependency cycle(s) with /display
+[    0.407928] /display: Fixed dependency cycle(s) with /ocp@68000000/dss@48050000
+[    0.408569] No ATAGs?
+[    0.408599] hw-breakpoint: debug architecture 0x4 unsupported.
+[    0.417694] kprobes: kprobe jump-optimization is enabled. All kprobes are optimized if possible.
+[    0.437377] iommu: Default domain type: Translated
+[    0.437408] iommu: DMA domain TLB invalidation policy: strict mode
+[    0.441253] platform 480bc000.isp: Adding to iommu group 0
+[    0.441528] omap-iommu 480bd400.mmu: 480bd400.mmu registered
+[    0.458007] SCSI subsystem initialized
+[    0.469573] omap_i2c 48070000.i2c: bus 0 rev3.3 at 400 kHz
+[    0.471466] omap_i2c 48072000.i2c: bus 1 rev3.3 at 400 kHz
+[    0.473144] omap_i2c 48060000.i2c: bus 2 rev3.3 at 400 kHz
+[    0.473724] pps_core: LinuxPPS API ver. 1 registered
+[    0.473724] pps_core: Software ver. 5.3.6 - Copyright 2005-2007 Rodolfo Giometti <giometti@linux.it>
+[    0.473815] PTP clock support registered
+[    0.487335] vgaarb: loaded
+[    0.487792] clocksource: Switched to clocksource 32k_counter
+[    1.942413] NET: Registered PF_INET protocol family
+[    1.942901] IP idents hash table entries: 2048 (order: 2, 16384 bytes, linear)
+[    1.944274] tcp_listen_portaddr_hash hash table entries: 512 (order: 0, 4096 bytes, linear)
+[    1.944427] Table-perturb hash table entries: 65536 (order: 6, 262144 bytes, linear)
+[    1.944488] TCP established hash table entries: 1024 (order: 0, 4096 bytes, linear)
+[    1.944519] TCP bind hash table entries: 1024 (order: 2, 16384 bytes, linear)
+[    1.944580] TCP: Hash tables configured (established 1024 bind 1024)
+[    1.944763] UDP hash table entries: 256 (order: 2, 14336 bytes, linear)
+[    1.944824] UDP-Lite hash table entries: 256 (order: 2, 14336 bytes, linear)
+[    1.945190] NET: Registered PF_UNIX/PF_LOCAL protocol family
+[    1.947326] RPC: Registered named UNIX socket transport module.
+[    1.947357] RPC: Registered udp transport module.
+[    1.947357] RPC: Registered tcp transport module.
+[    1.947387] RPC: Registered tcp-with-tls transport module.
+[    1.947387] RPC: Registered tcp NFSv4.1 backchannel transport module.
+[    1.947418] PCI: CLS 0 bytes, default 64
+[    1.950317] Initialise system trusted keyrings
+[    1.951843] workingset: timestamp_bits=14 max_order=15 bucket_order=1
+[    1.953948] NFS: Registering the id_resolver key type
+[    1.954040] Key type id_resolver registered
+[    1.954040] Key type id_legacy registered
+[    1.954193] jffs2: version 2.2. (NAND) (SUMMARY)  © 2001-2006 Red Hat, Inc.
+[    1.955169] Key type asymmetric registered
+[    1.955200] Asymmetric key parser 'x509' registered
+[    1.955291] io scheduler mq-deadline registered
+[    1.955322] io scheduler kyber registered
+[    1.955444] io scheduler bfq registered
+[    1.977722] omap-dma-engine 48056000.dma-controller: OMAP DMA engine driver
+[    1.985992] ti-sysc 480cb024.target-module: sysc_flags 00000100 != 00000110
+[    1.987487] ti-sysc 480c9024.target-module: sysc_flags 00000100 != 00000110
+[    1.994445] pinctrl-single 48002030.pinmux: 284 pins, size 568
+[    1.995269] pinctrl-single 48002a00.pinmux: 46 pins, size 92
+[    1.996307] pinctrl-single 480025d8.pinmux: 18 pins, size 36
+[    1.998779] ledtrig-cpu: registered to indicate activity on CPUs
+[    2.006072] Serial: 8250/16550 driver, 6 ports, IRQ sharing enabled
+[    2.017822] printk: legacy console [ttyS0] disabled
+[    2.019409] 4806a000.serial: ttyS0 at MMIO 0x4806a000 (irq = 88, base_baud = 3000000) is a 8250
+[    2.019561] printk: legacy console [ttyS0] enabled
+[    2.854858] 4806c000.serial: ttyS1 at MMIO 0x4806c000 (irq = 89, base_baud = 3000000) is a 8250
+[    2.868988] 49020000.serial: ttyS2 at MMIO 0x49020000 (irq = 90, base_baud = 3000000) is a 8250
+[    2.906524] brd: module loaded
+[    2.924499] loop: module loaded
+[    2.930603] Skipping twl internal clock init and using bootloader value (unknown osc rate)
+[    2.945587] twl 0-0048: PIH (irq 23) chaining IRQs 147..155
+[    2.951507] twl 0-0048: power (irq 152) chaining IRQs 155..162
+[    2.974243] twl4030_gpio twl4030-gpio: gpio (irq 147) chaining IRQs 163..180
+[    3.036041] mtdoops: mtd device (mtddev=name/number) must be supplied
+[    3.062225] i2c_dev: i2c /dev entries driver
+[    3.073242] sdhci: Secure Digital Host Controller Interface driver
+[    3.079681] sdhci: Copyright(c) Pierre Ossman
+[    3.085510] sdhci-pltfm: SDHCI platform and OF driver helper
+[    3.100524] omap-gpmc 6e000000.gpmc: GPMC revision 5.0
+[    3.105773] gpmc_mem_init: disabling cs 0 mapped at 0x0-0x1000000
+[    3.161621] smsc911x 2c000000.ethernet eth0: MAC Address: 00:50:c2:7e:88:4e
+[    3.171722] omap2-onenand 30000000.onenand: initializing on CS0 (0x30000000), va (ptrval), DMA mode
+[    3.181060] Muxed OneNAND 128MB 1.8V 16-bit (0x30)
+[    3.185913] OneNAND version = 0x0221
+[    3.190673] Scanning device for bad blocks
+[    3.250427] 5 fixed-partitions partitions found on MTD device 30000000.onenand
+[    3.257720] Creating 5 MTD partitions on "30000000.onenand":
+[    3.263549] 0x000000000000-0x000000080000 : "xloader-onenand"
+[    3.273681] 0x000000080000-0x000000260000 : "uboot-onenand"
+[    3.283203] 0x000000260000-0x000000280000 : "params-onenand"
+[    3.292785] 0x000000280000-0x000000780000 : "linux-onenand"
+[    3.302337] 0x000000780000-0x000008000000 : "jffs2-onenand"
+[    3.317230] hw perfevents: enabled with armv7_cortex_a8 PMU driver, 5 (8000000f) counters available
+[    3.328704] Initializing XFRM netlink socket
+[    3.333312] NET: Registered PF_INET6 protocol family
+[    3.341552] Segment Routing with IPv6
+[    3.345428] In-situ OAM (IOAM) with IPv6
+[    3.349731] sit: IPv6, IPv4 and MPLS over IPv4 tunneling driver
+[    3.357208] NET: Registered PF_PACKET protocol family
+[    3.362518] NET: Registered PF_KEY protocol family
+[    3.367584] Key type dns_resolver registered
+[    3.372314] ThumbEE CPU extension supported.
+[    3.376647] Registering SWP/SWPB emulation handler
+[    3.382476] PM: no software I/O chain control; some wakeups may be lost
+[    3.392028] SmartReflex Class3 initialized
+[    3.415252] Loading compiled-in X.509 certificates
+[    3.484893] smartreflex 480cb000.smartreflex: omap_sr_probe: SmartReflex driver initialized
+[    3.493682] smartreflex 480cb000.smartreflex: omap_sr_probe: smartreflex_core: No Voltage table for the corresponding vdd. Cannot create debugfs entries for n-values
+[    3.509185] smartreflex 480cb000.smartreflex: probe with driver smartreflex failed with error -61
+[    3.518768] smartreflex 480c9000.smartreflex: omap_sr_probe: SmartReflex driver initialized
+[    3.527343] smartreflex 480c9000.smartreflex: omap_sr_probe: smartreflex_mpu_iva: No Voltage table for the corresponding vdd. Cannot create debugfs entries for n-values
+[    3.544403] smartreflex 480c9000.smartreflex: probe with driver smartreflex failed with error -61
+[    3.564453] clk: Disabling unused clocks
+[    3.569061] PM: genpd: Disabling unused power domains
+[    3.575012] check access for rdinit=/init failed: -2, ignoring
+[    3.581695] Waiting for root device /dev/mmcblk0p2...
+[    3.679504] mmc0: host does not support reading read-only switch, assuming write-enable
+[    3.691619] mmc0: new high speed SDXC card at address e624
+[    3.699218] mmcblk0: mmc0:e624 SL64G 59.5 GiB
+[    3.720764]  mmcblk0: p1 p2
+[    3.815429] EXT4-fs (mmcblk0p2): recovery complete
+[    3.820831] EXT4-fs (mmcblk0p2): mounted filesystem 443e3125-f32c-4e25-8625-fad7340ad433 r/w with ordered data mode. Quota mode: none.
+[    3.833282] VFS: Mounted root (ext4 filesystem) on device 179:2.
+[    3.840972] devtmpfs: mounted
+[    3.847045] Freeing unused kernel image (initmem) memory: 1024K
+[    3.854217] Run /sbin/init as init process
+[    9.238189] EXT4-fs (mmcblk0p2): re-mounted 443e3125-f32c-4e25-8625-fad7340ad433.
+[    9.888122] random: crng init done
+Seeding 256 bits and crediting
+Saving 256 bits of creditable seed for next boot
+Starting syslogd: OK
+Starting klogd: OK
+Running sysctl: OK
+Starting mdev... OK
+[   14.895568] Driver for 1-wire Dallas network protocol.
+[   14.907501] omap_hdq 480b2000.1w: OMAP HDQ Hardware Rev 0.5. Driver in Interrupt mode
+[   14.926300] w1_master_driver w1_bus_master1: Attaching one wire slave 01.000000000000 crc 3d
+[   14.984954] w1_master_driver w1_bus_master1: Family 1 for 01.000000000000.3d is not registered.
+[   17.588745] input: TWL4030 Keypad as /devices/platform/68000000.ocp/48070000.i2c/i2c-0/0-0048/48070000.i2c:twl@48:keypad/input/input0
+[   18.121765] twl4030_madc 48070000.i2c:twl@48:madc: clk disabled, enabling
+[   18.130126] twl4030_madc 48070000.i2c:twl@48:madc: supply vusb3v1 not found, using dummy regulator
+[   18.169616] omap_ssi 48058000.ssi-controller: ssi controller 0 initialized (2 ports)!
+[   18.179260] omap_ssi_port 4805a000.ssi-port: couldn't get cawake gpio (err=-2)!
+[   18.186614] omap_ssi_port 4805a000.ssi-port: probe with driver omap_ssi_port failed with error -2
+[   18.196075] omap_ssi_port 4805b000.ssi-port: couldn't get cawake gpio (err=-2)!
+[   18.203552] omap_ssi_port 4805b000.ssi-port: probe with driver omap_ssi_port failed with error -2
+Starting network: [   18.539978] Generic PHY 2c000000.ethernet-ffffffff:01: attached PHY driver (mii_bus:phy_addr=2c000000.ethernet-ffffffff:01, irq=POLL)
+[   18.552734] smsc911x 2c000000.ethernet eth0: smsc911x_phy_check_loopbackpkt: Failed to transmit during loopback test
+[   18.563842] smsc911x 2c000000.ethernet eth0: smsc911x_phy_check_loopbackpkt: Failed to transmit during loopback test
+[   18.574859] smsc911x 2c000000.ethernet eth0: smsc911x_phy_check_loopbackpkt: Failed to transmit during loopback test
+[   18.585906] smsc911x 2c000000.ethernet eth0: smsc911x_phy_check_loopbackpkt: Failed to transmit during loopback test
+[   18.596923] smsc911x 2c000000.ethernet eth0: smsc911x_phy_check_loopbackpkt: Failed to transmit during loopback test
+[   18.608001] smsc911x 2c000000.ethernet eth0: smsc911x_phy_check_loopbackpkt: Failed to transmit during loopback test
+[   18.619049] smsc911x 2c000000.ethernet eth0: smsc911x_phy_check_loopbackpkt: Failed to transmit during loopback test
+[   18.630065] smsc911x 2c000000.ethernet eth0: smsc911x_phy_check_loopbackpkt: Failed to transmit during loopback test
+[   18.641082] smsc911x 2c000000.ethernet eth0: smsc911x_phy_check_loopbackpkt: Failed to transmit during loopback test
+[   18.652160] smsc911x 2c000000.ethernet eth0: smsc911x_phy_check_loopbackpkt: Failed to transmit during loopback test
+[   18.698547] smsc911x 2c000000.ethernet eth0: smsc911x_phy_check_loopbackpkt: Failed to transmit during loopback test
+[   18.709655] smsc911x 2c000000.ethernet eth0: smsc911x_phy_check_loopbackpkt: Failed to transmit during loopback test
+[   18.720703] smsc911x 2c000000.ethernet eth0: smsc911x_phy_check_loopbackpkt: Failed to transmit during loopback test
+[   18.731750] smsc911x 2c000000.ethernet eth0: smsc911x_phy_check_loopbackpkt: Failed to transmit during loopback test
+[   18.742797] smsc911x 2c000000.ethernet eth0: smsc911x_phy_check_loopbackpkt: Failed to transmit during loopback test
+[   18.753814] smsc911x 2c000000.ethernet eth0: smsc911x_phy_check_loopbackpkt: Failed to transmit during loopback test
+[   18.764862] smsc911x 2c000000.ethernet eth0: smsc911x_phy_check_loopbackpkt: Failed to transmit during loopback test
+[   18.775909] smsc911x 2c000000.ethernet eth0: smsc911x_phy_check_loopbackpkt: Failed to transmit during loopback test
+[   18.786926] smsc911x 2c000000.ethernet eth0: smsc911x_phy_check_loopbackpkt: Failed to transmit during loopback test
+[   18.797973] smsc911x 2c000000.ethernet eth0: smsc911x_phy_check_loopbackpkt: Failed to transmit during loopback test
+[   18.848510] smsc911x 2c000000.ethernet eth0: smsc911x_phy_check_loopbackpkt: Failed to transmit during loopback test
+[   18.859588] smsc911x 2c000000.ethernet eth0: smsc911x_phy_check_loopbackpkt: Failed to transmit during loopback test
+[   18.870635] smsc911x 2c000000.ethernet eth0: smsc911x_phy_check_loopbackpkt: Failed to transmit during loopback test
+[   18.881683] smsc911x 2c000000.ethernet eth0: smsc911x_phy_check_loopbackpkt: Failed to transmit during loopback test
+[   18.892700] smsc911x 2c000000.ethernet eth0: smsc911x_phy_check_loopbackpkt: Failed to transmit during loopback test
+[   18.903717] smsc911x 2c000000.ethernet eth0: smsc911x_phy_check_loopbackpkt: Failed to transmit during loopback test
+[   18.914764] smsc911x 2c000000.ethernet eth0: smsc911x_phy_check_loopbackpkt: Failed to transmit during loopback test
+[   18.925811] smsc911x 2c000000.ethernet eth0: smsc911x_phy_check_loopbackpkt: Failed to transmit during loopback test
+[   18.936828] smsc911x 2c000000.ethernet eth0: smsc911x_phy_check_loopbackpkt: Failed to transmit during loopback test
+[   18.947906] smsc911x 2c000000.ethernet eth0: smsc911x_phy_check_loopbackpkt: Failed to transmit during loopback test
+[   18.998504] smsc911x 2c000000.ethernet eth0: smsc911x_phy_check_loopbackpkt: Failed to transmit during loopback test
+[   19.009582] smsc911x 2c000000.ethernet eth0: smsc911x_phy_check_loopbackpkt: Failed to transmit during loopback test
+[   19.020629] smsc911x 2c000000.ethernet eth0: smsc911x_phy_check_loopbackpkt: Failed to transmit during loopback test
+[   19.031646] smsc911x 2c000000.ethernet eth0: smsc911x_phy_check_loopbackpkt: Failed to transmit during loopback test
+[   19.042663] smsc911x 2c000000.ethernet eth0: smsc911x_phy_check_loopbackpkt: Failed to transmit during loopback test
+[   19.053710] smsc911x 2c000000.ethernet eth0: smsc911x_phy_check_loopbackpkt: Failed to transmit during loopback test
+[   19.064727] smsc911x 2c000000.ethernet eth0: smsc911x_phy_check_loopbackpkt: Failed to transmit during loopback test
+[   19.075744] smsc911x 2c000000.ethernet eth0: smsc911x_phy_check_loopbackpkt: Failed to transmit during loopback test
+[   19.086791] smsc911x 2c000000.ethernet eth0: smsc911x_phy_check_loopbackpkt: Failed to transmit during loopback test
+[   19.097808] smsc911x 2c000000.ethernet eth0: smsc911x_phy_check_loopbackpkt: Failed to transmit during loopback test
+[   19.148498] smsc911x 2c000000.ethernet eth0: smsc911x_phy_check_loopbackpkt: Failed to transmit during loopback test
+[   19.159576] smsc911x 2c000000.ethernet eth0: smsc911x_phy_check_loopbackpkt: Failed to transmit during loopback test
+[   19.170623] smsc911x 2c000000.ethernet eth0: smsc911x_phy_check_loopbackpkt: Failed to transmit during loopback test
+[   19.181671] smsc911x 2c000000.ethernet eth0: smsc911x_phy_check_loopbackpkt: Failed to transmit during loopback test
+[   19.192687] smsc911x 2c000000.ethernet eth0: smsc911x_phy_check_loopbackpkt: Failed to transmit during loopback test
+[   19.203704] smsc911x 2c000000.ethernet eth0: smsc911x_phy_check_loopbackpkt: Failed to transmit during loopback test
+[   19.214721] smsc911x 2c000000.ethernet eth0: smsc911x_phy_check_loopbackpkt: Failed to transmit during loopback test
+[   19.225738] smsc911x 2c000000.ethernet eth0: smsc911x_phy_check_loopbackpkt: Failed to transmit during loopback test
+[   19.236785] smsc911x 2c000000.ethernet eth0: smsc911x_phy_check_loopbackpkt: Failed to transmit during loopback test
+[   19.247802] smsc911x 2c000000.ethernet eth0: smsc911x_phy_check_loopbackpkt: Failed to transmit during loopback test
+[   19.298522] smsc911x 2c000000.ethernet eth0: smsc911x_phy_check_loopbackpkt: Failed to transmit during loopback test
+[   19.309570] smsc911x 2c000000.ethernet eth0: smsc911x_phy_check_loopbackpkt: Failed to transmit during loopback test
+[   19.320648] smsc911x 2c000000.ethernet eth0: smsc911x_phy_check_loopbackpkt: Failed to transmit during loopback test
+[   19.331695] smsc911x 2c000000.ethernet eth0: smsc911x_phy_check_loopbackpkt: Failed to transmit during loopback test
+[   19.342712] smsc911x 2c000000.ethernet eth0: smsc911x_phy_check_loopbackpkt: Failed to transmit during loopback test
+[   19.353729] smsc911x 2c000000.ethernet eth0: smsc911x_phy_check_loopbackpkt: Failed to transmit during loopback test
+[   19.364746] smsc911x 2c000000.ethernet eth0: smsc911x_phy_check_loopbackpkt: Failed to transmit during loopback test
+[   19.375793] smsc911x 2c000000.ethernet eth0: smsc911x_phy_check_loopbackpkt: Failed to transmit during loopback test
+[   19.386810] smsc911x 2c000000.ethernet eth0: smsc911x_phy_check_loopbackpkt: Failed to transmit during loopback test
+[   19.397857] smsc911x 2c000000.ethernet eth0: smsc911x_phy_check_loopbackpkt: Failed to transmit during loopback test
+[   19.448516] smsc911x 2c000000.ethernet eth0: smsc911x_phy_check_loopbackpkt: Failed to transmit during loopback test
+[   19.459594] smsc911x 2c000000.ethernet eth0: smsc911x_phy_check_loopbackpkt: Failed to transmit during loopback test
+[   19.470642] smsc911x 2c000000.ethernet eth0: smsc911x_phy_check_loopbackpkt: Failed to transmit during loopback test
+[   19.481689] smsc911x 2c000000.ethernet eth0: smsc911x_phy_check_loopbackpkt: Failed to transmit during loopback test
+[   19.492706] smsc911x 2c000000.ethernet eth0: smsc911x_phy_check_loopbackpkt: Failed to transmit during loopback test
+[   19.503723] smsc911x 2c000000.ethernet eth0: smsc911x_phy_check_loopbackpkt: Failed to transmit during loopback test
+[   19.514770] smsc911x 2c000000.ethernet eth0: smsc911x_phy_check_loopbackpkt: Failed to transmit during loopback test
+[   19.525787] smsc911x 2c000000.ethernet eth0: smsc911x_phy_check_loopbackpkt: Failed to transmit during loopback test
+[   19.536834] smsc911x 2c000000.ethernet eth0: smsc911x_phy_check_loopbackpkt: Failed to transmit during loopback test
+[   19.547851] smsc911x 2c000000.ethernet eth0: smsc911x_phy_check_loopbackpkt: Failed to transmit during loopback test
+[   19.598510] smsc911x 2c000000.ethernet eth0: smsc911x_phy_check_loopbackpkt: Failed to transmit during loopback test
+[   19.609619] smsc911x 2c000000.ethernet eth0: smsc911x_phy_check_loopbackpkt: Failed to transmit during loopback test
+[   19.620666] smsc911x 2c000000.ethernet eth0: smsc911x_phy_check_loopbackpkt: Failed to transmit during loopback test
+[   19.631713] smsc911x 2c000000.ethernet eth0: smsc911x_phy_check_loopbackpkt: Failed to transmit during loopback test
+[   19.642730] smsc911x 2c000000.ethernet eth0: smsc911x_phy_check_loopbackpkt: Failed to transmit during loopback test
+[   19.653747] smsc911x 2c000000.ethernet eth0: smsc911x_phy_check_loopbackpkt: Failed to transmit during loopback test
+[   19.664764] smsc911x 2c000000.ethernet eth0: smsc911x_phy_check_loopbackpkt: Failed to transmit during loopback test
+[   19.675811] smsc911x 2c000000.ethernet eth0: smsc911x_phy_check_loopbackpkt: Failed to transmit during loopback test
+[   19.686828] smsc911x 2c000000.ethernet eth0: smsc911x_phy_check_loopbackpkt: Failed to transmit during loopback test
+[   19.697845] smsc911x 2c000000.ethernet eth0: smsc911x_phy_check_loopbackpkt: Failed to transmit during loopback test
+[   19.748504] smsc911x 2c000000.ethernet eth0: smsc911x_phy_check_loopbackpkt: Failed to transmit during loopback test
+[   19.759552] smsc911x 2c000000.ethernet eth0: smsc911x_phy_check_loopbackpkt: Failed to transmit during loopback test
+[   19.770599] smsc911x 2c000000.ethernet eth0: smsc911x_phy_check_loopbackpkt: Failed to transmit during loopback test
+[   19.781646] smsc911x 2c000000.ethernet eth0: smsc911x_phy_check_loopbackpkt: Failed to transmit during loopback test
+[   19.792663] smsc911x 2c000000.ethernet eth0: smsc911x_phy_check_loopbackpkt: Failed to transmit during loopback test
+[   19.803710] smsc911x 2c000000.ethernet eth0: smsc911x_phy_check_loopbackpkt: Failed to transmit during loopback test
+[   19.814727] smsc911x 2c000000.ethernet eth0: smsc911x_phy_check_loopbackpkt: Failed to transmit during loopback test
+[   19.825775] smsc911x 2c000000.ethernet eth0: smsc911x_phy_check_loopbackpkt: Failed to transmit during loopback test
+[   19.836791] smsc911x 2c000000.ethernet eth0: smsc911x_phy_check_loopbackpkt: Failed to transmit during loopback test
+[   19.847808] smsc911x 2c000000.ethernet eth0: smsc911x_phy_check_loopbackpkt: Failed to transmit during loopback test
+[   19.898498] smsc911x 2c000000.ethernet eth0: smsc911x_phy_check_loopbackpkt: Failed to transmit during loopback test
+[   19.909606] smsc911x 2c000000.ethernet eth0: smsc911x_phy_check_loopbackpkt: Failed to transmit during loopback test
+[   19.920745] smsc911x 2c000000.ethernet eth0: smsc911x_phy_check_loopbackpkt: Failed to transmit during loopback test
+[   19.931823] smsc911x 2c000000.ethernet eth0: smsc911x_phy_check_loopbackpkt: Failed to transmit during loopback test
+[   19.942871] smsc911x 2c000000.ethernet eth0: smsc911x_phy_check_loopbackpkt: Failed to transmit during loopback test
+[   19.953948] smsc911x 2c000000.ethernet eth0: smsc911x_phy_check_loopbackpkt: Failed to transmit during loopback test
+[   19.964996] smsc911x 2c000000.ethernet eth0: smsc911x_phy_check_loopbackpkt: Failed to transmit during loopback test
+[   19.976074] smsc911x 2c000000.ethernet eth0: smsc911x_phy_check_loopbackpkt: Failed to transmit during loopback test
+[   19.987121] smsc911x 2c000000.ethernet eth0: smsc911x_phy_check_loopbackpkt: Failed to transmit during loopback test
+[   19.998168] smsc911x 2c000000.ethernet eth0: smsc911x_phy_check_loopbackpkt: Failed to transmit during loopback test
+[   20.048278] smsc911x 2c000000.ethernet eth0: smsc911x_mii_probe: Failed Loop Back Test
+[   20.056610] smsc911x 2c000000.ethernet eth0: smsc911x_open: Error starting phy
+ip: SIOCSIFFLAGS: No such device
+FAIL
+Starting crond: OK
+Starting dropbear sshd: OK
+
+omap-ng - TMDSEVM3530 Rev D
+omap3evm login: 
+omap-ng - TMDSEVM3530 Rev D
+omap3evm login: 
+omap-ng - TMDSEVM3530 Rev D
+omap3evm login: root
+Password: 
+
+  omap-ng on the TI TMDSEVM3530 (OMAP3530 ES2.1, Rev D)
+  https://github.com/Emagip/omap-ng
+  GPIO: gpiodetect / gpioinfo / gpioset   I2C: i2cdetect -y 1|2   SPI: spi-config
+
+# [   33.768737] VUSB1V5: disabling
+[   33.773010] VUSB1V8: disabling
+[   33.777221] VUSB3V1: disabling
+[   33.784667] VAUX3: disabling
+[   33.789978] VDAC: disabling
+devmem 0x480020D0 32
+0x0118011C
+# gpiodetect
+gpiochip0 [gpio-0-31] (32 lines)
+gpiochip1 [gpio-32-63] (32 lines)
+gpiochip2 [gpio-64-95] (32 lines)
+gpiochip3 [gpio-96-127] (32 lines)
+gpiochip4 [gpio-128-159] (32 lines)
+gpiochip5 [twl4030] (20 lines)
+gpiochip6 [omap-gpmc] (4 lines)
+gpiochip7 [gpio-160-191] (32 lines)
+# gpioinfo -c gpiochip2 0
+gpiochip2 0	unnamed         	input
+# echo 2c000000.ethernet > /sys/bus/platform/drivers/smsc911x/unbind
+# gpioset -c gpiochip2 -t 10ms,0 0=0
+# sleep 1
+# echo 2c000000.ethernet > /sys/bus/platform/drivers/smsc911x/bind
+[   99.494964] smsc911x 2c000000.ethernet eth0: MAC Address: 00:50:c2:7e:88:4e
+# dmesg | tail -15
+[   33.784667] VAUX3: disabling
+[   33.789978] VDAC: disabling
+[   87.715515] gpio gpiochip2: Persistence not supported for GPIO 0
+[   87.715606] gpio gpiochip2: registered chardev handle for line 0
+[   87.715667] gpio gpiochip2: registered chardev handle for 1 lines
+[   98.693298] smsc911x 2c000000.ethernet: using DT '/ocp@68000000/gpmc@6e000000/ethernet@gpmc' for 'reset' GPIO lookup
+[   98.693420] of_get_named_gpiod_flags: can't parse 'reset-gpios' property of node '/ocp@68000000/gpmc@6e000000/ethernet@gpmc[0]'
+[   98.693481] of_get_named_gpiod_flags: can't parse 'reset-gpio' property of node '/ocp@68000000/gpmc@6e000000/ethernet@gpmc[0]'
+[   98.693542] smsc911x 2c000000.ethernet: using lookup tables for GPIO lookup
+[   98.693572] smsc911x 2c000000.ethernet: No GPIO consumer reset found
+[   98.729095] mdio_bus 2c000000.ethernet-ffffffff: using lookup tables for GPIO lookup
+[   98.729156] mdio_bus 2c000000.ethernet-ffffffff: No GPIO consumer reset found
+[   99.492401] mdio_bus 2c000000.ethernet-ffffffff:01: using lookup tables for GPIO lookup
+[   99.492462] mdio_bus 2c000000.ethernet-ffffffff:01: No GPIO consumer reset found
+[   99.494964] smsc911x 2c000000.ethernet eth0: MAC Address: 00:50:c2:7e:88:4e
+# ifconfig eth0 up && udhcpc -i eth0 -n -t 5
+[  135.664428] SMSC LAN911x Internal PHY 2c000000.ethernet-ffffffff:01: attached PHY driver (mii_bus:phy_addr=2c000000.ethernet-ffffffff:01, irq=POLL)
+[  135.678405] smsc911x 2c000000.ethernet eth0: smsc911x_phy_check_loopbackpkt: Failed to transmit during loopback test
+[  135.689544] smsc911x 2c000000.ethernet eth0: smsc911x_phy_check_loopbackpkt: Failed to transmit during loopback test
+[  135.700561] smsc911x 2c000000.ethernet eth0: smsc911x_phy_check_loopbackpkt: Failed to transmit during loopback test
+[  135.711578] smsc911x 2c000000.ethernet eth0: smsc911x_phy_check_loopbackpkt: Failed to transmit during loopback test
+[  135.722625] smsc911x 2c000000.ethernet eth0: smsc911x_phy_check_loopbackpkt: Failed to transmit during loopback test
+[  135.733642] smsc911x 2c000000.ethernet eth0: smsc911x_phy_check_loopbackpkt: Failed to transmit during loopback test
+[  135.744659] smsc911x 2c000000.ethernet eth0: smsc911x_phy_check_loopbackpkt: Failed to transmit during loopback test
+[  135.755706] smsc911x 2c000000.ethernet eth0: smsc911x_phy_check_loopbackpkt: Failed to transmit during loopback test
+[  135.766723] smsc911x 2c000000.ethernet eth0: smsc911x_phy_check_loopbackpkt: Failed to transmit during loopback test
+[  135.777740] smsc911x 2c000000.ethernet eth0: smsc911x_phy_check_loopbackpkt: Failed to transmit during loopback test
+[  135.828521] smsc911x 2c000000.ethernet eth0: smsc911x_phy_check_loopbackpkt: Failed to transmit during loopback test
+[  135.839599] smsc911x 2c000000.ethernet eth0: smsc911x_phy_check_loopbackpkt: Failed to transmit during loopback test
+[  135.850677] smsc911x 2c000000.ethernet eth0: smsc911x_phy_check_loopbackpkt: Failed to transmit during loopback test
+[  135.861724] smsc911x 2c000000.ethernet eth0: smsc911x_phy_check_loopbackpkt: Failed to transmit during loopback test
+[  135.872741] smsc911x 2c000000.ethernet eth0: smsc911x_phy_check_loopbackpkt: Failed to transmit during loopback test
+[  135.883758] smsc911x 2c000000.ethernet eth0: smsc911x_phy_check_loopbackpkt: Failed to transmit during loopback test
+[  135.894805] smsc911x 2c000000.ethernet eth0: smsc911x_phy_check_loopbackpkt: Failed to transmit during loopback test
+[  135.905822] smsc911x 2c000000.ethernet eth0: smsc911x_phy_check_loopbackpkt: Failed to transmit during loopback test
+[  135.916870] smsc911x 2c000000.ethernet eth0: smsc911x_phy_check_loopbackpkt: Failed to transmit during loopback test
+[  135.927917] smsc911x 2c000000.ethernet eth0: smsc911x_phy_check_loopbackpkt: Failed to transmit during loopback test
+[  135.978546] smsc911x 2c000000.ethernet eth0: smsc911x_phy_check_loopbackpkt: Failed to transmit during loopback test
+[  135.989685] smsc911x 2c000000.ethernet eth0: smsc911x_phy_check_loopbackpkt: Failed to transmit during loopback test
+[  136.000793] smsc911x 2c000000.ethernet eth0: smsc911x_phy_check_loopbackpkt: Failed to transmit during loopback test
+[  136.011840] smsc911x 2c000000.ethernet eth0: smsc911x_phy_check_loopbackpkt: Failed to transmit during loopback test
+[  136.022857] smsc911x 2c000000.ethernet eth0: smsc911x_phy_check_loopbackpkt: Failed to transmit during loopback test
+[  136.033874] smsc911x 2c000000.ethernet eth0: smsc911x_phy_check_loopbackpkt: Failed to transmit during loopback test
+[  136.044891] smsc911x 2c000000.ethernet eth0: smsc911x_phy_check_loopbackpkt: Failed to transmit during loopback test
+[  136.055938] smsc911x 2c000000.ethernet eth0: smsc911x_phy_check_loopbackpkt: Failed to transmit during loopback test
+[  136.066955] smsc911x 2c000000.ethernet eth0: smsc911x_phy_check_loopbackpkt: Failed to transmit during loopback test
+[  136.078002] smsc911x 2c000000.ethernet eth0: smsc911x_phy_check_loopbackpkt: Failed to transmit during loopback test
+[  136.128509] smsc911x 2c000000.ethernet eth0: smsc911x_phy_check_loopbackpkt: Failed to transmit during loopback test
+[  136.139648] smsc911x 2c000000.ethernet eth0: smsc911x_phy_check_loopbackpkt: Failed to transmit during loopback test
+[  136.150726] smsc911x 2c000000.ethernet eth0: smsc911x_phy_check_loopbackpkt: Failed to transmit during loopback test
+[  136.161804] smsc911x 2c000000.ethernet eth0: smsc911x_phy_check_loopbackpkt: Failed to transmit during loopback test
+[  136.172912] smsc911x 2c000000.ethernet eth0: smsc911x_phy_check_loopbackpkt: Failed to transmit during loopback test
+[  136.183959] smsc911x 2c000000.ethernet eth0: smsc911x_phy_check_loopbackpkt: Failed to transmit during loopback test
+[  136.195007] smsc911x 2c000000.ethernet eth0: smsc911x_phy_check_loopbackpkt: Failed to transmit during loopback test
+[  136.206024] smsc911x 2c000000.ethernet eth0: smsc911x_phy_check_loopbackpkt: Failed to transmit during loopback test
+[  136.217041] smsc911x 2c000000.ethernet eth0: smsc911x_phy_check_loopbackpkt: Failed to transmit during loopback test
+[  136.228118] smsc911x 2c000000.ethernet eth0: smsc911x_phy_check_loopbackpkt: Failed to transmit during loopback test
+[  136.278625] smsc911x 2c000000.ethernet eth0: smsc911x_phy_check_loopbackpkt: Failed to transmit during loopback test
+[  136.289733] smsc911x 2c000000.ethernet eth0: smsc911x_phy_check_loopbackpkt: Failed to transmit during loopback test
+[  136.300811] smsc911x 2c000000.ethernet eth0: smsc911x_phy_check_loopbackpkt: Failed to transmit during loopback test
+[  136.311859] smsc911x 2c000000.ethernet eth0: smsc911x_phy_check_loopbackpkt: Failed to transmit during loopback test
+[  136.322875] smsc911x 2c000000.ethernet eth0: smsc911x_phy_check_loopbackpkt: Failed to transmit during loopback test
+[  136.333923] smsc911x 2c000000.ethernet eth0: smsc911x_phy_check_loopbackpkt: Failed to transmit during loopback test
+[  136.344940] smsc911x 2c000000.ethernet eth0: smsc911x_phy_check_loopbackpkt: Failed to transmit during loopback test
+[  136.355957] smsc911x 2c000000.ethernet eth0: smsc911x_phy_check_loopbackpkt: Failed to transmit during loopback test
+[  136.367004] smsc911x 2c000000.ethernet eth0: smsc911x_phy_check_loopbackpkt: Failed to transmit during loopback test
+[  136.378051] smsc911x 2c000000.ethernet eth0: smsc911x_phy_check_loopbackpkt: Failed to transmit during loopback test
+[  136.428527] smsc911x 2c000000.ethernet eth0: smsc911x_phy_check_loopbackpkt: Failed to transmit during loopback test
+[  136.439666] smsc911x 2c000000.ethernet eth0: smsc911x_phy_check_loopbackpkt: Failed to transmit during loopback test
+[  136.450714] smsc911x 2c000000.ethernet eth0: smsc911x_phy_check_loopbackpkt: Failed to transmit during loopback test
+[  136.461761] smsc911x 2c000000.ethernet eth0: smsc911x_phy_check_loopbackpkt: Failed to transmit during loopback test
+[  136.472778] smsc911x 2c000000.ethernet eth0: smsc911x_phy_check_loopbackpkt: Failed to transmit during loopback test
+[  136.483795] smsc911x 2c000000.ethernet eth0: smsc911x_phy_check_loopbackpkt: Failed to transmit during loopback test
+[  136.494873] smsc911x 2c000000.ethernet eth0: smsc911x_phy_check_loopbackpkt: Failed to transmit during loopback test
+[  136.505889] smsc911x 2c000000.ethernet eth0: smsc911x_phy_check_loopbackpkt: Failed to transmit during loopback test
+[  136.516906] smsc911x 2c000000.ethernet eth0: smsc911x_phy_check_loopbackpkt: Failed to transmit during loopback test
+[  136.527984] smsc911x 2c000000.ethernet eth0: smsc911x_phy_check_loopbackpkt: Failed to transmit during loopback test
+[  136.578521] smsc911x 2c000000.ethernet eth0: smsc911x_phy_check_loopbackpkt: Failed to transmit during loopback test
+[  136.589599] smsc911x 2c000000.ethernet eth0: smsc911x_phy_check_loopbackpkt: Failed to transmit during loopback test
+[  136.600677] smsc911x 2c000000.ethernet eth0: smsc911x_phy_check_loopbackpkt: Failed to transmit during loopback test
+[  136.611694] smsc911x 2c000000.ethernet eth0: smsc911x_phy_check_loopbackpkt: Failed to transmit during loopback test
+[  136.622741] smsc911x 2c000000.ethernet eth0: smsc911x_phy_check_loopbackpkt: Failed to transmit during loopback test
+[  136.633758] smsc911x 2c000000.ethernet eth0: smsc911x_phy_check_loopbackpkt: Failed to transmit during loopback test
+[  136.644775] smsc911x 2c000000.ethernet eth0: smsc911x_phy_check_loopbackpkt: Failed to transmit during loopback test
+[  136.655792] smsc911x 2c000000.ethernet eth0: smsc911x_phy_check_loopbackpkt: Failed to transmit during loopback test
+[  136.666839] smsc911x 2c000000.ethernet eth0: smsc911x_phy_check_loopbackpkt: Failed to transmit during loopback test
+[  136.677947] smsc911x 2c000000.ethernet eth0: smsc911x_phy_check_loopbackpkt: Failed to transmit during loopback test
+[  136.728515] smsc911x 2c000000.ethernet eth0: smsc911x_phy_check_loopbackpkt: Failed to transmit during loopback test
+[  136.739593] smsc911x 2c000000.ethernet eth0: smsc911x_phy_check_loopbackpkt: Failed to transmit during loopback test
+[  136.750640] smsc911x 2c000000.ethernet eth0: smsc911x_phy_check_loopbackpkt: Failed to transmit during loopback test
+[  136.761718] smsc911x 2c000000.ethernet eth0: smsc911x_phy_check_loopbackpkt: Failed to transmit during loopback test
+[  136.772735] smsc911x 2c000000.ethernet eth0: smsc911x_phy_check_loopbackpkt: Failed to transmit during loopback test
+[  136.783782] smsc911x 2c000000.ethernet eth0: smsc911x_phy_check_loopbackpkt: Failed to transmit during loopback test
+[  136.794799] smsc911x 2c000000.ethernet eth0: smsc911x_phy_check_loopbackpkt: Failed to transmit during loopback test
+[  136.805816] smsc911x 2c000000.ethernet eth0: smsc911x_phy_check_loopbackpkt: Failed to transmit during loopback test
+[  136.816864] smsc911x 2c000000.ethernet eth0: smsc911x_phy_check_loopbackpkt: Failed to transmit during loopback test
+[  136.827911] smsc911x 2c000000.ethernet eth0: smsc911x_phy_check_loopbackpkt: Failed to transmit during loopback test
+[  136.878509] smsc911x 2c000000.ethernet eth0: smsc911x_phy_check_loopbackpkt: Failed to transmit during loopback test
+[  136.889587] smsc911x 2c000000.ethernet eth0: smsc911x_phy_check_loopbackpkt: Failed to transmit during loopback test
+[  136.900665] smsc911x 2c000000.ethernet eth0: smsc911x_phy_check_loopbackpkt: Failed to transmit during loopback test
+[  136.911682] smsc911x 2c000000.ethernet eth0: smsc911x_phy_check_loopbackpkt: Failed to transmit during loopback test
+[  136.922729] smsc911x 2c000000.ethernet eth0: smsc911x_phy_check_loopbackpkt: Failed to transmit during loopback test
+[  136.933746] smsc911x 2c000000.ethernet eth0: smsc911x_phy_check_loopbackpkt: Failed to transmit during loopback test
+[  136.944763] smsc911x 2c000000.ethernet eth0: smsc911x_phy_check_loopbackpkt: Failed to transmit during loopback test
+[  136.955780] smsc911x 2c000000.ethernet eth0: smsc911x_phy_check_loopbackpkt: Failed to transmit during loopback test
+[  136.966827] smsc911x 2c000000.ethernet eth0: smsc911x_phy_check_loopbackpkt: Failed to transmit during loopback test
+[  136.977844] smsc911x 2c000000.ethernet eth0: smsc911x_phy_check_loopbackpkt: Failed to transmit during loopback test
+[  137.028503] smsc911x 2c000000.ethernet eth0: smsc911x_phy_check_loopbackpkt: Failed to transmit during loopback test
+[  137.039550] smsc911x 2c000000.ethernet eth0: smsc911x_phy_check_loopbackpkt: Failed to transmit during loopback test
+[  137.050628] smsc911x 2c000000.ethernet eth0: smsc911x_phy_check_loopbackpkt: Failed to transmit during loopback test
+[  137.061645] smsc911x 2c000000.ethernet eth0: smsc911x_phy_check_loopbackpkt: Failed to transmit during loopback test
+[  137.072662] smsc911x 2c000000.ethernet eth0: smsc911x_phy_check_loopbackpkt: Failed to transmit during loopback test
+[  137.083679] smsc911x 2c000000.ethernet eth0: smsc911x_phy_check_loopbackpkt: Failed to transmit during loopback test
+[  137.094726] smsc911x 2c000000.ethernet eth0: smsc911x_phy_check_loopbackpkt: Failed to transmit during loopback test
+[  137.105743] smsc911x 2c000000.ethernet eth0: smsc911x_phy_check_loopbackpkt: Failed to transmit during loopback test
+[  137.116760] smsc911x 2c000000.ethernet eth0: smsc911x_phy_check_loopbackpkt: Failed to transmit during loopback test
+[  137.127807] smsc911x 2c000000.ethernet eth0: smsc911x_phy_check_loopbackpkt: Failed to transmit during loopback test
+[  137.178192] smsc911x 2c000000.ethernet eth0: smsc911x_mii_probe: Failed Loop Back Test
+[  137.186340] smsc911x 2c000000.ethernet eth0: smsc911x_open: Error starting phy
+ifconfig: SIOCSIFFLAGS: No such device
+# 

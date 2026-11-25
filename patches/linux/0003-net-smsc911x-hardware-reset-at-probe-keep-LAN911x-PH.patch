@@ -1,0 +1,111 @@
+From 7f86f1da8277b51cfcb949364c677b3b5b13532f Mon Sep 17 00:00:00 2001
+From: Emagip_ <72194496+Emagip@users.noreply.github.com>
+Date: Wed, 25 Nov 2026 22:34:20 +0100
+Subject: [PATCH] net: smsc911x: hardware reset at probe, keep LAN911x PHY out
+ of EDPD
+
+Further fixes for the LAN9115 on the OMAP35x EVM Rev D:
+
+- Pulse the optional reset GPIO at probe (1 ms asserted). U-Boot's
+  omap3evm board code resets the chip through GPIO 64 with a 1 us
+  pulse, below the 200 us minimum (datasheet T6.1); afterwards the
+  internal PHY did not run (PHY ID read 0, "Generic PHY", no TX_CLK).
+  A 10 ms pulse from userspace made the PHY ID read correctly.
+
+- Wake the internal PHY from energy-detect power-down before the PHY
+  loopback self-test. The SMSC PHY driver enables EDPD in polling mode,
+  the PHY then powers down in loopback (no line energy) and every try
+  failed with "Failed to transmit during loopback test".
+
+- Do the EDPD wake around the soft reset on LAN911x as well, not only
+  on generation 4 parts (SRST needs the PHY clocks), and restore EDPD
+  only if it was enabled.
+---
+ drivers/net/ethernet/smsc/smsc911x.c | 36 +++++++++++++++++++++++++++-
+ 1 file changed, 35 insertions(+), 1 deletion(-)
+
+diff --git a/drivers/net/ethernet/smsc/smsc911x.c b/drivers/net/ethernet/smsc/smsc911x.c
+index ce838f416..92aaad5b5 100644
+--- a/drivers/net/ethernet/smsc/smsc911x.c
++++ b/drivers/net/ethernet/smsc/smsc911x.c
+@@ -440,6 +440,19 @@ static int smsc911x_request_resources(struct platform_device *pdev)
+ 						     "reset",
+ 						     GPIOD_OUT_LOW);
+ 
++	/*
++	 * Give the chip a clean hardware reset: a bootloader may have left it
++	 * half reset (U-Boot's omap3evm pulse is 1 us, the LAN9115 needs at
++	 * least 200 us, datasheet T6.1) with the internal PHY not running.
++	 * READY is polled afterwards by smsc911x_init().
++	 */
++	if (!IS_ERR_OR_NULL(pdata->reset_gpiod)) {
++		gpiod_set_value_cansleep(pdata->reset_gpiod, 1);
++		usleep_range(1000, 2000);
++		gpiod_set_value_cansleep(pdata->reset_gpiod, 0);
++		usleep_range(5000, 6000);
++	}
++
+ 	/* Request clock */
+ 	pdata->clk = clk_get(&pdev->dev, NULL);
+ 	if (IS_ERR(pdata->clk))
+@@ -1014,6 +1027,8 @@ static void smsc911x_phy_adjust_link(struct net_device *dev)
+ 	}
+ }
+ 
++static int smsc911x_phy_disable_energy_detect(struct smsc911x_data *pdata);
++
+ static int smsc911x_mii_probe(struct net_device *dev)
+ {
+ 	struct smsc911x_data *pdata = netdev_priv(dev);
+@@ -1049,6 +1064,14 @@ static int smsc911x_mii_probe(struct net_device *dev)
+ 	pdata->last_carrier = -1;
+ 
+ #ifdef USE_PHY_WORK_AROUND
++	/*
++	 * The SMSC PHY driver enables EDPD in polling mode. In PHY loopback
++	 * there is no line energy, so the PHY powers down, stops TX_CLK and
++	 * the test fails with "Failed to transmit". Wake it for the test;
++	 * the PHY driver manages EDPD again afterwards.
++	 */
++	if (!pdata->using_extphy)
++		smsc911x_phy_disable_energy_detect(pdata);
+ 	if (smsc911x_phy_loopbacktest(dev) < 0) {
+ 		SMSC_WARN(pdata, hw, "Failed Loop Back Test");
+ 		phy_disconnect(phydev);
+@@ -1448,6 +1471,7 @@ static int smsc911x_soft_reset(struct smsc911x_data *pdata)
+ 	int ret;
+ 	unsigned int reset_offset = HW_CFG;
+ 	unsigned int reset_mask = HW_CFG_SRST_;
++	bool restore_edpd = false;
+ 
+ 	/*
+ 	 * Make sure to power-up the PHY chip before doing a reset, otherwise
+@@ -1472,6 +1496,16 @@ static int smsc911x_soft_reset(struct smsc911x_data *pdata)
+ 			SMSC_WARN(pdata, drv, "Failed to wakeup the PHY chip");
+ 			return ret;
+ 		}
++	} else if (!pdata->using_extphy && pdata->dev->phydev) {
++		/*
++		 * Same on LAN911x: SRST needs the internal PHY clocks, which
++		 * EDPD stops while the line is idle. Restore it afterwards.
++		 */
++		ret = phy_read(pdata->dev->phydev, MII_LAN83C185_CTRL_STATUS);
++		if (ret >= 0 && (ret & MII_LAN83C185_EDPWRDOWN)) {
++			restore_edpd = true;
++			smsc911x_phy_disable_energy_detect(pdata);
++		}
+ 	}
+ 
+ 	if ((pdata->idrev & 0xFFFF0000) == LAN9250) {
+@@ -1524,7 +1558,7 @@ static int smsc911x_soft_reset(struct smsc911x_data *pdata)
+ 				   GPIO_CFG_LED2_EN_ | GPIO_CFG_LED1_EN_ |
+ 				   0x00070000);
+ 
+-	if (pdata->generation == 4) {
++	if (pdata->generation == 4 || restore_edpd) {
+ 		ret = smsc911x_phy_enable_energy_detect(pdata);
+ 
+ 		if (ret) {
+-- 
+2.53.0
+
