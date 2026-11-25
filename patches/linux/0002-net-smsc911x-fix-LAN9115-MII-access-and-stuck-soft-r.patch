@@ -1,0 +1,97 @@
+From 0f43425549f9c615eb8845fe7d6ba6a3f1c7f2c0 Mon Sep 17 00:00:00 2001
+From: Emagip_ <72194496+Emagip@users.noreply.github.com>
+Date: Wed, 25 Nov 2026 21:42:45 +0100
+Subject: [PATCH] net: smsc911x: fix LAN9115 MII access and stuck soft reset
+
+On the OMAP35x EVM Rev D (LAN9115 rev 2, 16-bit GPMC bus) Ethernet never
+came up under mainline:
+
+- MII_ACC was written without MIIBZY. The LAN9115 datasheet says the
+  driver must set this bit to start a PHY register access (U-Boot does);
+  every PHY read returned 0, so the PHY bound as "Generic PHY" with ID 0
+  and the link was never seen. Set MIIBZY for reads and writes.
+
+- HW_CFG.SRST only completes while the internal PHY clocks run. With the
+  PHY powered down it stayed pending forever (HW_CFG 0x00050001,
+  PMT_CTRL.READY 0, all MAC CSRs reading 0), so probe or open failed
+  silently. When the reset does not clear, reset the PHY through
+  PMT_CTRL.PHY_RST and wait up to 100 ms; this was verified by hand on
+  the board to release the pending reset.
+
+- SRST also clears GPIO_CFG, which leaves the port LEDs dark under
+  Linux. Re-enable the LED functions (U-Boot's 0x70070000) on LAN911x.
+---
+ drivers/net/ethernet/smsc/smsc911x.c | 39 +++++++++++++++++++++++++---
+ 1 file changed, 35 insertions(+), 4 deletions(-)
+
+diff --git a/drivers/net/ethernet/smsc/smsc911x.c b/drivers/net/ethernet/smsc/smsc911x.c
+index 3ebd0664c..ce838f416 100644
+--- a/drivers/net/ethernet/smsc/smsc911x.c
++++ b/drivers/net/ethernet/smsc/smsc911x.c
+@@ -566,8 +566,10 @@ static int smsc911x_mii_read(struct mii_bus *bus, int phyaddr, int regidx)
+ 		goto out;
+ 	}
+ 
+-	/* Set the address, index & direction (read from PHY) */
+-	addr = ((phyaddr & 0x1F) << 11) | ((regidx & 0x1F) << 6);
++	/* Set the address, index & direction (read from PHY); the LAN9115
++	 * datasheet requires MIIBZY to be set to start the access */
++	addr = ((phyaddr & 0x1F) << 11) | ((regidx & 0x1F) << 6) |
++		MII_ACC_MII_BUSY_;
+ 	smsc911x_mac_write(pdata, MII_ACC, addr);
+ 
+ 	/* Wait for read to complete w/ timeout */
+@@ -610,7 +612,7 @@ static int smsc911x_mii_write(struct mii_bus *bus, int phyaddr, int regidx,
+ 
+ 	/* Set the address, index & direction (write to PHY) */
+ 	addr = ((phyaddr & 0x1F) << 11) | ((regidx & 0x1F) << 6) |
+-		MII_ACC_MII_WRITE_;
++		MII_ACC_MII_WRITE_ | MII_ACC_MII_BUSY_;
+ 	smsc911x_mac_write(pdata, MII_ACC, addr);
+ 
+ 	/* Wait for write to complete w/ timeout */
+@@ -1488,11 +1490,40 @@ static int smsc911x_soft_reset(struct smsc911x_data *pdata)
+ 		temp = smsc911x_reg_read(pdata, reset_offset);
+ 	} while ((--timeout) && (temp & reset_mask));
+ 
++	/*
++	 * HW_CFG.SRST only completes while the internal PHY runs RX_CLK and
++	 * TX_CLK. If the PHY was powered down (no phydev yet at probe time,
++	 * or EDPD on LAN911x where the wake-up below is not done), the reset
++	 * stays pending forever and all MAC CSRs read 0. A PHY reset through
++	 * PMT_CTRL (a plain register, still accessible) restarts the PHY
++	 * clocks and lets the pending soft reset finish.
++	 */
++	if (unlikely(temp & reset_mask) && reset_offset == HW_CFG) {
++		netdev_warn(pdata->dev,
++			    "soft reset stuck (HW_CFG 0x%08x), resetting PHY\n",
++			    temp);
++		smsc911x_reg_write(pdata, PMT_CTRL,
++			smsc911x_reg_read(pdata, PMT_CTRL) | PMT_CTRL_PHY_RST_);
++		timeout = 100;
++		do {
++			msleep(1);
++			temp = smsc911x_reg_read(pdata, reset_offset);
++		} while ((--timeout) && (temp & reset_mask));
++	}
++
+ 	if (unlikely(temp & reset_mask)) {
+-		SMSC_WARN(pdata, drv, "Failed to complete reset");
++		netdev_err(pdata->dev, "soft reset failed (HW_CFG 0x%08x)\n",
++			   temp);
+ 		return -EIO;
+ 	}
+ 
++	/* SRST cleared GPIO_CFG: route the LED pins back to the PHY (link,
++	 * speed, activity), as U-Boot does (0x70070000) */
++	if (pdata->generation <= 2 && !pdata->using_extphy)
++		smsc911x_reg_write(pdata, GPIO_CFG, GPIO_CFG_LED3_EN_ |
++				   GPIO_CFG_LED2_EN_ | GPIO_CFG_LED1_EN_ |
++				   0x00070000);
++
+ 	if (pdata->generation == 4) {
+ 		ret = smsc911x_phy_enable_energy_detect(pdata);
+ 
+-- 
+2.53.0
+

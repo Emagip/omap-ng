@@ -597,4 +597,40 @@ udhcpc: broadcasting discover
 udhcpc: broadcasting discover
 udhcpc: broadcasting discover
 udhcpc: no lease, failing
-# 
+# devmem 0x2C000088 32 0x70070000
+# cat /sys/class/net/eth0/carrier /sys/class/net/eth0/operstate
+0
+down
+# ip -s link show eth0
+BusyBox v1.37.0 (2026-11-24 22:20:02 CET) multi-call binary.
+
+Usage: ip [OPTIONS] address|route|link|tunnel|neigh|rule [ARGS]
+
+OPTIONS := -f[amily] inet|inet6|link | -o[neline]
+
+ip addr add|del IFADDR dev IFACE | show|flush [dev IFACE] [to PREFIX]
+ip route list|flush|add|del|change|append|replace|test ROUTE
+ip link set IFACE [up|down] [arp on|off] [multicast on|off]
+	[promisc on|off] [mtu NUM] [name NAME] [qlen NUM] [address MAC]
+	[master IFACE | nomaster] [netns PID] [type TYPE ARGS]
+ip tunnel add|change|del|show [NAME]
+	[mode ipip|gre|sit] [remote ADDR] [local ADDR] [ttl TTL]
+ip neigh show|flush [to PREFIX] [dev DEV] [nud STATE]
+ip rule [list] | add|del SELECTOR ACTION
+# devmem 0x2C0000A8 32 0x00000841; devmem 0x2C0000A4 32 0x80000006
+m 0x2C0000A8 32# devmem 0x2C0000A4 32 0xC0000007; devmem 0x2C0000A8 32
+0x00000000
+# udhcpc -i eth0 -n -t 10            # retry with more time
+udhcpc: started, v1.37.0
+udhcpc: broadcasting discover
+udhcpc: broadcasting discover
+udhcpc: broadcasting discover
+udhcpc: broadcasting discover
+udhcpc: broadcasting discover
+udhcpc: broadcasting discover
+udhcpc: broadcasting discover
+udhcpc: broadcasting discover
+udhcpc: broadcasting discover
+udhcpc: broadcasting discover
+udhcpc: no lease, failing
+# ü
