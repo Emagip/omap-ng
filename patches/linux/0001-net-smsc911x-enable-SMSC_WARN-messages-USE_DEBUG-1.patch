@@ -1,0 +1,31 @@
+From 6b705410b924749dd5b1be670c7a8424ec7a1941 Mon Sep 17 00:00:00 2001
+From: Emagip_ <72194496+Emagip@users.noreply.github.com>
+Date: Wed, 25 Nov 2026 21:17:45 +0100
+Subject: [PATCH] net: smsc911x: enable SMSC_WARN messages (USE_DEBUG 1)
+
+With USE_DEBUG 0 every SMSC_WARN() is compiled out, so a probe that
+fails in smsc911x_init() (BYTE_TEST, chip ID, PHY or soft reset)
+returns -ENODEV with no message at all. On the OMAP35x EVM Rev D
+(LAN9115) the boot-time probe fails this way while a later manual
+rebind succeeds; this makes the failing step visible. SMSC_TRACE
+stays off (USE_DEBUG < 2).
+---
+ drivers/net/ethernet/smsc/smsc911x.h | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/drivers/net/ethernet/smsc/smsc911x.h b/drivers/net/ethernet/smsc/smsc911x.h
+index 09b46382b..438531694 100644
+--- a/drivers/net/ethernet/smsc/smsc911x.h
++++ b/drivers/net/ethernet/smsc/smsc911x.h
+@@ -26,7 +26,7 @@
+ 
+ #define TX_FIFO_LOW_THRESHOLD	((u32)1600)
+ #define SMSC911X_EEPROM_SIZE	((u32)128)
+-#define USE_DEBUG		0
++#define USE_DEBUG		1
+ 
+ /* This is the maximum number of packets to be received every
+  * NAPI poll */
+-- 
+2.53.0
+

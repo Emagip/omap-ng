@@ -1,0 +1,42 @@
+
+# 
+# ls -l /sys/bus/platform/devices/2c000000.ethernet/driver
+ls: /sys/bus/platform/devices/2c000000.ethernet/driver: No such file or directory
+# mount -t debugfs none /sys/kernel/debug; cat /sys/kernel/debug/devices_deferre
+d
+mount: mounting none on /sys/kernel/debug failed: Device or resource busy
+# for o in 150 154 158 15c 160 164 168; do devmem 0x6E000$o 32; done
+0x00001000
+0x001E1E01
+0x00080300
+0x1C091C09
+0x04181F1F
+0x80000DCD
+0x00000F6C
+# echo 2c000000.ethernet > /sys/bus/platform/drivers/smsc911x/bind; dmesg | tail
+ -20
+[  414.319732] smsc911x 2c000000.ethernet eth0: MAC Address: 00:50:c2:7e:88:4e
+[   18.739227] of_get_named_gpiod_flags: can't parse 'ti,ssi-cawake-gpio' property of node '/ocp@68000000/ssi-controller@48058000/ssi-port@4805b000[0]'
+[   18.739257] omap_ssi_port 4805b000.ssi-port: using lookup tables for GPIO lookup
+[   18.739288] omap_ssi_port 4805b000.ssi-port: No GPIO consumer ti,ssi-cawake found
+[   18.739318] omap_ssi_port 4805b000.ssi-port: couldn't get cawake gpio (err=-2)!
+[   18.746673] omap_ssi_port 4805b000.ssi-port: probe with driver omap_ssi_port failed with error -2
+[   33.769500] VUSB1V5: disabling
+[   33.774169] VUSB1V8: disabling
+[   33.778381] VUSB3V1: disabling
+[   33.784088] VAUX3: disabling
+[   33.789001] VDAC: disabling
+[  414.253570] smsc911x 2c000000.ethernet: using DT '/ocp@68000000/gpmc@6e000000/ethernet@gpmc' for 'reset' GPIO lookup
+[  414.253692] of_get_named_gpiod_flags: can't parse 'reset-gpios' property of node '/ocp@68000000/gpmc@6e000000/ethernet@gpmc[0]'
+[  414.253753] of_get_named_gpiod_flags: can't parse 'reset-gpio' property of node '/ocp@68000000/gpmc@6e000000/ethernet@gpmc[0]'
+[  414.253814] smsc911x 2c000000.ethernet: using lookup tables for GPIO lookup
+[  414.253845] smsc911x 2c000000.ethernet: No GPIO consumer reset found
+[  414.289672] mdio_bus 2c000000.ethernet-ffffffff: using lookup tables for GPIO lookup
+[  414.289733] mdio_bus 2c000000.ethernet-ffffffff: No GPIO consumer reset found
+[  414.317474] mdio_bus 2c000000.ethernet-ffffffff:01: using lookup tables for GPIO lookup
+[  414.317535] mdio_bus 2c000000.ethernet-ffffffff:01: No GPIO consumer reset found
+[  414.319732] smsc911x 2c000000.ethernet eth0: MAC Address: 00:50:c2:7e:88:4e
+# ping 192.168.1.110
+PING 192.168.1.110 (192.168.1.110): 56 data bytes
+ping: sendto: Network is unreachable
+# 
