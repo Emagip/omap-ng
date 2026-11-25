@@ -108,24 +108,30 @@
  * omap-gpmc-smsc911x.dtsi is tuned for the LAN9220 of Rev E+ boards (155 ns cycles).
  * The LAN9115 needs a read/write cycle time of at least 165 ns (datasheet table 6-3);
  * out-of-spec access gave a silent smsc911x probe failure or a garbage MAC.
- * These are U-Boot's proven NET_GPMC_CONFIG1..5 values for this board, in ns
- * (165 MHz GPMC clock, ~6.06 ns per tick).
+ * These are U-Boot's proven NET_GPMC_CONFIG2..5 tick counts for this board
+ * (0x001e1e01 0x00080300 0x1c091c09 0x04181f1f), expressed in ns.
+ *
+ * The kernel converts ns to ticks with round-UP (L3 = 165 MHz -> 6060 ps/tick),
+ * so each value is chosen just BELOW ticks * 6.06 ns. Rounding the other way
+ * (188 ns for the 31-tick cycle) gave 32 ticks, overflowed the 5-bit
+ * RDCYCLETIME/WRCYCLETIME fields and made gpmc refuse the child (-6, no eth0).
+ * These values also give the same ticks at 166 MHz (6024 ps).
  */
 &gpmc {
 	ethernet@gpmc {
-		gpmc,cs-on-ns = <6>;
-		gpmc,cs-rd-off-ns = <182>;
-		gpmc,cs-wr-off-ns = <182>;
-		gpmc,adv-on-ns = <0>;
-		gpmc,adv-rd-off-ns = <18>;
-		gpmc,adv-wr-off-ns = <48>;
-		gpmc,oe-on-ns = <55>;
-		gpmc,oe-off-ns = <170>;
-		gpmc,we-on-ns = <55>;
-		gpmc,we-off-ns = <170>;
-		gpmc,rd-cycle-ns = <188>;
-		gpmc,wr-cycle-ns = <188>;
-		gpmc,access-ns = <145>;
+		gpmc,cs-on-ns = <6>;		/*  1 tick  */
+		gpmc,cs-rd-off-ns = <180>;	/* 30 ticks */
+		gpmc,cs-wr-off-ns = <180>;	/* 30 ticks */
+		gpmc,adv-on-ns = <0>;		/*  0 ticks */
+		gpmc,adv-rd-off-ns = <18>;	/*  3 ticks */
+		gpmc,adv-wr-off-ns = <48>;	/*  8 ticks */
+		gpmc,oe-on-ns = <54>;		/*  9 ticks */
+		gpmc,oe-off-ns = <168>;		/* 28 ticks */
+		gpmc,we-on-ns = <54>;		/*  9 ticks */
+		gpmc,we-off-ns = <168>;		/* 28 ticks */
+		gpmc,rd-cycle-ns = <186>;	/* 31 ticks = 188 ns > 165 ns min */
+		gpmc,wr-cycle-ns = <186>;	/* 31 ticks */
+		gpmc,access-ns = <144>;		/* 24 ticks */
 	};
 };
 
