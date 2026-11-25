@@ -566,4 +566,17 @@ sh: write error: Device or resource busy
 # ifconfig eth0 up && udhcpc -i eth0 -n -t 5
 [   75.788787] Generic PHY 2c000000.ethernet-ffffffff:01: attached PHY driver (mii_bus:phy_addr=2c000000.ethernet-ffffffff:01, irq=POLL)
 ifconfig: SIOCSIFFLAGS: No such device
+# devmem 0x2C000084 32; devmem 0x2C000074 32; devmem 0x2C000050 32
+0x00000000
+0x00050001
+0x01150002
+# devmem 0x2C0000A4 32 0xC0000002; devmem 0x2C0000A4 32; devmem 0x2C0000A8 32
+0x00000000
+0x00000000
+# devmem 0x2C0000A4 32 0xC0000003; devmem 0x2C0000A4 32; devmem 0x2C0000A8 32
+0x00000000
+0x00000000
+# devmem 0x2C0000A4 32 0xC0000001; devmem 0x2C0000A4 32; devmem 0x2C0000A8 32
+0x00000000
+0x00000000
 # 
