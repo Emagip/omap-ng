@@ -579,4 +579,22 @@ ifconfig: SIOCSIFFLAGS: No such device
 # devmem 0x2C0000A4 32 0xC0000001; devmem 0x2C0000A4 32; devmem 0x2C0000A8 32
 0x00000000
 0x00000000
+# devmem 0x2C000074 32
+0x00050001
+# devmem 0x2C000084 32 0x00000400
+# sleep 1
+# devmem 0x2C000074 32
+0x00050000
+# devmem 0x2C000084 32
+0x00000001
+# ifconfig eth0 up && udhcpc -i eth0 -n -t 5
+[  445.957580] Generic PHY 2c000000.ethernet-ffffffff:01: attached PHY driver (mii_bus:phy_addr=2c000000.ethernet-ffffffff:01, irq=POLL)
+[  445.988464] smsc911x 2c000000.ethernet eth0: SMSC911x/921x identified at 0xc80c5000, IRQ: 182
+udhcpc: started, v1.37.0
+udhcpc: broadcasting discover
+udhcpc: broadcasting discover
+udhcpc: broadcasting discover
+udhcpc: broadcasting discover
+udhcpc: broadcasting discover
+udhcpc: no lease, failing
 # 
